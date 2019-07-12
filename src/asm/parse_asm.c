@@ -6,11 +6,11 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/12 12:55:03 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/12 16:39:34 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "asm.h"
+#include "ft_asm.h"
 #include "get_next_line.h"
 
 int			ft_strncmp(char *s1, char *s2, unsigned int n)
