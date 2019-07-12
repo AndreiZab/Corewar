@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/12 19:02:30 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/12 19:14:48 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,11 +70,8 @@ char		*ft_get_name_or_comment(char *src, t_data *data)
 	return (dst);
 }
 
-void		ft_row_is_data(t_data *data, char *str)
+void		ft_row_is_data(t_data *data, char *str, int i)
 {
-	int i;
-
-	i = -1;
 	while (str[++i])
 	{
 		while (str[i] == ' ' || str[i] == '\t')
@@ -99,12 +96,22 @@ void		ft_row_is_data(t_data *data, char *str)
 
 }
 
-void		ft_check_row(t_data *data, char *str)
+void		ft_row_is_code (t_data *data, char *str,int i)
 {
-	if (!data->comment || !data->name)
-		ft_row_is_data(data, str);
-//	else if (1)
-//		ft_row_is_code(data, str);
+	while (str[++i])
+	{
+		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
+			return ;
+	}
+
+}
+
+void		ft_check_row(t_data *data, char *str, int i)
+{
+	if (!data->comment || !data->name || str[i] == '.')
+		ft_row_is_data(data, str, i - 1);
+	else
+		ft_row_is_code(data, str, i - 1);
 }
 
 void		ft_read(t_data *data)
@@ -119,8 +126,8 @@ void		ft_read(t_data *data)
 		data->num_current_row++;
 		i = 0;
 		while (line[i] == ' ' || line[i] == '\t')
-			i += (line[i] == ' ') ? 1 : 4;
-		ft_check_row(data, line);
+			i++;
+		ft_check_row(data, line, i);
 	}
 	if (err == -1)
 		ft_error("ERROR_READ_FILE", data);
