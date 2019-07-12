@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/12 16:39:34 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/12 19:02:30 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,18 +46,26 @@ char		*ft_get_name_or_comment(char *src, t_data *data)
 {
 	int i;
 	int j;
+	int quotes;
 	char *dst;
 
 	i = 0;
 	j = 0;
+	quotes = 0;
 	while (src[i] && src[i] != '"')
-		i++;
+		src[i] =='\'' ? ft_error("WRONG_QUOTES", data) : i++;
 	dst = (char *)ft_memalloc(sizeof(ft_strlen(src + i)));
-	i++;
+	if (src[++i - 1] == '"')
+		quotes++;
 	while (src[i] && src[i] != '"')
-		dst[j++] = src[i++];
-	if (src[i] != '"')
-		ft_error("MISSING_CLOSING_QUOTES", data);
+		src[i] =='\'' ? ft_error("WRONG_QUOTES", data) : (dst[j++] = src[i++]);
+	while (src[i])
+		if (src[i++] == '"' )
+			quotes++;
+	if (quotes > 2)
+		ft_error("TOO_MANY_QUOTES", data);
+	if (quotes < 2)
+		ft_error("NO_ENOUGH_QUOTES", data);
 	dst[j] = '\0';
 	return (dst);
 }
