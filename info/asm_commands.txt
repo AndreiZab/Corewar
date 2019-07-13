@@ -1,0 +1,21 @@
+fork:
+lfork:
+live:
+aff:
+zjmp:
+
+st:
+sti:
+
+ld:
+lld:
+ldi:
+lldi:
+
+add:	op=0x04
+sub:	
+
+and:
+or:
+xor:
+
