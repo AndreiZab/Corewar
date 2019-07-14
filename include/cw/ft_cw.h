@@ -1,5 +1,6 @@
 #ifndef FT_CW_H
 # define FT_CW_H
+# include <stdlib.h>
 # include <fcntl.h>
 # include "libft.h"
 # include "op.h"
@@ -13,6 +14,7 @@
 # define FT_EXE_MAX -7
 # define FT_MEMORY -8
 # define FT_NULL -9
+# define FT_ARG -10
 
 typedef struct	s_player
 {
@@ -36,9 +38,8 @@ typedef struct	s_corewar
 	struct s_player	*players;
 	int				players_count;
 
-
-	struct s_arg_handler	*args_h;
-	struct s_arg_handler	*arg_default;
+	struct s_arg_handler	*argh;
+	struct s_arg_handler	*argh_default;
 }				t_corewar;
 
 
@@ -60,7 +61,8 @@ typedef struct	s_carriage
 typedef struct	s_arg_handler
 {
 	char					*on_arg;
-	int						(*f)(char *arg, int *arg_i);
+	int						(*f)
+		(t_corewar *cw, int argc, char **argv, int *arg_i);
 	struct s_arg_handler	*next;
 }				t_arg_handler;
 
@@ -70,5 +72,22 @@ void		ft_cw_free(t_corewar **cw);
 
 void		ft_map_set(t_corewar *cw, int pos, char val);
 void		ft_map_get(t_corewar *cw, int pos);
+
+/*
+**	argh.c
+*/
+
+int		ft_argh_add(t_arg_handler **arg_h, char *on_arg,
+			int (*f)(t_corewar *cw, int argc, char **arg, int *arg_i));
+int		ft_argh_do(t_corewar *cw, int argc, char **argv, int *arg_i);
+void	ft_argh_free(t_arg_handler **arg_h);
+
+/*
+**	arg_process.c
+*/
+
+int ft_process_flag_dump(t_corewar *cw, int argc, char **argv, int *arg_i);
+int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i);
+int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
 
 #endif

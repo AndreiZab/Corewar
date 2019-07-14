@@ -1,6 +1,7 @@
 NAME=corewar
 SRC=main.c\
-	args.c
+	argh.c \
+	arg_process.c
 
 OBJ=$(SRC:.c=.o)
 
