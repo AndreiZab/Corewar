@@ -6,4 +6,4 @@ CMakeLists.txt
 cmake-build-debug
 .vscode
 .asm
-.corewar
+**.corewar
