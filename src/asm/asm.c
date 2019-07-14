@@ -14,7 +14,7 @@
 
 void	ft_error(char *str, t_data *data)
 {
-	if (data->num_current_row)
+	if (data && data->num_current_row)
 	{
 		ft_putstr_fd("line:", 2);
 		ft_putnbr_fd(data->num_current_row, 2);
