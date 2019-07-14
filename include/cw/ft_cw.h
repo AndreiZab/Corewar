@@ -11,6 +11,7 @@
 # define FT_4_NULL -5
 # define FT_MAX_SIZE -6
 # define FT_EXE_MAX -7
+# define FT_MEMORY -8
 
 typedef struct	s_player
 {
@@ -21,18 +22,22 @@ typedef struct	s_player
 	int				exe_size;
 	char			*exe;
 
+	struct s_player	*next;
+
 }				t_player;
 
 typedef struct	s_corewar
 {
 	int				dump;
 
-	unsigned char	map[MEM_SIZE];
+	unsigned char	*map;
 
-	struct s_player	players[MAX_PLAYERS];
+	struct s_player	*players;
 	int				players_count;
 
 
+	struct s_arg_handler	*args_h;
+	struct s_arg_handler	*arg_default;
 }				t_corewar;
 
 
@@ -50,6 +55,13 @@ typedef struct	s_carriage
 	unsigned int	preparing_ticks;
 
 }				t_carriage;
+
+typedef struct	s_arg_handler
+{
+	char					*on_arg;
+	int						(*f)(char *arg, int *arg_i);
+	struct s_arg_handler	*next;
+}				t_arg_handler;
 
 
 t_corewar	*ft_cw_alloc(void);
