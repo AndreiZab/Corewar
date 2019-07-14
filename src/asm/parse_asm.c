@@ -6,13 +6,14 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/14 20:52:36 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/14 21:14:00 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
 #include "ft_asm.h"
+#include "get_next_line.h"
 
 int			ft_strncmp(char *s1, char *s2, unsigned int n)
 {
@@ -186,7 +187,6 @@ void		ft_read(t_data *data)
 	line = NULL;
 	while (ft_free_l(line) && (err = get_next_line(data->fd, &line)) > 0)
 	{
-		data->count_char += ft_strlen(line);
 		data->num_current_row++;
 		i = 0;
 		while (line[i] == ' ' || line[i] == '\t')
