@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/14 21:14:00 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/14 21:53:27 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ char		*ft_get_name_or_comment(char *src, t_data *data, int *i, char flag)
 
 	j = 0;
 	data->quotes = 0;
-	dst = (char *)ft_memalloc(sizeof(ft_strlen(src + (*i)) + 1));
+	dst = (char *)ft_memalloc(sizeof(char) * (ft_strlen(src + (*i)) + 1));
 	if (src[++(*i) - 1] == '"')
 		data->quotes++;
 	while (src[*i] && src[*i] != '"')
@@ -115,16 +115,25 @@ int		ft_add_text(char *src, t_data *data, int i)
 {
 	int j;
 	char *dst;
+	char *tmp;
 
 	j = 1;
-	dst = (char *)ft_memalloc(sizeof(ft_strlen(src + i) + 3));
+	dst = (char *)ft_memalloc(sizeof(char) *(ft_strlen(src + i) + 3));
 	dst[0] = '\n';
 	while (src[++i] && src[i] != '"')
 		dst[j++] = src[i];
 	if (data->quotes == 3)
-		data->comment = ft_strjoin(data->comment, dst);
+	{
+		tmp = ft_strjoin(data->comment, dst);
+		free(data->comment);
+		data->comment = tmp;
+	}
 	else if (data->quotes == 1)
-		data->name = ft_strjoin(data->name, dst);
+	{
+		tmp = ft_strjoin(data->name, dst);
+		free(data->name);
+		data->name = tmp;
+	}
 	if (src[i] == '"')
 		data->quotes++;
 	while (src[i])
