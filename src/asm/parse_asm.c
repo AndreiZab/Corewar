@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/13 17:20:50 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/14 15:17:12 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,32 +68,80 @@ t_data	*ft_create(int fd)
 	return (data);
 }
 
-char		*ft_get_name_or_comment(char *src, t_data *data)
+char		*ft_get_name_or_comment(char *src, t_data *data, int *i)
 {
-	int i;
 	int j;
 	char *dst;
 
-	i = 0;
 	j = 0;
 	data->quotes = 0;
-	while (src[i] && src[i] != '"')
-		src[i] =='\'' ? ft_error("WRONG_QUOTES", data) : i++;
-	dst = (char *)ft_memalloc(sizeof(ft_strlen(src + i)));
-	if (src[++i - 1] == '"')
+	dst = (char *)ft_memalloc(sizeof(ft_strlen(src) + 1));
+	if (src[++(*i) - 1] == '"')
 		data->quotes++;
-	while (src[i] && src[i] != '"')
-		src[i] =='\'' ? ft_error("WRONG_QUOTES", data) : (dst[j++] = src[i++]);
-	while (src[i])
-		if (src[i++] == '"' )
-			data->quotes++;
-	if (data->quotes > 2)
-		ft_error("TOO_MANY_QUOTES", data);
-	//if (data->quotes < 2)
-//		ft_error("NO_ENOUGH_QUOTES", data);
+	while (src[*i] && src[*i] != '"')
+		src[*i] == '\'' ? ft_error("WRONG_QUOTES", data) : (dst[j++] = src[(*i)++]);
+	if (src[*i] == '"')
+		data->quotes++;
+	while (src[(*i)++])
+	{
+		if (src[*i] == '"' && data->quotes++ && data->quotes > 2)
+			ft_error("TOO_MANY_QUOTES", data);
+		if (data->quotes == 2 && src[*i] != '\0' && src[*i] != ' ' && src[*i] != '\t')
+			ft_error("WRONG_SYMBOL_AFTER_QUOTES", data);
+	}
 	dst[j] = '\0';
 	return (dst);
 }
+
+int		ft_find_name_or_comment(char *str, t_data *data, int i)
+{
+	if (str[i] == NAME_CMD_STRING[0] && !ft_strncmp(str + i, NAME_CMD_STRING, ft_strlen(NAME_CMD_STRING)))
+	{
+		if (data->name)
+			ft_error("NAME_ALREADY_EXIST", data);
+		i += ft_strlen(NAME_CMD_STRING);
+		while (str[i] && str[i] != '"')
+		{
+			str[i] == '\'' ? ft_error("WRONG_QUOTES", data) : 0;
+			if (str[i] != ' ' && str[i] != '\t')
+				ft_error("WRONG_SYMBOL_BEFORE_QUOTES", data);
+			i++;
+		}
+		data->name = ft_get_name_or_comment(str, data, &i);
+
+	}
+	else if (str[i] == COMMENT_CMD_STRING[0] && !ft_strncmp(str + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
+	{
+		if (data->comment)
+			ft_error("COMMENT_ALREADY_EXIST", data);
+		i += ft_strlen(COMMENT_CMD_STRING);
+		while (str[i] && str[i] != '"')
+		{
+			str[i] == '\'' ? ft_error("WRONG_QUOTES", data) : 0;
+			if (str[i] != ' ' && str[i] != '\t')
+				ft_error("WRONG_SYMBOL_BEFORE_QUOTES", data);
+			i++;
+		}
+		data->comment = ft_get_name_or_comment(str, data, &i);
+	}
+	return (i);
+}
+
+void		ft_row_is_data(t_data *data, char *str, int i)
+{
+	while (str[++i])
+	{
+		while (str[i] == ' ' || str[i] == '\t')
+			i++;
+		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
+			return;
+//		if (data->quotes == 1)
+//			ft_add_text(str + i, data);
+		else
+			 i = ft_find_name_or_comment(str + i, data, i);
+	}
+}
+/*
 
 char		*ft_add_text(char *src, t_data *data)
 {
@@ -111,6 +159,33 @@ char		*ft_add_text(char *src, t_data *data)
 			data->quotes++;
 	if (data->quotes > 2)
 		ft_error("TOO_MANY_QUOTES", data);
+	dst[j] = '\0';
+	return (dst);
+}
+
+char		*ft_get_name_or_comment(char *src, t_data *data)
+{
+	int i;
+	int j;
+	char *dst;
+
+	i = 0;
+	j = 0;
+	data->quotes = 0;
+	while (src[i] && src[i] != '"')
+		src[i] =='\'' ? ft_error("WRONG_QUOTES", data) : i++;
+	dst = (char *)ft_memalloc(sizeof(ft_strlen(src + i) + 1));
+	if (src[++i - 1] == '"')
+		data->quotes++;
+	while (src[i] && src[i] != '"')
+		src[i] =='\'' ? ft_error("WRONG_QUOTES", data) : (dst[j++] = src[i++]);
+	while (src[i])
+		if (src[i++] == '"' )
+			data->quotes++;
+	if (data->quotes > 2)
+		ft_error("TOO_MANY_QUOTES", data);
+	//if (data->quotes < 2)
+//		ft_error("NO_ENOUGH_QUOTES", data);
 	dst[j] = '\0';
 	return (dst);
 }
@@ -135,8 +210,7 @@ void		ft_row_is_data(t_data *data, char *str, int i)
 					data->name = ft_get_name_or_comment(str + i, data);
 			}
 		}
-		else if (str[i] == COMMENT_CMD_STRING[0] &&
-				   !ft_strncmp(str + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
+		else if (str[i] == COMMENT_CMD_STRING[0] && !ft_strncmp(str + i, COMMENT_CMD_STRING, ft_strlen(COMMENT_CMD_STRING)))
 		{
 			if (data->comment)
 				ft_error("COMMENT_ALREADY_EXIST", data);
@@ -150,7 +224,7 @@ void		ft_row_is_data(t_data *data, char *str, int i)
 		}
 	}
 }
-
+*/
 void		ft_row_is_code (t_data *data, char *str, int i)
 {
 	while (str[++i])
