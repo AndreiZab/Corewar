@@ -12,6 +12,7 @@
 # define FT_MAX_SIZE -6
 # define FT_EXE_MAX -7
 # define FT_MEMORY -8
+# define FT_NULL -9
 
 typedef struct	s_player
 {
