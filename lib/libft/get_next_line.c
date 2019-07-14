@@ -16,13 +16,37 @@
 #include "libft.h"
 #include "get_next_line.h"
 
+static int		get_next_line_destroy_fd(t_fd_buffer **start, t_fd_buffer *fd)
+{
+	t_fd_buffer		*st;
+	t_fd_buffer		*prev;
+
+	prev = NULL;
+	st = *start;
+	while (st != fd)
+	{
+		if (st == fd)
+			break ;
+		prev = st;
+		st = st->next;
+	}
+	if (prev)
+		prev->next = st->next;
+	else
+		*start = st->next;
+	free(st->buff);
+	free(st);
+	return (0);
+}
+
 static int		get_next_line_get(t_fd_buffer *info, char *new_line_pos,
 	char **line)
 {
 	char	*temp;
 	size_t	pos;
 
-	pos = (new_line_pos == NULL) ? info->length : new_line_pos - info->buff;
+	pos = (new_line_pos == NULL) ? info->length :
+		(size_t)(new_line_pos - info->buff);
 	if ((*line = ft_strnew(pos)) == NULL)
 		return (-1);
 	ft_memcpy(*line, info->buff, pos);
@@ -45,7 +69,8 @@ static int		get_next_line_get(t_fd_buffer *info, char *new_line_pos,
 	return (1);
 }
 
-static int		get_next_line_read(t_fd_buffer *info, char **line)
+static int		get_next_line_read(t_fd_buffer **start,
+					t_fd_buffer *info, char **line)
 {
 	char	*buff[BUFF_SIZE];
 	long	readed;
@@ -68,13 +93,13 @@ static int		get_next_line_read(t_fd_buffer *info, char **line)
 	if (readed < 0)
 		return (-1);
 	if (readed == 0 && info->length == 0)
-		return (0);
+		return (get_next_line_destroy_fd(start, info));
 	return (get_next_line_get(info, new_line_pos, line));
 }
 
 int				get_next_line(const int fd, char **line)
 {
-	static t_fd_buffer	*start;
+	static t_fd_buffer	*start = NULL;
 	t_fd_buffer			*current;
 
 	if (fd < 0 || line == NULL)
@@ -83,15 +108,16 @@ int				get_next_line(const int fd, char **line)
 	while (current)
 	{
 		if (current->fd == fd)
-			return (get_next_line_read(current, line));
+			return (get_next_line_read(&start, current, line));
 		current = current->next;
 	}
-	current = (t_fd_buffer*)malloc(sizeof(t_fd_buffer));
+	if ((current = (t_fd_buffer*)malloc(sizeof(t_fd_buffer))) == NULL)
+		return (-1);
 	if ((current->buff = ft_strnew(1)) == NULL)
 		return (-1);
 	current->length = 0;
 	current->fd = fd;
 	current->next = start;
 	start = current;
-	return (get_next_line_read(current, line));
+	return (get_next_line_read(&start, current, line));
 }
