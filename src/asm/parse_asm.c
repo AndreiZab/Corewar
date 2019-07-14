@@ -6,38 +6,17 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/14 20:12:25 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/14 20:45:06 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 
 #include "ft_asm.h"
-#include "get_next_line.h"
-
-char	*ft_strjoin(char const *s1, char const *s2)
-{
-	char			*dest;
-	unsigned int	i;
-
-	i = 0;
-	if (s1 == NULL || s2 == NULL)
-		return (NULL);
-	dest = (char*)ft_memalloc(sizeof(*dest) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (dest == NULL)
-		return (NULL);
-	while (*s1 != '\0')
-		dest[i++] = *s1++;
-	while (*s2 != '\0')
-		dest[i++] = *s2++;
-	dest[i] = '\0';
-	return (dest);
-}
 
 int			ft_strncmp(char *s1, char *s2, unsigned int n)
 {
 	unsigned int i;
-
 	i = 0;
 	if (n == 0)
 		return (0);
@@ -173,6 +152,10 @@ void		ft_row_is_data(t_data *data, char *str, int i)
 			i = ft_find_name_or_comment(str, data, i);
 		if (str[i])
 			i++;
+//		if (data->name && ft_strlen(data->name) > PROG_NAME_LENGTH)
+//			ft_error("NAME_TOO_LONG", data);
+		if (data->comment && ft_strlen(data->comment) > COMMENT_LENGTH)
+			ft_error("COMMENT_TOO_LONG", data);
 	}
 }
 
