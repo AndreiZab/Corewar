@@ -1,6 +1,25 @@
 #include "ft_cw.h"
 
-int	static	ft_process_args(t_corewar *cw, int argc, char **argv)
+static t_corewar *ft_cw_alloc(int *err)
+{
+	t_corewar *cw;
+
+	if ((cw = (t_corewar*)ft_memalloc(sizeof(t_corewar))) == NULL)
+	{
+		*err = FT_MEMORY;
+		return (NULL);
+	}
+	if (ft_player_new(&cw->players) == NULL)
+	{
+		free(cw);
+		*err = FT_MEMORY;
+		return (NULL);
+	}
+	*err = FT_OK;
+	return (cw);
+}
+
+static int		ft_process_args(t_corewar *cw, int argc, char **argv)
 {
 	int				arg_i;
 	int				err;
@@ -8,6 +27,7 @@ int	static	ft_process_args(t_corewar *cw, int argc, char **argv)
 	cw->argh = NULL;
 	cw->argh_default = NULL;
 	ft_argh_add(&cw->argh, "-n", ft_process_flag_n); // Обработка флагов
+	ft_argh_add(&cw->argh, "-v", ft_process_flag_v);
 	ft_argh_add(&cw->argh, "-dump", ft_process_flag_dump);
 	ft_argh_add(&cw->argh_default, NULL, ft_process_file); // Обработка названий файлов
 	arg_i = 0;
@@ -19,7 +39,7 @@ int	static	ft_process_args(t_corewar *cw, int argc, char **argv)
 	return (err);
 }
 
-int			ft_prepare_field(t_corewar *cw)
+int				ft_prepare_field(t_corewar *cw)
 {
 	// int mem_part;
 	// int i;
@@ -35,13 +55,13 @@ int			ft_prepare_field(t_corewar *cw)
 	return (FT_OK);
 }
 
-int			main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
-	t_corewar	cw;
+	t_corewar	*cw;
 	int			err;
 
-	err = FT_OK;
-	err = ft_process_args(&cw, argc, argv);
+	cw = ft_cw_alloc(&err);
+	err == FT_OK ? err = ft_process_args(cw, argc, argv) : 0;
 	//if (err == FT_OK)
 	//	err = ft_prepare_field(&cw);
 	//if (err == FT_OK)

@@ -18,7 +18,7 @@
 
 typedef struct	s_player
 {
-	unsigned char	id;
+	int				id;	//Переделать под uint
 	char			*name;
 	char			*comment;
 
@@ -31,7 +31,10 @@ typedef struct	s_player
 
 typedef struct	s_corewar
 {
-	int				dump;
+	char			dump_mode;
+	int	dump_cycle; //переделать под ulonglongint
+
+	char			v;
 
 	unsigned char	*map;
 
@@ -67,7 +70,6 @@ typedef struct	s_arg_handler
 }				t_arg_handler;
 
 
-t_corewar	*ft_cw_alloc(void);
 void		ft_cw_free(t_corewar **cw);
 
 void		ft_map_set(t_corewar *cw, int pos, char val);
@@ -86,8 +88,15 @@ void	ft_argh_free(t_arg_handler **arg_h);
 **	arg_process.c
 */
 
+int	ft_process_flag_v(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_flag_dump(t_corewar *cw, int argc, char **argv, int *arg_i);
 int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
+
+/*
+** players.c
+*/
+
+t_player	*ft_player_new(t_player **players);
 
 #endif
