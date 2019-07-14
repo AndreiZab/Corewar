@@ -52,7 +52,8 @@ SRCS=ft_memset.c \
 \
 	 get_next_line.c \
 	 ft_memchr.c \
-	 ft_putendl_fd.c
+	 ft_putendl_fd.c \
+	 ft_strjoin.c
 
 OBJS=$(SRCS:.c=.o)
 
