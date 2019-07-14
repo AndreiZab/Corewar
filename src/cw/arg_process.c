@@ -97,9 +97,5 @@ int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i)
 
 int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i)
 {
-	//необходима проверка на расширение файла .cor
-	ft_putstr("File: ");
-	ft_putstr(argv[*arg_i]);
-	ft_putchar('\n');
-	return (FT_OK);
+	return (ft_exe_read(cw, argv));
 }

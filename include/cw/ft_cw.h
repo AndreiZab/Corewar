@@ -15,6 +15,16 @@
 # define FT_MEMORY -8
 # define FT_NULL -9
 # define FT_ARG -10
+# define FT_READ -11
+# define FT_TRASH_AFTER_BINARY_DATA -12
+# define MAX(x, y) ((x > y) ? x : y)
+
+/*
+** Определяет число безрезультатных чтений (read return 0)
+**  после которого чтение прекратится с ошибкой
+*/
+
+# define FT_ACCURATE_READ_MAX_WAIT 10
 
 typedef struct	s_player
 {
@@ -98,5 +108,21 @@ int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
 */
 
 t_player	*ft_player_new(t_player **players);
+
+
+/*
+** accurate_reader.c
+*/
+
+int 		ft_accurate_read(int fd, char *buffer, int n_bytes);
+
+
+/*
+** exe_reader.c
+*/
+
+int			ft_exe_read(t_corewar *cw, char *filename);
+
+
 
 #endif

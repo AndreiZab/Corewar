@@ -2,7 +2,9 @@ NAME=corewar
 SRC=main.c\
 	argh.c \
 	arg_process.c \
-	players.c
+	players.c \
+	accurate_reader.c \
+	exe_reader.c
 
 OBJ=$(SRC:.c=.o)
 
