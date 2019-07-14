@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/14 20:05:11 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/14 20:12:25 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -147,11 +147,12 @@ int		ft_add_text(char *src, t_data *data, int i)
 		data->name = ft_strjoin(data->name, dst);
 	if (src[i] == '"')
 		data->quotes++;
-	while (src[i++])
+	while (src[i])
 	{
+		i++;
 		if (src[i] == '"' && data->quotes++ && data->quotes > 2)
 			ft_error("TOO_MANY_QUOTES", data);
-		if (data->quotes == 2 && src[i] != '\0' && src[i] != ' ' && src[i] != '\t')
+		if ((data->quotes == 2 || data->quotes == 4) && src[i] != '\0' && src[i] != ' ' && src[i] != '\t')
 			ft_error("WRONG_SYMBOL_AFTER_QUOTES", data);
 	}
 	free(dst);
