@@ -15,8 +15,10 @@ typedef struct		s_data
 
 	int					fd;
 	int					num_current_row;
+	int					count_char;
 	unsigned int		comm_counter;
 	int					code_size;
+	char				quotes;
 
 	struct s_command	*comms;
 	struct s_label		*labels;
