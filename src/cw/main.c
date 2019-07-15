@@ -36,23 +36,52 @@ static int		ft_process_args(t_corewar *cw, int argc, char **argv)
 		err = ft_argh_do(cw, argc, argv, &arg_i);
 	ft_argh_free(&cw->argh);
 	ft_argh_free(&cw->argh_default);
+	if (err == FT_OK && cw->players_count > 0)
+		ft_player_delete(&(cw->players));
 	return (err);
 }
 
-int				ft_prepare_field(t_corewar *cw)
+static int		ft_prepare_field(t_corewar *cw)
 {
-	// int mem_part;
-	// int i;
+	int mem_part;
+	int i;
+	int	err;
 
-	// ft_bzero(cw->map, MEM_SIZE);
-	// mem_part = MEM_SIZE / cw->players_count;
-	// i = -1;
-	// while (++i < cw->players_count)
-	// {
-	// 	ft_memcpy(cw->map[i * mem_part], cw->players[i].exe,
-	// 		cw->players[i].exe_size);
-	// }
+	if ((cw->map = (char*)ft_memalloc(MEM_SIZE)) == NULL)
+		return (FT_MEMORY);
+	mem_part = MEM_SIZE / cw->players_count;
+	i = -1;
+	while (++i < cw->players_count)
+	{
+		ft_memcpy(cw->map[i * mem_part], cw->players[i].exe,
+			cw->players[i].exe_size);
+	}
+	if (cw->v)
+	{
+		/*return (ft_vis_init(cw))*/;
+	}
 	return (FT_OK);
+}
+
+static void		ft_info(t_corewar *cw)
+{
+	t_player	*player;
+
+	ft_putstr("Players(");
+	ft_putnbr(cw->players_count);
+	ft_putstr("):\n");
+	player = cw->players;
+	while (player)
+	{
+		ft_putstr("Name: ");
+		ft_putstr(player->name);
+		ft_putstr("\nComment: ");
+		ft_putstr(player->comment);
+		ft_putstr("\nMem size: ");
+		ft_putnbr(player->exe_size);
+		ft_putstr("\n\n");
+		player = player->next;
+	}
 }
 
 int				main(int argc, char **argv)
@@ -62,12 +91,14 @@ int				main(int argc, char **argv)
 
 	cw = ft_cw_alloc(&err);
 	err == FT_OK ? err = ft_process_args(cw, argc, argv) : 0;
-	ft_putnbr(err);
-	//if (err == FT_OK)
-	//	err = ft_prepare_field(&cw);
+	err == FT_OK ? err = ft_prepare_field(cw) : 0;
 	//if (err == FT_OK)
 	//	err = ft_play(&cw);
 	//ft_output(&cw);
 	//ft_cw_free(&cw);
+	ft_putstr("Status: ");
+	ft_putnbr(err);
+	ft_putchar('\n');
+	ft_info(cw);
 	return (0);
 }

@@ -109,6 +109,7 @@ int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
 */
 
 t_player	*ft_player_new(t_player **players);
+void		ft_player_delete(t_player **player);
 
 
 /*
