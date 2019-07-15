@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/15 14:23:47 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/15 20:32:05 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,8 +170,8 @@ void		ft_row_is_data(t_data *data, char *str, int i)
 			i = ft_find_name_or_comment(str, data, i);
 		if (str[i])
 			i++;
-//		if (data->name && ft_strlen(data->name) > PROG_NAME_LENGTH)
-//			ft_error("NAME_TOO_LONG", data);
+		if (data->name && ft_strlen(data->name) > PROG_NAME_LENGTH)
+			ft_error("NAME_TOO_LONG", data);
 		if (data->comment && ft_strlen(data->comment) > COMMENT_LENGTH)
 			ft_error("COMMENT_TOO_LONG", data);
 	}
