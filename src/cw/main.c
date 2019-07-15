@@ -67,7 +67,7 @@ static int		ft_prepare_field(t_corewar *cw)
 	return (FT_OK);
 }
 
-static void		ft_info(t_corewar *cw)
+static void		ft_info(t_corewar *cw) //DEBUG FUNCTION
 {
 	t_player	*player;
 
@@ -77,7 +77,9 @@ static void		ft_info(t_corewar *cw)
 	player = cw->players;
 	while (player)
 	{
-		ft_putstr("Name: ");
+		ft_putstr("Id: ");
+		ft_putnbr(player->id);
+		ft_putstr("\nName: ");
 		ft_putstr(player->name);
 		ft_putstr("\nComment: ");
 		ft_putstr(player->comment);
@@ -88,6 +90,11 @@ static void		ft_info(t_corewar *cw)
 	}
 }
 
+static int		ft_play(t_corewar *cw)
+{
+	return (FT_OK);
+}
+
 int				main(int argc, char **argv)
 {
 	t_corewar	*cw;
@@ -96,8 +103,7 @@ int				main(int argc, char **argv)
 	cw = ft_cw_alloc(&err);
 	err == FT_OK ? err = ft_process_args(cw, argc, argv) : 0;
 	err == FT_OK ? err = ft_prepare_field(cw) : 0;
-	//if (err == FT_OK)
-	//	err = ft_play(&cw);
+	err == FT_OK ? err = ft_play(cw) : 0;
 	//ft_output(&cw);
 	//ft_cw_free(&cw);
 	ft_putstr("Status: ");
