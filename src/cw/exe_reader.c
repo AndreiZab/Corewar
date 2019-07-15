@@ -1,12 +1,31 @@
 #include "ft_cw.h"
+#include <stdio.h>
+
+static char		*ft_reverse_bytes(char *src, int size)
+{
+	char	buff;
+	int		i;
+
+	if (src == NULL)
+		return (NULL);
+	i = -1;
+	while (++i < size / 2)
+	{
+		buff = src[size - 1 - i];
+		src[size - 1 - i] = src[i];
+		src[i] = buff;
+	}
+	return (src);
+}
 
 static int		ft_exe_read_data(t_corewar *cw, int fd)
 {
 	char	buffer[MAX(COMMENT_LENGTH, CHAMP_MAX_SIZE) + 1];
+	unsigned int		supp;
 
 	if (ft_accurate_read(fd, buffer, 4) != FT_OK)
 		return (FT_READ_FILE);
-	if (*((int*)buffer) != COREWAR_EXEC_MAGIC)
+	if (*((int*)ft_reverse_bytes(buffer, 4)) != COREWAR_EXEC_MAGIC)
 		return (FT_EXE_MAGIC);
 	if (ft_accurate_read(fd, buffer, PROG_NAME_LENGTH) != FT_OK)
 		return (FT_READ_FILE);
@@ -17,9 +36,10 @@ static int		ft_exe_read_data(t_corewar *cw, int fd)
 		return (FT_4_NULL);
 	if (ft_accurate_read(fd, buffer, 4) != FT_OK)
 		return (FT_READ_FILE);
-	if (*((int*)buffer) > CHAMP_MAX_SIZE)
+	supp = *((unsigned int*)(ft_reverse_bytes(buffer, 4)));
+	if (supp > CHAMP_MAX_SIZE)
 		return (FT_EXE_MAX);
-	cw->players->exe_size = *((int*)buffer);
+	cw->players->exe_size = supp;
 	if (ft_accurate_read(fd, buffer, COMMENT_LENGTH) != FT_OK)
 		return (FT_READ_FILE);
 	cw->players->comment = ft_strdup(buffer);
