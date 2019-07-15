@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/14 21:53:27 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/15 12:27:54 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,20 +57,21 @@ char		*ft_get_name_or_comment(char *src, t_data *data, int *i, char flag)
 
 	j = 0;
 	data->quotes = 0;
-	dst = (char *)ft_memalloc(sizeof(char) * (ft_strlen(src + (*i)) + 1));
+	if (!(dst = ft_strnew(ft_strlen(src + (*i)))))
+		ft_error("NO_MEMORY", NULL);
 	if (src[++(*i) - 1] == '"')
 		data->quotes++;
 	while (src[*i] && src[*i] != '"')
 		dst[j++] = src[(*i)++];
-	if (src[*i] == '"')
+	if (src[++(*i) - 1] == '"')
 		data->quotes++;
 	while (src[*i])
 	{
-		(*i)++;
 		if (src[*i] == '"' && data->quotes++ && data->quotes > 2)
 			ft_error("TOO_MANY_QUOTES", data);
-		if (data->quotes == 2 && src[*i] != '\0' && src[*i] != ' ' && src[*i] != '\t')
+		if (data->quotes == 2 && src[*i] != ' ' && src[*i] != '\t')
 			ft_error("WRONG_SYMBOL_AFTER_QUOTES", data);
+		(*i)++;
 	}
 	if (data->quotes == 1 && flag == 'c')
 		data->quotes = 3;
@@ -118,7 +119,8 @@ int		ft_add_text(char *src, t_data *data, int i)
 	char *tmp;
 
 	j = 1;
-	dst = (char *)ft_memalloc(sizeof(char) *(ft_strlen(src + i) + 3));
+	if(!(dst = ft_strnew(ft_strlen(src + i) + 3)))
+		ft_error("NO_MEMORY", NULL);
 	dst[0] = '\n';
 	while (src[++i] && src[i] != '"')
 		dst[j++] = src[i];
@@ -157,7 +159,7 @@ void		ft_row_is_data(t_data *data, char *str, int i)
 		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 			return;
 		if (data->quotes == 1 || data->quotes == 3)
-			i = ft_add_text(str, data, i - 1);
+			 i = ft_add_text(str, data, i - 1);
 		else
 			i = ft_find_name_or_comment(str, data, i);
 		if (str[i])
@@ -179,8 +181,13 @@ void		ft_row_is_code (t_data *data, char *str, int i)
 
 }
 
-void		ft_check_row(t_data *data, char *str, int i)
+void		ft_check_row(t_data *data, char *str)
 {
+	int i;
+
+	i = 0;
+	while (str[i] == ' ' || str[i] == '\t')
+		i++;
 	if (!data->comment || !data->name || str[i] == '.' || data->quotes == 1 || data->quotes == 3)
 		ft_row_is_data(data, str, i);
 	else
@@ -191,16 +198,12 @@ void		ft_read(t_data *data)
 {
 	char *line;
 	int err;
-	int i;
 
 	line = NULL;
 	while (ft_free_l(line) && (err = get_next_line(data->fd, &line)) > 0)
 	{
 		data->num_current_row++;
-		i = 0;
-		while (line[i] == ' ' || line[i] == '\t')
-			i++;
-		ft_check_row(data, line, i);
+		ft_check_row(data, line);
 	}
 	if (data->quotes == 1 || data->quotes == 3)
 		ft_error("ERROR_WITH_QUOTES", NULL);
