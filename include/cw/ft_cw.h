@@ -18,6 +18,7 @@
 # define FT_ARG -10
 # define FT_READ -11
 # define FT_TRASH_AFTER_BINARY_DATA -12
+# define FT_NO_PLAYERS -13
 # define MAX(x, y) ((x > y) ? x : y)
 
 /*

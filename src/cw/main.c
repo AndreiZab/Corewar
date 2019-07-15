@@ -36,7 +36,7 @@ static int		ft_process_args(t_corewar *cw, int argc, char **argv)
 		err = ft_argh_do(cw, argc, argv, &arg_i);
 	ft_argh_free(&cw->argh);
 	ft_argh_free(&cw->argh_default);
-	if (err == FT_OK && cw->players_count > 0)
+	if (err == FT_OK)
 		ft_player_delete(&(cw->players));
 	return (err);
 }
@@ -48,7 +48,9 @@ static int		ft_prepare_field(t_corewar *cw)
 	int	err;
 	t_player	*pl;
 
-	if ((cw->map = (char*)ft_memalloc(MEM_SIZE)) == NULL)
+	if (cw->players_count == 0)
+		return (FT_NO_PLAYERS);
+	if ((cw->map = (unsigned char*)ft_memalloc(MEM_SIZE)) == NULL)
 		return (FT_MEMORY);
 	mem_part = MEM_SIZE / cw->players_count;
 	i = -1;
