@@ -20,12 +20,12 @@ void		ft_player_delete(t_player **player)
 	if (player == NULL || *player == NULL)
 		return ;
 	next = (*player)->next;
-	// if ((*player)->name)
-	// 	free((*player)->name);
-	// if ((*player)->comment)
-	// 	free((*player)->comment);
-	// if ((*player)->exe)
-	// 	free((*player)->exe);
+	 if ((*player)->name)
+	 	free((*player)->name);
+	 if ((*player)->comment)
+	 	free((*player)->comment);
+	 if ((*player)->exe)
+	 	free((*player)->exe);
 	free(*player);
 	*player = next;
 }
