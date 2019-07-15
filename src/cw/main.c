@@ -55,7 +55,7 @@ static int		ft_prepare_field(t_corewar *cw)
 	pl = cw->players;
 	while (++i < cw->players_count)
 	{
-		ft_memcpy(cw->map[i * mem_part], pl->exe, pl->exe_size);
+		ft_memcpy(cw->map + i * mem_part, pl->exe, pl->exe_size);
 		pl = pl->next;
 	}
 	if (cw->v)
