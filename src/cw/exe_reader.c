@@ -6,26 +6,26 @@ static int		ft_exe_read_data(t_corewar *cw, int fd)
 
 	if (ft_accurate_read(fd, buffer, 4) != FT_OK)
 		return (FT_READ_FILE);
-	if ((int)(*buffer) != COREWAR_EXEC_MAGIC)
+	if (*((int*)buffer) != COREWAR_EXEC_MAGIC)
 		return (FT_EXE_MAGIC);
 	if (ft_accurate_read(fd, buffer, PROG_NAME_LENGTH) != FT_OK)
 		return (FT_READ_FILE);
 	cw->players->name = ft_strdup(buffer);
 	if (ft_accurate_read(fd, buffer, 4) != FT_OK)
 		return (FT_READ_FILE);
-	if ((int)(*buffer) != 0x00000000)
+	if (*((int*)buffer) != 0x00000000)
 		return (FT_4_NULL);
 	if (ft_accurate_read(fd, buffer, 4) != FT_OK)
 		return (FT_READ_FILE);
-	if ((int)(*buffer) > CHAMP_MAX_SIZE)
+	if (*((int*)buffer) > CHAMP_MAX_SIZE)
 		return (FT_EXE_MAX);
-	cw->players->exe_size = (int)(*buffer);
+	cw->players->exe_size = *((int*)buffer);
 	if (ft_accurate_read(fd, buffer, COMMENT_LENGTH) != FT_OK)
 		return (FT_READ_FILE);
 	cw->players->comment = ft_strdup(buffer);
 	if (ft_accurate_read(fd, buffer, 4) != FT_OK)
 		return (FT_READ_FILE);
-	if ((int)(*buffer) != 0x00000000)
+	if (*((int*)buffer) != 0x00000000)
 		return (FT_4_NULL);
 	if (ft_accurate_read(fd, buffer, cw->players->exe_size) != FT_OK)
 		return (FT_READ_FILE);

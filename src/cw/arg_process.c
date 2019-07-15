@@ -97,5 +97,5 @@ int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i)
 
 int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i)
 {
-	return (ft_exe_read(cw, argv));
+	return (ft_exe_read(cw, argv[*arg_i]));
 }
