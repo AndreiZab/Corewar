@@ -46,15 +46,17 @@ static int		ft_prepare_field(t_corewar *cw)
 	int mem_part;
 	int i;
 	int	err;
+	t_player	*pl;
 
 	if ((cw->map = (char*)ft_memalloc(MEM_SIZE)) == NULL)
 		return (FT_MEMORY);
 	mem_part = MEM_SIZE / cw->players_count;
 	i = -1;
+	pl = cw->players;
 	while (++i < cw->players_count)
 	{
-		ft_memcpy(cw->map[i * mem_part], cw->players[i].exe,
-			cw->players[i].exe_size);
+		ft_memcpy(cw->map[i * mem_part], pl->exe, pl->exe_size);
+		pl = pl->next;
 	}
 	if (cw->v)
 	{

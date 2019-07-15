@@ -26,6 +26,6 @@ void		ft_player_delete(t_player **player)
 	// 	free((*player)->comment);
 	// if ((*player)->exe)
 	// 	free((*player)->exe);
-	// free(*player);
-	//*player = next;
+	free(*player);
+	*player = next;
 }
