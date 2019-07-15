@@ -1,6 +1,7 @@
 #ifndef FT_CW_H
 # define FT_CW_H
 # include <stdlib.h>
+# include <unistd.h>
 # include <fcntl.h>
 # include "libft.h"
 # include "op.h"

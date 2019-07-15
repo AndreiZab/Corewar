@@ -62,6 +62,7 @@ int				main(int argc, char **argv)
 
 	cw = ft_cw_alloc(&err);
 	err == FT_OK ? err = ft_process_args(cw, argc, argv) : 0;
+	ft_putnbr(err);
 	//if (err == FT_OK)
 	//	err = ft_prepare_field(&cw);
 	//if (err == FT_OK)

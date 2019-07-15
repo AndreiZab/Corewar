@@ -10,15 +10,16 @@ OBJ=$(SRC:.c=.o)
 
 LIBFT=../../lib/libft
 INCLUDE=-I ../../include -I ../../include/cw -I $(LIBFT)
+CFLAGS=-g3
 
 
 all: $(NAME)
 
 $(NAME): $(LIBFT)/libft.a $(OBJ)
-	@gcc -o $(NAME) $(OBJ) $(INCLUDE) -L $(LIBFT) -lft
+	@gcc $(CFLAGS) -o $(NAME) $(OBJ) $(INCLUDE) -L $(LIBFT) -lft
 
 $(LIBFT)/libft.a:
 	@make -C $(LIBFT)
 
 %.o: %.c
-	@gcc $(INCLUDE) -c $< -L $(LIBFT) -lft
+	@gcc $(CFLAGS) $(INCLUDE) -c $< -L $(LIBFT) -lft
