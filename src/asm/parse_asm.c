@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/15 12:27:54 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/15 14:23:47 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,11 @@ char		*ft_get_name_or_comment(char *src, t_data *data, int *i, char flag)
 		data->quotes++;
 	while (src[*i] && src[*i] != '"')
 		dst[j++] = src[(*i)++];
-	if (src[++(*i) - 1] == '"')
+	if (src[(*i)] == '"')
+	{
 		data->quotes++;
+		i++;
+	}
 	while (src[*i])
 	{
 		if (src[*i] == '"' && data->quotes++ && data->quotes > 2)
@@ -119,11 +122,11 @@ int		ft_add_text(char *src, t_data *data, int i)
 	char *tmp;
 
 	j = 1;
-	if(!(dst = ft_strnew(ft_strlen(src + i) + 3)))
+	if(!(dst = ft_strnew(ft_strlen(src + ++i) + 1)))
 		ft_error("NO_MEMORY", NULL);
 	dst[0] = '\n';
-	while (src[++i] && src[i] != '"')
-		dst[j++] = src[i];
+	while (src[i] && src[i] != '"')
+		dst[j++] = src[i++];
 	if (data->quotes == 3)
 	{
 		tmp = ft_strjoin(data->comment, dst);
@@ -137,14 +140,17 @@ int		ft_add_text(char *src, t_data *data, int i)
 		data->name = tmp;
 	}
 	if (src[i] == '"')
+	{
 		data->quotes++;
+		i++;
+	}
 	while (src[i])
 	{
-		i++;
 		if (src[i] == '"' && data->quotes++ && data->quotes > 2)
 			ft_error("TOO_MANY_QUOTES", data);
 		if ((data->quotes == 2 || data->quotes == 4) && src[i] != '\0' && src[i] != ' ' && src[i] != '\t')
 			ft_error("WRONG_SYMBOL_AFTER_QUOTES", data);
+		i++;
 	}
 	free(dst);
 	return (i);
