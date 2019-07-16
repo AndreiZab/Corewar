@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/16 18:44:23 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/16 18:53:18 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,22 +43,22 @@ t_token			*ft_token_create(void)
 }
 
 char	g_commands[REG_NUMBER][6] = {
-		"live",
-		"ld",
-		"st",
-		"add",
-		"sub",
-		"and",
-		"or",
-		"xor",
-		"zjmp",
-		"ldi",
+		"lfork",
 		"sti",
 		"fork",
 		"lld",
+		"ld",
+		"add",
+		"zjmp",
+		"sub",
+		"ldi",
+		"or",
+		"st",
+		"aff",
+		"live",
+		"xor",
 		"lldi",
-		"lfork",
-		"aff"
+		"and"
 };
 
 int 		ft_len_one_word(char *str)
