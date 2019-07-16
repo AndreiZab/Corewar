@@ -6,11 +6,9 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/15 20:57:07 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/15 21:09:18 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdio.h>
 
 #include "ft_asm.h"
 #include "get_next_line.h"
@@ -114,7 +112,7 @@ int			ft_find_name_or_comment(char *str, t_data *data, int i)
 		data->comment = ft_get_name_or_comment(str, data, &i, 'c');
 	}
 	else
-		ft_error("FT_EXTRA_CHARACTER", data);
+		ft_error("FT_EXTRA_CHARACTER__NEED_NAME/COMMENT", data);
 	return (i);
 }
 
@@ -184,16 +182,6 @@ void		ft_row_is_data(t_data *data, char *str, int i)
 		if (data->comment && ft_strlen(data->comment) > COMMENT_LENGTH)
 			ft_error("COMMENT_TOO_LONG", data);
 	}
-}
-
-void		ft_row_is_code (t_data *data, char *str, int i)
-{
-	while (str[++i])
-	{
-		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
-			return ;
-	}
-
 }
 
 void		ft_check_row(t_data *data, char *str)
