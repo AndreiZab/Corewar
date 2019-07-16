@@ -53,4 +53,10 @@ void		ft_asm(char *str);
 
 void		ft_error(char *str, t_data *data);
 
+/*
+** row_is_code.c
+ */
+
+void		ft_row_is_code (t_data *data, char *str, int i);
+
 #endif
