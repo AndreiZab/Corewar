@@ -95,6 +95,15 @@ static void		ft_info(t_corewar *cw) //DEBUG FUNCTION
 
 static int		ft_play(t_corewar *cw)
 {
+	int play;
+
+	play = 1;
+	while (play)
+	{
+		ft_tick(cw);
+		if (cw->v)
+			ft_vis_redraw(cw);
+	}
 	return (FT_OK);
 }
 
