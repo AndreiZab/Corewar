@@ -41,24 +41,6 @@ int	ft_process_flag_v(t_corewar *cw, int argc, char **argv, int *arg_i)
 	return (FT_OK);
 }
 
-/*
-** Проверить, задан ли уже этот id игрока
-*/
-
-static int ft_contains_ids(t_corewar *cw, int id)
-{
-	t_player	*player;
-
-	player = cw->players->next;
-	while (player)
-	{
-		if (id == player->id)
-			return (1);
-		player = player->next;
-	}
-	return (0);
-}
-
 int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i)
 {
 	int		n_val;

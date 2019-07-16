@@ -36,8 +36,11 @@ static int		ft_process_args(t_corewar *cw, int argc, char **argv)
 		err = ft_argh_do(cw, argc, argv, &arg_i);
 	ft_argh_free(&cw->argh);
 	ft_argh_free(&cw->argh_default);
-	if (err == FT_OK)
+	if (err == FT_OK && cw->players_count > 0)
+	{
 		ft_player_delete(&(cw->players));
+		ft_set_ids(cw);
+	}	
 	return (err);
 }
 
