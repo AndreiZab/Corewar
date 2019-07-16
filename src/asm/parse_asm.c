@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/16 12:12:58 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/16 14:18:36 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -192,7 +192,7 @@ void		ft_check_row(t_data *data, char *str)
 	if (!data->comment || !data->name || str[i] == '.' || data->quotes == 1 || data->quotes == 3)
 		ft_row_is_data(data, str, i);
 	else
-		ft_row_is_code(data, str, i - 1);
+		ft_row_is_code(data, str);
 }
 
 void		ft_read(t_data *data)

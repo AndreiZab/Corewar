@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/16 18:53:18 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/16 19:23:38 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,14 +98,15 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 	}
 }
 
-void		ft_row_is_code (t_data *data, char *str, int i)
+void		ft_row_is_code (t_data *data, char *str)
 {
+	int i;
 	int len;
 	t_token	*token;
 
-	while (str[++i])
+	i = 0;
+	while (str[i])
 	{
-		len = ft_len_one_word(str + i);
 		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 			return ;
 		len = ft_len_one_word(str + i);
