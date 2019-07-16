@@ -4,7 +4,8 @@ SRC=main.c\
 	arg_process.c \
 	players.c \
 	accurate_reader.c \
-	exe_reader.c
+	exe_reader.c \
+	others.c
 
 OBJ=$(SRC:.c=.o)
 
@@ -23,3 +24,14 @@ $(LIBFT)/libft.a:
 
 %.o: %.c
 	@gcc $(CFLAGS) $(INCLUDE) -c $< -L $(LIBFT) -lft
+
+clean:
+	@rm -f $(OBJ)
+	@make -C $(LIBFT) fclean
+
+fclean: clean
+	@rm -f $(NAME)
+
+re: fclean all
+
+.PHONY: all clean fclean re

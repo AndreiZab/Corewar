@@ -37,6 +37,7 @@ typedef struct	s_player
 	int				exe_size;
 	char			*exe;
 
+	struct s_player *prev;
 	struct s_player	*next;
 
 }				t_player;
@@ -111,6 +112,7 @@ int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
 
 t_player	*ft_player_new(t_player **players);
 void		ft_player_delete(t_player **player);
+void		ft_player_list_start(t_player **players);
 
 
 /*
@@ -127,5 +129,11 @@ int 		ft_accurate_read(int fd, char *buffer, int n_bytes);
 int			ft_exe_read(t_corewar *cw, char *filename);
 
 
+/*
+** others.c
+*/
+
+int			ft_contains_ids(t_corewar *cw, int id);
+void		ft_set_ids(t_corewar *cw);
 
 #endif
