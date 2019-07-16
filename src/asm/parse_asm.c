@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/15 21:09:18 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/16 12:12:58 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,6 @@ t_data	*ft_create(int fd)
 	data->fd = fd;
 	return (data);
 }
-
-
 
 char		*ft_get_name_or_comment(char *src, t_data *data, int *i, char flag)
 {

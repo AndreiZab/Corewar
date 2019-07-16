@@ -8,11 +8,35 @@
 # include "libft.h"
 # include "op.h"
 
+typedef enum
+{
+	What_is_this = -1,
+	Direct_number,
+	Direct_label,
+	Whitespace,
+	Label_arg,
+	Separator,
+	Register,
+	Newline,
+	Command,
+	Number,
+	Label
+}	t_type;
+
+typedef struct			s_token
+{
+	char				*content;
+	t_type				type;
+	unsigned			row;
+	struct s_token		*next;
+}						t_token;
+
+
 typedef struct		s_data
 {
 	char				*name;
 	char				*comment;
-
+	t_token				*tokens;
 	int					fd;
 	int					num_current_row;
 	int					count_char;
@@ -40,6 +64,7 @@ typedef struct		s_label
 
 	struct s_label		*next;
 }					t_label;
+
 
 /*
 ** parse_asm.c
