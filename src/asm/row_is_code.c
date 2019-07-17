@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/16 19:23:38 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:25:53 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,6 +96,18 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 		token->type = Separator;
 		return ;
 	}
+	if (ft_check_symbols(str, LABEL_CHAR) && str[0] != DIRECT_CHAR)
+	{
+		if (ft_check_label_symbols(str))
+			token->type = Label;
+		else
+		{
+			token->type = what_is_this;
+			ft_error("WRONG_SYMBOL_IN_LABEL", data);
+		}
+		return ;
+	}
+	ft_digits(data, str, token);
 }
 
 void		ft_row_is_code (t_data *data, char *str)

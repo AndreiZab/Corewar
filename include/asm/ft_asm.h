@@ -10,7 +10,6 @@
 
 typedef enum
 {
-	What_is_this = -1,
 	Direct_number,
 	Direct_label,
 	Whitespace,
