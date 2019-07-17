@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/17 15:25:53 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/17 17:04:16 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,31 +83,54 @@ int 		ft_len_one_word(char *str)
 	return (0);
 }
 
+int			ft_check_label_chars(char *str)
+{
+	int		i;
+	int		j;
+
+	i = -1;
+	while (str[++i] && str[i] != LABEL_CHAR)
+	{
+		j = -1;
+		while  (LABEL_CHARS[++j])
+			if (LABEL_CHARS[j] == str[i])
+				break;
+		if (!LABEL_CHARS[j])
+			return (0);
+	}
+	return (1);
+}
+
+int			ft_check_label_char(char *str)
+{
+	int i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == LABEL_CHAR || str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void		ft_parse_token(t_data *data, char *str, t_token	*token)
 {
 	token->content = str;
 	if (str[0] == ' ' || str[0] == '\t')
-	{
 		token->type = Whitespace;
-		return ;
-	}
-	if (str[0] == SEPARATOR_CHAR)
-	{
+	else if (str[0] == SEPARATOR_CHAR)
 		token->type = Separator;
-		return ;
-	}
-	if (ft_check_symbols(str, LABEL_CHAR) && str[0] != DIRECT_CHAR)
+	else if (str[0] != DIRECT_CHAR && ft_check_label_char(str))
 	{
-		if (ft_check_label_symbols(str))
+		if (ft_check_label_chars(str))
 			token->type = Label;
 		else
-		{
-			token->type = what_is_this;
 			ft_error("WRONG_SYMBOL_IN_LABEL", data);
-		}
-		return ;
 	}
-	ft_digits(data, str, token);
+	else
+		ft_is_digits(data, str, token);
 }
 
 void		ft_row_is_code (t_data *data, char *str)
