@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/18 16:30:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/18 17:49:15 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_token			*ft_token_create(void)
 		ft_error("NO_MEMORY", NULL);
 	token->row = 0;
 	token->content = NULL;
-	token->type = 0;
+	token->type = -1;
 	return (token);
 }
 
@@ -154,7 +154,7 @@ int			ft_is_direct_label(t_data *data, char *str)
 	if (str[0] == DIRECT_CHAR)
 	{
 		label = 1;
-		i = -1;
+		i = 1;
 		while (str[++i] && str[i] != LABEL_CHAR)
 		{
 			j = -1;
@@ -192,14 +192,15 @@ int			ft_is_register(t_data *data, char *str)
 
 }
 
-int			ft_is_command(t_data *data, char *str)
+int			ft_is_command(char *str)
 {
 	int i;
 
 	i = 0;
 	while (i <= REG_NUMBER)
 	{
-		if (!ft_strcmp)
+		if (!ft_strcmp(str, g_commands[i]))
+			return (1);
 		i++;
 	}
 	return (0);
@@ -224,7 +225,7 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 		token->type = Register;
 	else if (str[0] == LABEL_CHAR && str[1] != '\0')
 		token->type = Label_arg;
-	else if (ft_is_command(data, str))
+	else if (ft_is_command(str))
 		token->type = Command;
 	else
 		ft_error("TOKEN_ERROR", data);
