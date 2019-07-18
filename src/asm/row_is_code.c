@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/18 14:51:08 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/18 14:58:54 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,16 @@ int			ft_is_digits(t_data *data, char *str)
 
 int			ft_is_direct(t_data *data, char *str)
 {
-
+	if (str[0] == DIRECT_CHAR)
+	{
+		if (str[1] == LABEL_CHAR)
+			;
+		else if()
+			;
+		else
+			ft_error("ERROR_VALUE_AFTER_DIRECT", data);
+	}
+	return (0);
 }
 
 void		ft_parse_token(t_data *data, char *str, t_token	*token)
