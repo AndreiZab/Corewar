@@ -110,7 +110,7 @@ int			ft_find_name_or_comment(char *str, t_data *data, int i)
 		data->comment = ft_get_name_or_comment(str, data, &i, 'c');
 	}
 	else
-		ft_error("FT_EXTRA_CHARACTER__NEED_NAME/COMMENT", data);
+		ft_error("EXTRA_CHARACTER__NEED_NAME/COMMENT", data);
 	return (i);
 }
 
