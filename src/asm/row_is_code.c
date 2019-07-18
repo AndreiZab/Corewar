@@ -6,29 +6,11 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/17 18:41:35 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/18 14:51:08 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-char	*ft_strsub(char const *s, unsigned int start, size_t len)
-{
-	int i;
-	char *subs;
-
-	if (s == NULL)
-		return (NULL);
-	if (!(subs = ft_strnew(len)))
-		return (NULL);
-	i = 0;
-	while (len--)
-	{
-		subs[i] = s[start + i];
-		i++;
-	}
-	return (subs);
-}
 
 t_token			*ft_token_create(void)
 {
@@ -83,7 +65,29 @@ int 		ft_len_one_word(char *str)
 	return (0);
 }
 
-int			ft_check_label(t_data *data, t_token *token, char *str)
+int		ft_str_is_num(t_data *data, char *str)
+{
+	int		i;
+
+	i = 0;
+	while (str[i] == '0')
+		i++;
+	if (!str[i])
+		return (0);
+	if (str[0] == '+')
+		ft_error("PLUS_IN_NUMBER", data);
+	if (str[0] == '-')
+		i++;
+	while (str[i])
+	{
+		if (!ft_isdigit(str[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int			ft_is_label(t_data *data, char *str)
 {
 	char label;
 	int i;
@@ -113,18 +117,25 @@ int			ft_check_label(t_data *data, t_token *token, char *str)
 	}
 	return (0);
 }
-int			ft_check_label_char(char *str)
-{
-	int i;
 
-	i = 0;
-	while (str[i])
+int			ft_is_digits(t_data *data, char *str)
+{
+
+	if (str[0] == '+')
+		ft_error("PLUS_IN_NUMBER", data);
+	if (ft_isdigit(str[0]) || str[0] == '-')
 	{
-		if (str[i] == LABEL_CHAR || str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
+		if (!ft_str_is_num(data, str) && ft_atoi(str) != 0) // точно атои? там могут быть числа больше (uint точно)
+			ft_error("CHAR_IN_NUMBER", data);
+		else
 			return (1);
-		i++;
 	}
 	return (0);
+}
+
+int			ft_is_direct(t_data *data, char *str)
+{
+
 }
 
 void		ft_parse_token(t_data *data, char *str, t_token	*token)
@@ -134,11 +145,20 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 		token->type = Whitespace;
 	else if (str[0] == SEPARATOR_CHAR)
 		token->type = Separator;
-	else if (ft_check_label(data, token, str))
+	else if (ft_is_label(data, str))
 		token->type = Label;
-	else if
-		ft_is_digits(data, str, token);
-	// ...
+	else if (ft_is_digits(data, str))
+		token->type = Number;
+	else if (ft_is_direct(data, str))
+	//	Direct_number,
+	//	Direct_label,
+	//	token->type = Number;
+	else if (ft_is_reg(data, str))
+		token->type = Register;
+	else if (ft_is_command(data, str))
+		token->type = Command;
+	else
+		ft_error("TOKEN_ERROR", data);
 }
 
 void		ft_row_is_code (t_data *data, char *str)
