@@ -56,6 +56,8 @@ int				ft_isint(const char *str);
 char			*ft_strdup(const char *s1);
 void			*ft_memchr(const void *s, int c, size_t n);
 char			*ft_strjoin(char const *s1, char const *s2);
+char			*ft_strsub(char const *s, unsigned int start, size_t len);
+int				ft_isdigit(int c);
 
 /*
 ** Larlyne's String
