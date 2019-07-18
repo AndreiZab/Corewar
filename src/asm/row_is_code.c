@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/18 16:02:41 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/18 16:30:42 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -194,6 +194,14 @@ int			ft_is_register(t_data *data, char *str)
 
 int			ft_is_command(t_data *data, char *str)
 {
+	int i;
+
+	i = 0;
+	while (i <= REG_NUMBER)
+	{
+		if (!ft_strcmp)
+		i++;
+	}
 	return (0);
 }
 
@@ -214,6 +222,8 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 		token->type = Direct_number;
 	else if (ft_is_register(data, str))
 		token->type = Register;
+	else if (str[0] == LABEL_CHAR && str[1] != '\0')
+		token->type = Label_arg;
 	else if (ft_is_command(data, str))
 		token->type = Command;
 	else
