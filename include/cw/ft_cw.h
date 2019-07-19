@@ -117,6 +117,7 @@ void	ft_argh_free(t_arg_handler **arg_h);
 */
 
 int	ft_process_flag_v(t_corewar *cw, int argc, char **argv, int *arg_i);
+int	ft_process_flag_a(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_flag_dump(t_corewar *cw, int argc, char **argv, int *arg_i);
 int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);

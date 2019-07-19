@@ -6,4 +6,5 @@ void	ft_comm_live(t_corewar *cw, t_carriage *carr, int (*f)())
 
 	carr->cycle_live = cw->cycle;
 	id = ft_reverse_bytes();
+	carr->pc += 5;
 }

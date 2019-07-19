@@ -41,6 +41,22 @@ char		ft_get_byte(t_corewar *cw, int pos)
 	return (cw->map[pos % MEM_SIZE]);
 }
 
+char		*ft_get_bytes(t_corewar *cw, int pos, int count, char reverse)
+{
+	char	*bytes;
+	int		i;
+
+	if ((bytes = (char*)memalloc(sizeof(char) * count)) == NULL)
+		return (FT_MEMORY);
+	i = -1;
+	while (++i < count)
+		if (reverse)
+			bytes[count - 1 - i] = ft_get_byte(cw, pos + i);
+		else
+			bytes[i] = ft_get_byte(cw, pos + i);
+	return (bytes);
+}
+
 char		*ft_get_arg_types(char byte)
 {
 	char	*types;

@@ -28,6 +28,7 @@ static int		ft_process_args(t_corewar *cw, int argc, char **argv)
 	cw->argh_default = NULL;
 	ft_argh_add(&(cw->argh), "-n", ft_process_flag_n); // Обработка флагов
 	ft_argh_add(&(cw->argh), "-v", ft_process_flag_v);
+	ft_argh_add(&(cw->argh), "-a", ft_process_flag_a);
 	ft_argh_add(&(cw->argh), "-dump", ft_process_flag_dump);
 	ft_argh_add(&(cw->argh_default), NULL, ft_process_file); // Обработка названий файлов
 	arg_i = 0;
