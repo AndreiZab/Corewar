@@ -16,7 +16,6 @@ typedef enum
 	Label_arg,
 	Separator,
 	Register,
-	Newline,
 	Command,
 	Number,
 	Label
