@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/19 16:59:22 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/19 17:01:01 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,7 @@ int			ft_is_register(t_data *data, char *str)
 		if (!str[1])
 			ft_error("NO_REGISTER_NUMBER", data);
 		i = ft_atoi(str + 1);
-		if (!ft_str_is_num(data, str + 1)) //чекнуть
+		if (!ft_str_is_num(data, str + 1))
 			ft_error("CHAR_IN_REGISTER", data);
 		else if (i < 0)
 			ft_error("ERROR_IN_REGISTER_NUMBER", data);
