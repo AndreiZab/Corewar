@@ -3,9 +3,11 @@ SRC=main.c\
 	argh.c \
 	arg_process.c \
 	players.c \
+	carriage.c \
 	accurate_reader.c \
 	exe_reader.c \
-	others.c
+	others.c \
+	casting_uc_hex.c
 
 OBJ=$(SRC:.c=.o)
 

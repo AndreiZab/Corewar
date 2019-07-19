@@ -26,10 +26,10 @@ static int		ft_process_args(t_corewar *cw, int argc, char **argv)
 
 	cw->argh = NULL;
 	cw->argh_default = NULL;
-	ft_argh_add(&cw->argh, "-n", ft_process_flag_n); // Обработка флагов
-	ft_argh_add(&cw->argh, "-v", ft_process_flag_v);
-	ft_argh_add(&cw->argh, "-dump", ft_process_flag_dump);
-	ft_argh_add(&cw->argh_default, NULL, ft_process_file); // Обработка названий файлов
+	ft_argh_add(&(cw->argh), "-n", ft_process_flag_n); // Обработка флагов
+	ft_argh_add(&(cw->argh), "-v", ft_process_flag_v);
+	ft_argh_add(&(cw->argh), "-dump", ft_process_flag_dump);
+	ft_argh_add(&(cw->argh_default), NULL, ft_process_file); // Обработка названий файлов
 	arg_i = 0;
 	err = FT_OK;
 	while (err == FT_OK && ++arg_i < argc)
@@ -56,12 +56,12 @@ static int		ft_prepare_field(t_corewar *cw)
 	if ((cw->map = (unsigned char*)ft_memalloc(MEM_SIZE)) == NULL)
 		return (FT_MEMORY);
 	mem_part = MEM_SIZE / cw->players_count;
-	i = -1;
-	pl = cw->players;
-	while (++i < cw->players_count)
+	i = 0;
+	while (++i <= cw->players_count)
 	{
-		ft_memcpy(cw->map + i * mem_part, pl->exe, pl->exe_size);
-		pl = pl->next;
+		pl = ft_player_by_id(cw->players, i);
+		ft_memcpy(cw->map + (i - 1) * mem_part, pl->exe, pl->exe_size);
+		ft_carriage_new(&(cw->carriages), i, (i - 1) * mem_part);
 	}
 	if (cw->v)
 	{
@@ -96,13 +96,34 @@ static void		ft_info(t_corewar *cw) //DEBUG FUNCTION
 static int		ft_play(t_corewar *cw)
 {
 	int play;
+	int tick;
 
+	return (FT_OK);
+	ft_commh_add(&(cw->commh), 1, 10, ft_comm_process_live);
+	ft_commh_add(&(cw->commh), 2, 5, ft_comm_process_ld);
+	ft_commh_add(&(cw->commh), 3, 5, ft_comm_process_st);
+	ft_commh_add(&(cw->commh), 4, 10, ft_comm_process_add);
+	ft_commh_add(&(cw->commh), 5, 10, ft_comm_process_sub);
+	ft_commh_add(&(cw->commh), 6, 6, ft_comm_process_and);
+	ft_commh_add(&(cw->commh), 7, 6, ft_comm_process_or);
+	ft_commh_add(&(cw->commh), 8, 6, ft_comm_process_xor);
+	ft_commh_add(&(cw->commh), 9, 20, ft_comm_process_zjmp);
+	ft_commh_add(&(cw->commh), 10, 25, ft_comm_process_ldi);
+	ft_commh_add(&(cw->commh), 11, 25, ft_comm_process_sti);
+	ft_commh_add(&(cw->commh), 12, 800, ft_comm_process_fork);
+	ft_commh_add(&(cw->commh), 13, 10, ft_comm_process_lld);
+	ft_commh_add(&(cw->commh), 14, 50, ft_comm_process_lldi);
+	ft_commh_add(&(cw->commh), 15, 1000, ft_comm_process_lfork);
+	ft_commh_add(&(cw->commh), 16, 2, ft_comm_process_aff);
+	ft_commh_add(&(cw->commh_default), 0, 0, ft_comm_process_unknown);
 	play = 1;
+	tick = 0;
 	while (play)
 	{
-		ft_tick(cw);
-		if (cw->v)
-			ft_vis_redraw(cw);
+		//ft_tick(cw);
+		//if (cw->v)
+		//	ft_vis_redraw(cw);
+		++tick;
 	}
 	return (FT_OK);
 }
@@ -115,7 +136,7 @@ int				main(int argc, char **argv)
 	cw = ft_cw_alloc(&err);
 	err == FT_OK ? err = ft_process_args(cw, argc, argv) : 0;
 	err == FT_OK ? err = ft_prepare_field(cw) : 0;
-	err == FT_OK ? err = ft_play(cw) : 0;
+	//err == FT_OK ? err = ft_play(cw) : 0;
 	//ft_output(&cw);
 	//ft_cw_free(&cw);
 	ft_putstr("Status: ");

@@ -48,30 +48,39 @@ typedef struct	s_corewar
 	int	dump_cycle; //переделать под ulonglongint
 
 	char			v;
+	char			aff;
 
+
+	int				cycle;
 	unsigned char	*map;
 
 	struct s_player	*players;
 	int				players_count;
 
+	struct s_carriage		*carriages;
+
 	struct s_arg_handler	*argh;
 	struct s_arg_handler	*argh_default;
+
+	struct s_comm_handler	*commh;
+	struct s_comm_handler	*commh_default;
 }				t_corewar;
 
 
 
 typedef struct	s_carriage
 {
-	char			player_id;
+	int					player_id;
 
-	unsigned int	rg[REG_NUMBER];
-	char			carry;
-	char			live;
+	unsigned int		rg[REG_NUMBER];
+	char				carry;
+	int					cycle_live;
 
-	unsigned int	pc; //program counter
-	int				command; //?
-	unsigned int	preparing_ticks;
+	unsigned int		pc; //program counter
+	int					command; //?
+	unsigned int		preparing_ticks;
 
+	struct s_carriage *next;
 }				t_carriage;
 
 typedef struct	s_arg_handler
@@ -82,11 +91,17 @@ typedef struct	s_arg_handler
 	struct s_arg_handler	*next;
 }				t_arg_handler;
 
+typedef struct	s_comm_handler
+{
+	char	comm;
+	int		cycles;
+	int		(*f)(t_corewar *cw, t_carriage *carr);
+	struct		t_comm_handler *next;
+}				t_comm_handler;
+
 
 void		ft_cw_free(t_corewar **cw);
 
-void		ft_map_set(t_corewar *cw, int pos, char val);
-void		ft_map_get(t_corewar *cw, int pos);
 
 /*
 **	argh.c
@@ -112,7 +127,23 @@ int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
 
 t_player	*ft_player_new(t_player **players);
 void		ft_player_delete(t_player **player);
-void		ft_player_list_start(t_player **players);
+t_player	*ft_player_by_id(t_player *players, int id);
+
+
+/*
+** carriage.c
+*/
+
+t_carriage	*ft_carriage_new(t_carriage **carrs, int player_id, int pos);
+
+
+/*
+** commh.c
+*/
+
+int		ft_commh_add(t_comm_handler **commh, char command, int cycles,
+			int (*f)(t_corewar *cw, t_carriage *carr));
+t_comm_handler	*ft_commh_by_byte(t_corewar *cw, char command);
 
 
 /*
@@ -128,6 +159,12 @@ int 		ft_accurate_read(int fd, char *buffer, int n_bytes);
 
 int			ft_exe_read(t_corewar *cw, char *filename);
 
+/*
+** casting_uc_hex.c
+*/
+
+char		*casting_uc_hex(unsigned char c);
+
 
 /*
 ** others.c
@@ -135,5 +172,7 @@ int			ft_exe_read(t_corewar *cw, char *filename);
 
 int			ft_contains_ids(t_corewar *cw, int id);
 void		ft_set_ids(t_corewar *cw);
+char		ft_get_byte(t_corewar *cw, int pos);
+char		*ft_get_arg_types(char byte);
 
 #endif

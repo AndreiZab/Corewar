@@ -41,6 +41,12 @@ int	ft_process_flag_v(t_corewar *cw, int argc, char **argv, int *arg_i)
 	return (FT_OK);
 }
 
+int	ft_process_flag_a(t_corewar *cw, int argc, char **argv, int *arg_i)
+{
+	cw->aff = 1;
+	return (FT_OK);
+}
+
 int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i)
 {
 	int		n_val;

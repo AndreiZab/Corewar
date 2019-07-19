@@ -29,3 +29,14 @@ void		ft_player_delete(t_player **player)
 	free(*player);
 	*player = next;
 }
+
+t_player	*ft_player_by_id(t_player *players, int id)
+{
+	while (players)
+	{
+		if (players->id == id)
+			return players;
+		players = players->next;
+	}
+	return (NULL);
+}

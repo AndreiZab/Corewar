@@ -10,9 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include <unistd.h>
-// #include <stdlib.h>
-// #include <stdio.h>
+# include "ft_cw.h"
 
 char	*casting_uc_hex(unsigned char c)
 {

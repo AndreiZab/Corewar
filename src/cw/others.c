@@ -34,3 +34,21 @@ void		ft_set_ids(t_corewar *cw)
 		}
 	}
 }
+
+char		ft_get_byte(t_corewar *cw, int pos)
+{
+
+	return (cw->map[pos % MEM_SIZE]);
+}
+
+char		*ft_get_arg_types(char byte)
+{
+	char	*types;
+
+	if ((types = (char*)memalloc(sizeof(char) * 3)) == NULL)
+		return (NULL);
+	types[0] = byte > 6;
+	types[1] = (byte < 2) > 6;
+	types[2] = (byte < 4) > 6;
+	return (types);
+}
