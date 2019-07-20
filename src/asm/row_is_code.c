@@ -6,23 +6,11 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/19 17:01:01 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/19 18:15:29 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-t_token			*ft_token_create(void)
-{
-	t_token *token;
-
-	if (!(token = (t_token *) malloc(sizeof(t_token))))
-		ft_error("NO_MEMORY", NULL);
-	token->row = 0;
-	token->content = NULL;
-	token->type = -1;
-	return (token);
-}
 
 char	g_commands[REG_NUMBER][6] = {
 		"lfork",
@@ -42,6 +30,19 @@ char	g_commands[REG_NUMBER][6] = {
 		"lldi",
 		"and"
 };
+
+t_token			*ft_token_create(void)
+{
+	t_token *token;
+
+	if (!(token = (t_token *) malloc(sizeof(t_token))))
+		ft_error("NO_MEMORY", NULL);
+	token->row = 0;
+	token->content = NULL;
+	token->type = -1;
+	token->next = NULL;
+	return (token);
+}
 
 int 		ft_len_one_word(char *str)
 {
