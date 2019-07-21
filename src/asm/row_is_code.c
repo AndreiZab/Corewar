@@ -6,23 +6,11 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/18 17:49:15 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/19 18:15:29 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-t_token			*ft_token_create(void)
-{
-	t_token *token;
-
-	if (!(token = (t_token *) malloc(sizeof(t_token))))
-		ft_error("NO_MEMORY", NULL);
-	token->row = 0;
-	token->content = NULL;
-	token->type = -1;
-	return (token);
-}
 
 char	g_commands[REG_NUMBER][6] = {
 		"lfork",
@@ -42,6 +30,19 @@ char	g_commands[REG_NUMBER][6] = {
 		"lldi",
 		"and"
 };
+
+t_token			*ft_token_create(void)
+{
+	t_token *token;
+
+	if (!(token = (t_token *) malloc(sizeof(t_token))))
+		ft_error("NO_MEMORY", NULL);
+	token->row = 0;
+	token->content = NULL;
+	token->type = -1;
+	token->next = NULL;
+	return (token);
+}
 
 int 		ft_len_one_word(char *str)
 {
@@ -178,14 +179,14 @@ int			ft_is_register(t_data *data, char *str)
 
 	if (str[0] == 'r')
 	{
-		i = ft_atoi(str + 1);
 		if (!str[1])
 			ft_error("NO_REGISTER_NUMBER", data);
-		else if (!ft_str_is_num(data, str + 1)) //чекнуть
+		i = ft_atoi(str + 1);
+		if (!ft_str_is_num(data, str + 1))
 			ft_error("CHAR_IN_REGISTER", data);
-		else if (i > REG_NUMBER || i < 0)
+		else if (i < 0)
 			ft_error("ERROR_IN_REGISTER_NUMBER", data);
-		else
+		else if (ft_isdigit(str[1]))
 			return (1);
 	}
 	return (0);
