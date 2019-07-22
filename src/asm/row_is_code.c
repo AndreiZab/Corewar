@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/22 18:45:34 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/22 18:45:36 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,6 +249,5 @@ void		ft_row_is_code (t_data *data, char *str)
 		ft_parse_token(data, ft_strsub(str, i, len), token);
 		i += len;
 	}
-
 	//токены - в цепь и почистить перед выходом
 }
