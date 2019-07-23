@@ -35,33 +35,33 @@ void		ft_set_ids(t_corewar *cw)
 	}
 }
 
-char		ft_get_byte(t_corewar *cw, int pos)
-{
+// char		ft_get_byte(t_corewar *cw, int pos)
+// {
 
-	return (cw->map[pos % MEM_SIZE]);
-}
+// 	return (cw->map[pos % MEM_SIZE]);
+// }
 
-char		*ft_get_bytes(t_corewar *cw, int pos, int count, char reverse)
-{
-	char	*bytes;
-	int		i;
+// char		*ft_get_bytes(t_corewar *cw, int pos, int count, char reverse)
+// {
+// 	char	*bytes;
+// 	int		i;
 
-	if ((bytes = (char*)memalloc(sizeof(char) * count)) == NULL)
-		return (FT_MEMORY);
-	i = -1;
-	while (++i < count)
-		if (reverse)
-			bytes[count - 1 - i] = ft_get_byte(cw, pos + i);
-		else
-			bytes[i] = ft_get_byte(cw, pos + i);
-	return (bytes);
-}
+// 	if ((bytes = (char*)ft_memalloc(sizeof(char) * count)) == NULL)
+// 		return (NULL);
+// 	i = -1;
+// 	while (++i < count)
+// 		if (reverse)
+// 			bytes[count - 1 - i] = ft_get_byte(cw, pos + i);
+// 		else
+// 			bytes[i] = ft_get_byte(cw, pos + i);
+// 	return (bytes);
+// }
 
 char		*ft_get_arg_types(char byte)
 {
 	char	*types;
 
-	if ((types = (char*)memalloc(sizeof(char) * 3)) == NULL)
+	if ((types = (char*)ft_memalloc(sizeof(char) * 3)) == NULL)
 		return (NULL);
 	types[0] = byte > 6;
 	types[1] = (byte < 2) > 6;

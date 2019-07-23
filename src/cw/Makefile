@@ -7,7 +7,8 @@ SRC=main.c\
 	accurate_reader.c \
 	exe_reader.c \
 	others.c \
-	casting_uc_hex.c
+	casting_uc_hex.c \
+	dump.c
 
 OBJ=$(SRC:.c=.o)
 

@@ -20,6 +20,8 @@
 # define FT_TRASH_AFTER_BINARY_DATA -12
 # define FT_NO_PLAYERS -13
 # define MAX(x, y) ((x > y) ? x : y)
+# define FT_DUMP_ROW_SIZE 64
+# define FT_LINK 4
 
 /*
 ** Определяет число безрезультатных чтений (read return 0)
@@ -33,6 +35,8 @@ typedef struct	s_player
 	int				id;	//Переделать под uint
 	char			*name;
 	char			*comment;
+
+	int				live;
 
 	int				exe_size;
 	char			*exe;
@@ -75,6 +79,9 @@ typedef struct	s_carriage
 	unsigned int		rg[REG_NUMBER];
 	char				carry;
 	int					cycle_live;
+
+	char				*arg_types;
+	int					arg[3];
 
 	unsigned int		pc; //program counter
 	int					command; //?
@@ -136,7 +143,25 @@ t_player	*ft_player_by_id(t_player *players, int id);
 */
 
 t_carriage	*ft_carriage_new(t_carriage **carrs, int player_id, int pos);
+void		ft_carr_move(t_carriage *carr, int move);
+void		ft_carr_load_arg_types(t_corewar *cw, t_carriage *carr);
+void		ft_carr_load_dir(t_corewar *cw, t_carriage *carr, int arg_n);
+void		ft_carr_load_ind(t_corewar *cw, t_carriage *carr, int arg_n);
+void		ft_carr_load_value(t_corewar *cw, t_carriage *carr, int arg_n,
+				char arg_type);
 
+
+/*
+** carr_load.c
+*/
+
+void	ft_carr_load_dir(t_corewar *cw, t_carriage *carr, int arg_n);
+void	ft_carr_load_ind_link(t_corewar *cw, t_carriage *carr, int arg_n);
+void	ft_carr_load_ind(t_corewar *cw, t_carriage *carr, int arg_n);
+void	ft_carr_load_reg_link(t_corewar *cw, t_carriage *carr, int arg_n);
+void	ft_carr_load_reg(t_corewar *cw, t_carriage *carr, int arg_n);
+void	ft_carr_load_value(t_corewar *cw, t_carriage *carr, int arg_n,
+			char value_type);
 
 /*
 ** commh.c
@@ -165,6 +190,13 @@ int			ft_exe_read(t_corewar *cw, char *filename);
 */
 
 char		*casting_uc_hex(unsigned char c);
+
+
+/*
+** dump.c
+*/
+
+int ft_show_dump(t_corewar *cw);
 
 
 /*
