@@ -195,7 +195,7 @@ void		ft_check_row(t_data *data, char *str)
 		ft_row_is_code(data, str);
 }
 
-void		ft_read(t_data *data)
+void		ft_read_champ(t_data *data)
 {
 	char *line;
 	int err;
@@ -224,6 +224,7 @@ void	ft_asm(char *str)
 	if ((fd = open(str, O_RDONLY)) == -1)
 		ft_error("FILE_NOT_FOUND", NULL);
 	data = ft_create(fd);
-	ft_read(data);
+	ft_read_champ(data);
+//	ft_write_bytes(data);
 	ft_free_data(data);
 }
