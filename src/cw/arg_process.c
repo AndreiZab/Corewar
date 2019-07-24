@@ -22,9 +22,9 @@ int ft_process_flag_dump(t_corewar *cw, int argc, char **argv, int *arg_i)
 	}
 	//dump_val сделать uint или даже ulonglongint
 	dump_val = ft_atoi(argv[*arg_i]);
-	if (dump_val <= 0)
+	if (dump_val < 0)
 	{
-		ft_putstr("Flag -dump: value must be positive\n");
+		ft_putstr("Flag -dump: value must be positive or 0\n");
 		return (FT_ARG);
 	}
 	cw->dump_mode = 1;

@@ -8,7 +8,13 @@ SRC=main.c\
 	exe_reader.c \
 	others.c \
 	casting_uc_hex.c \
-	dump.c
+	dump.c \
+	comm_process.c \
+	carr_load.c \
+	map_set.c \
+	map_get.c \
+	tick.c \
+	commh.c 
 
 OBJ=$(SRC:.c=.o)
 

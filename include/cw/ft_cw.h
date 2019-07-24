@@ -103,7 +103,7 @@ typedef struct	s_comm_handler
 	char	comm;
 	int		cycles;
 	int		(*f)(t_corewar *cw, t_carriage *carr);
-	struct		t_comm_handler *next;
+	struct		s_comm_handler *next;
 }				t_comm_handler;
 
 
@@ -128,6 +128,25 @@ int	ft_process_flag_a(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_flag_dump(t_corewar *cw, int argc, char **argv, int *arg_i);
 int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
+
+
+/*
+** map_set.c
+*/
+
+void	ft_map_set_byte(t_corewar *cw, int pos, unsigned char value);
+void	ft_map_set_word(t_corewar *cw, int pos, short value);
+void	ft_map_set_dword(t_corewar *cw, int pos, long value);
+
+
+/*
+** map_get.c
+*/
+
+unsigned char	ft_map_get_byte(t_corewar *cw, int pos);
+short			ft_map_get_word(t_corewar *cw, int pos);
+long			ft_map_get_dword(t_corewar *cw, int pos);
+
 
 /*
 ** players.c
@@ -207,5 +226,23 @@ int			ft_contains_ids(t_corewar *cw, int id);
 void		ft_set_ids(t_corewar *cw);
 char		ft_get_byte(t_corewar *cw, int pos);
 char		*ft_get_arg_types(char byte);
+
+/*
+** comm_process.c
+*/
+
+int		ft_comm_live(t_corewar *cw, t_carriage *carr);
+int		ft_comm_ld(t_corewar *cw, t_carriage *carr);
+int		ft_comm_st(t_corewar *cw, t_carriage *carr);
+int		ft_comm_add(t_corewar *cw, t_carriage *carr);
+int		ft_comm_sub(t_corewar *cw, t_carriage *carr);
+int		ft_comm_and(t_corewar *cw, t_carriage *carr);
+int		ft_comm_or(t_corewar *cw, t_carriage *carr);
+int		ft_comm_xor(t_corewar *cw, t_carriage *carr);
+int		ft_comm_zjmp(t_corewar *cw, t_carriage *carr);
+int		ft_comm_ldi(t_corewar *cw, t_carriage *carr);
+int		ft_comm_fork(t_corewar *cw, t_carriage *carr);
+int		ft_comm_lfork(t_corewar *cw, t_carriage *carr);
+int		ft_comm_aff(t_corewar *cw, t_carriage *carr);
 
 #endif

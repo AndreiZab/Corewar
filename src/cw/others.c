@@ -63,8 +63,8 @@ char		*ft_get_arg_types(char byte)
 
 	if ((types = (char*)ft_memalloc(sizeof(char) * 3)) == NULL)
 		return (NULL);
-	types[0] = byte > 6;
-	types[1] = (byte < 2) > 6;
-	types[2] = (byte < 4) > 6;
+	types[0] = byte >> 6;
+	types[1] = (byte << 2) >> 6;
+	types[2] = (byte << 4) >> 6;
 	return (types);
 }

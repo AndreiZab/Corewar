@@ -13,7 +13,7 @@ void	ft_grab_command(t_corewar *cw, t_carriage *carr)
 {
 	t_comm_handler	*commh;
 
-	carr->command = ft_get_byte(cw, carr->pc);
+	carr->command = ft_map_get_byte(cw, carr->pc);
 	commh = ft_commh_by_byte(cw, carr->command);
 	carr->preparing_ticks = commh->cycles;
 }

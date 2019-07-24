@@ -49,7 +49,9 @@ static int		ft_exe_read_data(t_corewar *cw, int fd)
 		return (FT_4_NULL);
 	if (ft_accurate_read(fd, buffer, cw->players->exe_size) != FT_OK)
 		return (FT_READ_FILE);
-	cw->players->exe = ft_strdup(buffer);
+	if ((cw->players->exe = (char*)malloc(sizeof(char) * cw->players->exe_size)) == NULL)
+		return (FT_MEMORY);
+	ft_memcpy(cw->players->exe, buffer, cw->players->exe_size);
 	if (ft_accurate_read(fd, buffer, 1) != FT_READ)
 		return (FT_TRASH_AFTER_BINARY_DATA);
 	return (FT_OK);

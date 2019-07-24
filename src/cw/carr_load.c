@@ -18,7 +18,7 @@ void	ft_carr_load_ind(t_corewar *cw, t_carriage *carr,
 			int arg_n)
 {
 	ft_carr_load_ind_link(cw, carr, arg_n);
-	carr->arg[arg_n] = ft_map_get_dword(carr->arg[arg_n]);
+	carr->arg[arg_n] = ft_map_get_dword(cw, carr->arg[arg_n]);
 }
 
 void	ft_carr_load_reg_link(t_corewar *cw, t_carriage *carr,
@@ -54,9 +54,9 @@ void	ft_carr_load_value(t_corewar *cw, t_carriage *carr,
 	else if (val == IND_CODE)
 	{
 		if (lnk)
-			ft_carr_load_dir_link(cw, carr, arg_n);
+			ft_carr_load_ind_link(cw, carr, arg_n);
 		else
-			ft_carr_load_dir(cw, carr, arg_n);
+			ft_carr_load_ind(cw, carr, arg_n);
 	}
 		
 }

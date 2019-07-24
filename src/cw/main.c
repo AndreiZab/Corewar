@@ -100,15 +100,15 @@ static int		ft_play(t_corewar *cw)
 	int tick;
 
 	//return (FT_OK);
-	// ft_commh_add(&(cw->commh), 1, 10, ft_comm_process_live);
-	// ft_commh_add(&(cw->commh), 2, 5, ft_comm_process_ld);
-	// ft_commh_add(&(cw->commh), 3, 5, ft_comm_process_st);
-	// ft_commh_add(&(cw->commh), 4, 10, ft_comm_process_add);
-	// ft_commh_add(&(cw->commh), 5, 10, ft_comm_process_sub);
-	// ft_commh_add(&(cw->commh), 6, 6, ft_comm_process_and);
-	// ft_commh_add(&(cw->commh), 7, 6, ft_comm_process_or);
-	// ft_commh_add(&(cw->commh), 8, 6, ft_comm_process_xor);
-	// ft_commh_add(&(cw->commh), 9, 20, ft_comm_process_zjmp);
+	ft_commh_add(&(cw->commh), 1, 10, ft_comm_live);
+	ft_commh_add(&(cw->commh), 2, 5, ft_comm_ld);
+	ft_commh_add(&(cw->commh), 3, 5, ft_comm_st);
+	ft_commh_add(&(cw->commh), 4, 10, ft_comm_add);
+	ft_commh_add(&(cw->commh), 5, 10, ft_comm_sub);
+	ft_commh_add(&(cw->commh), 6, 6, ft_comm_and);
+	ft_commh_add(&(cw->commh), 7, 6, ft_comm_or);
+	ft_commh_add(&(cw->commh), 8, 6, ft_comm_xor);
+	ft_commh_add(&(cw->commh), 9, 20, ft_comm_zjmp);
 	// ft_commh_add(&(cw->commh), 10, 25, ft_comm_process_ldi);
 	// ft_commh_add(&(cw->commh), 11, 25, ft_comm_process_sti);
 	// ft_commh_add(&(cw->commh), 12, 800, ft_comm_process_fork);
