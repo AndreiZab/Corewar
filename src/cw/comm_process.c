@@ -116,6 +116,14 @@ void	ft_comm_zjmp(t_corewar *cw, t_carriage *carr, int (*f)())
 	}
 }
 
+void	ft_comm_ldi(t_corewar *cw, t_carriage *carr, int (*f)())
+{
+	ft_carr_move(carr, 1);
+	ft_carr_load_arg_types(cw, carr);
+	ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+	ft_carr_load_value(cw, carr, 1, carr->arg_types[1]);
+}
+
 void	ft_comm_fork(t_corewar *cw, t_carriage *carr, int (*f)())
 {
 	t_carriage *fork;
