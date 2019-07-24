@@ -123,7 +123,7 @@ static int		ft_play(t_corewar *cw)
 	cw->cycle = 0;
 	while (play)
 	{
-		//ft_tick(cw);
+		ft_tick(cw);
 		//if (cw->v)
 		//	ft_vis_redraw(cw);
 		if (cw->dump_mode == 1 && cw->dump_cycle == cw->cycle)
