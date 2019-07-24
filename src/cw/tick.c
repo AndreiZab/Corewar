@@ -7,7 +7,6 @@ void	ft_do_command(t_corewar *cw, t_carriage *carr)
 
 	commh = ft_commh_by_byte(cw, carr->command);
 	commh->f(cw, carr);
-	ft_putstr("Comm DO\n");
 }
 
 void	ft_grab_command(t_corewar *cw, t_carriage *carr)
@@ -16,7 +15,6 @@ void	ft_grab_command(t_corewar *cw, t_carriage *carr)
 
 	
 	carr->command = ft_map_get_byte(cw, carr->pc);
-	
 	commh = ft_commh_by_byte(cw, carr->command);
 	carr->preparing_ticks = (commh != NULL) ? commh->cycles : 0;
 }

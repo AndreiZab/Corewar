@@ -66,5 +66,12 @@ char		*ft_get_arg_types(char byte)
 	types[0] = byte >> 6;
 	types[1] = (byte << 2) >> 6;
 	types[2] = (byte << 4) >> 6;
+	ft_putstr("ARGTYPES[");
+	ft_putnbr(types[0]);
+	ft_putchar(' ');
+	ft_putnbr(types[1]);
+	ft_putchar(' ');
+	ft_putnbr(types[2]);
+	ft_putstr("]\n");
 	return (types);
 }

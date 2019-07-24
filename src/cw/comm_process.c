@@ -48,7 +48,9 @@ int		ft_comm_st(t_corewar *cw, t_carriage *carr)
 		ft_carr_move(carr, -10);
 		ft_map_set_dword(cw, carr->pc + carr->arg[1], carr->arg[0]);
 		ft_carr_move(carr, 10);
+		
 	}
+	//ft_putstr("ST COMPLETED\n");
 	return (FT_OK);
 }
 

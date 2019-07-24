@@ -18,7 +18,7 @@ void			ft_carr_load_arg_types(t_corewar *cw, t_carriage *carr)
 {
 	if (carr->arg_types != NULL)
 		free(carr->arg_types);
-	carr->arg_types = ft_get_arg_types(carr->pc);
+	carr->arg_types = ft_get_arg_types(ft_map_get_byte(cw, carr->pc));
 	ft_carr_move(carr, 1);
 }
 
