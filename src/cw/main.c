@@ -89,6 +89,8 @@ static void		ft_info(t_corewar *cw) //DEBUG FUNCTION
 		ft_putstr(player->comment);
 		ft_putstr("\nMem size: ");
 		ft_putnbr(player->exe_size);
+		ft_putstr("\nLive: ");
+		ft_putnbr(player->live);
 		ft_putstr("\n\n");
 		player = player->next;
 	}
