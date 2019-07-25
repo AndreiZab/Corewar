@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/23 11:14:36 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/25 17:15:42 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,6 +232,27 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 		ft_error("TOKEN_ERROR", data);
 }
 
+void		ft_tokenadd_end(t_data *data, t_token *token)
+{
+	t_token *ptr;
+
+	ptr = data->tokens;
+	if (!token)
+		return ;
+	if (!data->tokens)
+	{
+		data->tokens = token;
+		token->next = NULL;
+	}
+	else
+	{
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = token;
+		token->next = NULL;
+	}
+}
+
 void		ft_row_is_code (t_data *data, char *str)
 {
 	int i;
@@ -239,12 +260,14 @@ void		ft_row_is_code (t_data *data, char *str)
 	t_token	*token;
 
 	i = 0;
+
 	while (str[i])
 	{
 		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
 			return ;
 		len = ft_len_one_word(str + i);
 		token = ft_token_create();
+		ft_tokenadd_end(data, token);
 		token->row = data->num_current_row;
 		ft_parse_token(data, ft_strsub(str, i, len), token);
 		i += len;
