@@ -119,6 +119,7 @@ static int		ft_play(t_corewar *cw)
 	// ft_commh_add(&(cw->commh), 15, 1000, ft_comm_process_lfork);
 	// ft_commh_add(&(cw->commh), 16, 2, ft_comm_process_aff);
 	// ft_commh_add(&(cw->commh_default), 0, 0, ft_comm_process_unknown);
+	ft_show_players(cw);
 	play = 1;
 	cw->cycle = 0;
 	while (play)

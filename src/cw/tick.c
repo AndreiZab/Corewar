@@ -32,6 +32,8 @@ int	ft_tick(t_corewar *cw)
 			if (carr->command != 0)
 				ft_do_command(cw, carr);
 			ft_grab_command(cw, carr);
+			if (carr->preparing_ticks > 0)
+				--(carr->preparing_ticks);
 		}
 		carr = carr->next;
 	}

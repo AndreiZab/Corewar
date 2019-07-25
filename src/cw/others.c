@@ -75,3 +75,25 @@ char		*ft_get_arg_types(char byte)
 	ft_putstr("]\n");
 	return (types);
 }
+
+void		ft_show_players(t_corewar *cw)
+{
+	t_player	*pl;
+	int			id;
+
+	id = 0;
+	ft_putstr("Introducing contestants...\n");
+	while (++id <= cw->players_count)
+	{
+		pl = ft_player_by_id(cw->players, id);
+		ft_putstr("* Player ");
+		ft_putnbr(id);
+		ft_putstr(", weighing ");
+		ft_putnbr(pl->exe_size);
+		ft_putstr(" bytes, \"");
+		ft_putstr(pl->name);
+		ft_putstr("\" (\"");
+		ft_putstr(pl->comment);
+		ft_putstr("\") !\n");
+	}
+}

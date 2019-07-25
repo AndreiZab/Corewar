@@ -130,6 +130,8 @@ int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
 
 
+int		ft_tick(t_corewar *cw);
+
 /*
 ** map_set.c
 */
@@ -226,6 +228,7 @@ int			ft_contains_ids(t_corewar *cw, int id);
 void		ft_set_ids(t_corewar *cw);
 char		ft_get_byte(t_corewar *cw, int pos);
 char		*ft_get_arg_types(char byte);
+void		ft_show_players(t_corewar *cw);
 
 /*
 ** comm_process.c

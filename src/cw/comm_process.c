@@ -35,12 +35,13 @@ int		ft_comm_st(t_corewar *cw, t_carriage *carr)
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
-	if (carr->arg_types[1] == REG_CODE)
+	if (carr->arg_types[0] == REG_CODE)
 	{
 		ft_carr_load_value(cw, carr, 1, REG_CODE | FT_LINK);
 		carr->rg[carr->arg[1]] = carr->arg[0];
+		ft_putstr("ST COMPLETED\n");
 	}
-	else if (carr->arg_types[1] == IND_CODE)
+	else if (carr->arg_types[0] == IND_CODE)
 	{
 		ft_carr_load_value(cw, carr, 1, IND_CODE | FT_LINK);
 		carr->arg[1] %= IDX_MOD;
@@ -50,7 +51,6 @@ int		ft_comm_st(t_corewar *cw, t_carriage *carr)
 		ft_carr_move(carr, 10);
 		
 	}
-	//ft_putstr("ST COMPLETED\n");
 	return (FT_OK);
 }
 
