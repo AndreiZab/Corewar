@@ -210,7 +210,7 @@ int			ft_exe_read(t_corewar *cw, char *filename);
 ** casting_uc_hex.c
 */
 
-char		*casting_uc_hex(unsigned char c);
+char		*casting_uc_hex(int num, int width);
 
 
 /*
