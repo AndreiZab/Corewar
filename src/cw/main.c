@@ -101,7 +101,6 @@ static int		ft_play(t_corewar *cw)
 	int play;
 	int tick;
 
-	//return (FT_OK);
 	ft_commh_add(&(cw->commh), 1, 10, ft_comm_live);
 	ft_commh_add(&(cw->commh), 2, 5, ft_comm_ld);
 	ft_commh_add(&(cw->commh), 3, 5, ft_comm_st);

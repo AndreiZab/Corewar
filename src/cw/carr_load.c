@@ -24,7 +24,8 @@ void	ft_carr_load_ind(t_corewar *cw, t_carriage *carr,
 void	ft_carr_load_reg_link(t_corewar *cw, t_carriage *carr,
 			int arg_n)
 {
-	ft_carr_load_dir(cw, carr, arg_n);
+	carr->arg[arg_n] = ft_map_get_byte(cw, carr->pc);
+	carr->pc += 1;
 }
 
 void	ft_carr_load_reg(t_corewar *cw, t_carriage *carr,
