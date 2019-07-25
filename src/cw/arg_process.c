@@ -29,9 +29,9 @@ int ft_process_flag_dump(t_corewar *cw, int argc, char **argv, int *arg_i)
 	}
 	cw->dump_mode = 1;
 	cw->dump_cycle = dump_val;
-	ft_putstr("Flag -dump: has value = ");
-	ft_putstr(argv[*arg_i]);
-	ft_putchar('\n');
+	// ft_putstr("Flag -dump: has value = ");
+	// ft_putstr(argv[*arg_i]);
+	// ft_putchar('\n');
 	return (FT_OK);
 }
 
@@ -76,9 +76,9 @@ int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i)
 		ft_putstr("Flag -n: this player number already set\n");
 		return (FT_ARG);
 	}
-	ft_putstr("Flag -n: has value = ");
-	ft_putstr(argv[*arg_i]);
-	ft_putchar('\n');
+	// ft_putstr("Flag -n: has value = ");
+	// ft_putstr(argv[*arg_i]);
+	// ft_putchar('\n');
 	cw->players->id = n_val;
 	return (FT_OK);
 }
