@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/26 17:08:36 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/26 18:46:35 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,9 +128,39 @@ void		ft_check_token(t_data *data)
 		ft_error("NO_TOKENS", data);
 }
 
+t_label		*ft_create_label()
+{
+	t_label *label;
+
+	if (!(label = (t_label *)ft_memalloc(sizeof(t_label))))
+		ft_error("NO_MEMORY", NULL);
+	label->next = NULL;
+	label->line = 0;
+	label->name = NULL;
+	return (label);
+}
+
+t_token		*ft_parse_label(t_data *data)
+{
+	t_token *cur;
+	t_label *label;
+
+	cur = data->tokens;
+	while (cur)
+	{
+		if (cur->type == Label)
+		{
+			label = ft_create_label();
+		}
+		cur = cur->next;
+	}
+
+}
+
 void		ft_syntax_analysis(t_data *data)
 {
-	g_ops = ft_create_oper();
 	ft_check_token(data);
+	g_ops = ft_create_oper();
+	data->labels = ft_parse_label(data);
 }
 
