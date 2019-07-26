@@ -8,6 +8,7 @@ t_carriage		*ft_carriage_new(t_carriage **carrs, int player_id, int pos)
 		return (NULL);
 	carr = (t_carriage*)ft_memalloc(sizeof(t_carriage));
 	carr->player_id = player_id;
+	carr->rg[0] = player_id;
 	carr->pc = pos;
 	carr->next = *carrs;
 	*carrs = carr;

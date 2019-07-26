@@ -42,15 +42,11 @@ int		ft_comm_st(t_corewar *cw, t_carriage *carr)
 	}
 	else if (carr->arg_types[1] == IND_CODE)
 	{
-		ft_putstr("ST COMPLETED\n");
 		ft_carr_load_value(cw, carr, 1, IND_CODE | FT_LINK);
 		carr->arg[1] %= IDX_MOD;
-		// - 10 = сдвиг к началу инструкции
-		ft_carr_move(carr, -3);
-		ft_putnbr(carr->pc);
-		ft_putchar('\n');
+		ft_carr_move(carr, -5);
 		ft_map_set_dword(cw, carr->pc + carr->arg[1], carr->arg[0]);
-		ft_carr_move(carr, 3);
+		ft_carr_move(carr, 5);
 		
 	}
 	return (FT_OK);
