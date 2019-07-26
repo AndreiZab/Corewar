@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/26 17:08:14 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/26 17:08:36 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,6 +102,13 @@ int				g_arg_type_3[REG_NUMBER] = {
 t_ops		*g_ops = NULL;
 
 size_t		g_label_num = 0;
+
+/*
+ *
+ * ^		^
+ * | GLOBAL |
+ *
+ */
 
 void		ft_check_token(t_data *data)
 {
