@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/26 14:07:39 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/26 17:08:14 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,7 +218,6 @@ void		ft_read_champ(t_data *data)
 		ft_error("NO_COMMENT", NULL);
 	else if (!data->name)
 		ft_error("NO_NAME", NULL);
-
 }
 
 void	ft_asm(char *str)
