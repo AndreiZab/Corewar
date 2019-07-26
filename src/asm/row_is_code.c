@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/25 17:15:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/26 13:24:34 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -230,6 +230,28 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 		token->type = Command;
 	else
 		ft_error("TOKEN_ERROR", data);
+}
+
+void	ft_add_newline_token(t_data *data)
+{
+	t_token *ptr;
+	t_token	*token;
+
+	if (data->tokens)
+	{
+		ptr = data->tokens;
+		token = ft_token_create();
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = token;
+		token->next = NULL;
+		token->row = data->num_current_row;
+		if (!(token->content = ft_strnew(1)))
+			ft_error("NO_MEMORY", NULL);
+		token->content[0] = '\n';
+		token->type = Line_feed;
+	}
+
 }
 
 void		ft_tokenadd_end(t_data *data, t_token *token)

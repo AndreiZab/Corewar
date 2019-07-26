@@ -14,6 +14,7 @@ typedef enum
 	Direct_label,
 	Whitespace,
 	Label_arg,
+	Line_feed,
 	Separator,
 	Register,
 	Command,
@@ -80,5 +81,12 @@ void		ft_error(char *str, t_data *data);
  */
 
 void		ft_row_is_code (t_data *data, char *str);
+void	ft_add_newline_token(t_data *data);
+
+/*
+** syntax_analysis.c
+ */
+
+void		ft_syntax_analysis(t_data *data);
 
 #endif
