@@ -8,6 +8,10 @@
 # include "libft.h"
 # include "op.h"
 
+# define T_REGS 1
+# define T_DIRS 10
+# define T_INDS 100
+
 typedef enum
 {
 	Direct_number,

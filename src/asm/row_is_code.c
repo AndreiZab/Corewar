@@ -6,30 +6,11 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/26 13:24:34 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/26 17:08:14 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-char	g_commands[REG_NUMBER][6] = {
-		"lfork",
-		"sti",
-		"fork",
-		"lld",
-		"ld",
-		"add",
-		"zjmp",
-		"sub",
-		"ldi",
-		"or",
-		"st",
-		"aff",
-		"live",
-		"xor",
-		"lldi",
-		"and"
-};
 
 t_token			*ft_token_create(void)
 {
@@ -237,7 +218,7 @@ void	ft_add_newline_token(t_data *data)
 	t_token *ptr;
 	t_token	*token;
 
-	if (data->tokens)
+	if (data && data->tokens)
 	{
 		ptr = data->tokens;
 		token = ft_token_create();
@@ -258,16 +239,17 @@ void		ft_tokenadd_end(t_data *data, t_token *token)
 {
 	t_token *ptr;
 
-	ptr = data->tokens;
-	if (!token)
+	if (!token || !data)
 		return ;
 	if (!data->tokens)
 	{
 		data->tokens = token;
 		token->next = NULL;
 	}
+
 	else
 	{
+		ptr = data->tokens;
 		while (ptr->next)
 			ptr = ptr->next;
 		ptr->next = token;
@@ -282,7 +264,6 @@ void		ft_row_is_code (t_data *data, char *str)
 	t_token	*token;
 
 	i = 0;
-
 	while (str[i])
 	{
 		if (str[i] == COMMENT_CHAR || str[i] == ALT_COMMENT_CHAR)
