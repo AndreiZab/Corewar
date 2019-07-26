@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 13:44:41 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/07/25 20:04:26 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/07/26 14:25:49 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,14 +64,26 @@ static char		*ft_width_more(int num, int rate, int width)
 	return (str);
 }
 
-static char		*ft_num_zero(void)
+static char		*ft_num_zero(int width)
 {
-	char *str;
+	char	*str;
+	int		i;
 
-	if (!(str = (char*)malloc(sizeof(char) * 2)))
-		return (NULL);
-	str[0] = '0';
-	str[1] = '\0';
+	if (width > 0)
+	{
+		if (!(str = (char*)malloc(sizeof(char) * (width + 1))))
+			return (NULL);
+		str[width] = '\0';
+		while (--width >= 0)
+			str[width] = '0';
+	}
+	else
+	{
+		if (!(str = (char*)malloc(sizeof(char) * 2)))
+			return (NULL);
+		str[0] = '0';
+		str[1] = '\0';
+	}
 	return (str);
 }
 
@@ -83,7 +95,7 @@ char			*casting_uc_hex(int num, int width)
 	if (num < 0)
 		return (NULL);
 	if (num == 0)
-		return (ft_num_zero());
+		return (ft_num_zero(width));
 	if (width < 0 || width < rate)
 		return (ft_width_less(num, rate));
 	else
