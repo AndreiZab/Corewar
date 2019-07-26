@@ -227,7 +227,7 @@ int ft_show_dump(t_corewar *cw);
 int			ft_contains_ids(t_corewar *cw, int id);
 void		ft_set_ids(t_corewar *cw);
 char		ft_get_byte(t_corewar *cw, int pos);
-char		*ft_get_arg_types(char byte);
+unsigned char	*ft_get_arg_types(unsigned char byte);
 void		ft_show_players(t_corewar *cw);
 
 /*

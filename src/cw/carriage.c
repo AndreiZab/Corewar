@@ -24,6 +24,9 @@ void			ft_carr_load_arg_types(t_corewar *cw, t_carriage *carr)
 
 void			ft_carr_move(t_carriage *carr, int move)
 {
+	move %= MEM_SIZE;
+	if (move < 0)
+		carr->pc += MEM_SIZE;
 	carr->pc += move;
 	carr->pc = carr->pc % MEM_SIZE;
 }

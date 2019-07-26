@@ -10,7 +10,7 @@ int		ft_comm_live(t_corewar *cw, t_carriage *carr)
 	ft_carr_move(carr, 1);
 	ft_carr_load_dir(cw, carr, 0);
 	carr->cycle_live = cw->cycle;
-	pl = ft_player_by_id(cw->players, carr->arg[0]);
+	pl = ft_player_by_id(cw->players, -(carr->arg[0]));
 	pl->live = carr->cycle_live;
 	return (FT_OK);
 }
@@ -35,20 +35,22 @@ int		ft_comm_st(t_corewar *cw, t_carriage *carr)
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
-	if (carr->arg_types[0] == REG_CODE)
+	if (carr->arg_types[1] == REG_CODE)
 	{
 		ft_carr_load_value(cw, carr, 1, REG_CODE | FT_LINK);
 		carr->rg[carr->arg[1]] = carr->arg[0];
-		ft_putstr("ST COMPLETED\n");
 	}
-	else if (carr->arg_types[0] == IND_CODE)
+	else if (carr->arg_types[1] == IND_CODE)
 	{
+		ft_putstr("ST COMPLETED\n");
 		ft_carr_load_value(cw, carr, 1, IND_CODE | FT_LINK);
 		carr->arg[1] %= IDX_MOD;
 		// - 10 = сдвиг к началу инструкции
-		ft_carr_move(carr, -10);
+		ft_carr_move(carr, -3);
+		ft_putnbr(carr->pc);
+		ft_putchar('\n');
 		ft_map_set_dword(cw, carr->pc + carr->arg[1], carr->arg[0]);
-		ft_carr_move(carr, 10);
+		ft_carr_move(carr, 3);
 		
 	}
 	return (FT_OK);

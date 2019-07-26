@@ -62,7 +62,7 @@ static int		ft_prepare_field(t_corewar *cw)
 	{
 		pl = ft_player_by_id(cw->players, i);
 		ft_memcpy(cw->map + (i - 1) * mem_part, pl->exe, pl->exe_size);
-		ft_carriage_new(&(cw->carriages), i, (i - 1) * mem_part);
+		ft_carriage_new(&(cw->carriages), -i, (i - 1) * mem_part);
 	}
 	if (cw->v)
 	{
