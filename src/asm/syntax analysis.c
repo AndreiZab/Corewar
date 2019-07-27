@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/26 18:46:35 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/27 18:10:11 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -140,7 +140,7 @@ t_label		*ft_create_label()
 	return (label);
 }
 
-t_token		*ft_parse_label(t_data *data)
+t_label		*ft_parse_label(t_data *data)
 {
 	t_token *cur;
 	t_label *label;
@@ -151,6 +151,8 @@ t_token		*ft_parse_label(t_data *data)
 		if (cur->type == Label)
 		{
 			label = ft_create_label();
+			label->line = cur->row;
+			label->name = ft_strdup(cur->content);
 		}
 		cur = cur->next;
 	}
