@@ -97,3 +97,8 @@ void		ft_show_players(t_corewar *cw)
 		ft_putstr("\") !\n");
 	}
 }
+
+int		ft_regnumber_contains(int num)
+{
+	return (num > 0 && num <= REG_NUMBER);
+}

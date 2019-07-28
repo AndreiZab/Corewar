@@ -22,6 +22,7 @@
 # define MAX(x, y) ((x > y) ? x : y)
 # define FT_DUMP_ROW_SIZE 64
 # define FT_LINK 4
+# define FT_IDX_USE 8
 
 /*
 ** Определяет число безрезультатных чтений (read return 0)
@@ -53,10 +54,13 @@ typedef struct	s_corewar
 
 	char			v;
 	char			aff;
+	char			pinfo;
 
-
+	int				cycles_to_die;
 	int				cycle;
 	unsigned char	*map;
+
+	int				dir_size;
 
 	struct s_player	*players;
 	int				players_count;
@@ -84,6 +88,7 @@ typedef struct	s_carriage
 	int					arg[3];
 
 	unsigned int		pc; //program counter
+	unsigned int		pc_comm; // позиция исполняемой команды. Удобно для indirect
 	int					command; //?
 	unsigned int		preparing_ticks;
 
@@ -129,8 +134,22 @@ int ft_process_flag_dump(t_corewar *cw, int argc, char **argv, int *arg_i);
 int	ft_process_flag_n(t_corewar *cw, int argc, char **argv, int *arg_i);
 int ft_process_file(t_corewar *cw, int argc, char **argv, int *arg_i);
 
+/*
+**	arg_process_2.c
+*/
+
+int ft_process_flag_pinfo(t_corewar *cw, int argc, char **argv, int *arg_i);
+
 
 int		ft_tick(t_corewar *cw);
+
+
+/*
+**	kill_machine.c
+*/
+
+void	ft_kill_machine(t_corewar *cw, int *play);
+
 
 /*
 ** map_set.c
@@ -166,10 +185,6 @@ t_player	*ft_player_by_id(t_player *players, int id);
 t_carriage	*ft_carriage_new(t_carriage **carrs, int player_id, int pos);
 void		ft_carr_move(t_carriage *carr, int move);
 void		ft_carr_load_arg_types(t_corewar *cw, t_carriage *carr);
-void		ft_carr_load_dir(t_corewar *cw, t_carriage *carr, int arg_n);
-void		ft_carr_load_ind(t_corewar *cw, t_carriage *carr, int arg_n);
-void		ft_carr_load_value(t_corewar *cw, t_carriage *carr, int arg_n,
-				char arg_type);
 
 
 /*
@@ -178,7 +193,7 @@ void		ft_carr_load_value(t_corewar *cw, t_carriage *carr, int arg_n,
 
 void	ft_carr_load_dir(t_corewar *cw, t_carriage *carr, int arg_n);
 void	ft_carr_load_ind_link(t_corewar *cw, t_carriage *carr, int arg_n);
-void	ft_carr_load_ind(t_corewar *cw, t_carriage *carr, int arg_n);
+void	ft_carr_load_ind(t_corewar *cw, t_carriage *carr, int arg_n, char idx);
 void	ft_carr_load_reg_link(t_corewar *cw, t_carriage *carr, int arg_n);
 void	ft_carr_load_reg(t_corewar *cw, t_carriage *carr, int arg_n);
 void	ft_carr_load_value(t_corewar *cw, t_carriage *carr, int arg_n,
@@ -229,6 +244,7 @@ void		ft_set_ids(t_corewar *cw);
 char		ft_get_byte(t_corewar *cw, int pos);
 unsigned char	*ft_get_arg_types(unsigned char byte);
 void		ft_show_players(t_corewar *cw);
+int			ft_regnumber_contains(int num);
 
 /*
 ** comm_process.c
@@ -244,8 +260,12 @@ int		ft_comm_or(t_corewar *cw, t_carriage *carr);
 int		ft_comm_xor(t_corewar *cw, t_carriage *carr);
 int		ft_comm_zjmp(t_corewar *cw, t_carriage *carr);
 int		ft_comm_ldi(t_corewar *cw, t_carriage *carr);
+int		ft_comm_sti(t_corewar *cw, t_carriage *carr);
 int		ft_comm_fork(t_corewar *cw, t_carriage *carr);
+int		ft_comm_lld(t_corewar *cw, t_carriage *carr);
+int		ft_comm_lldi(t_corewar *cw, t_carriage *carr);
 int		ft_comm_lfork(t_corewar *cw, t_carriage *carr);
 int		ft_comm_aff(t_corewar *cw, t_carriage *carr);
+int		ft_comm_unknown(t_corewar *cw, t_carriage *carr);
 
 #endif
