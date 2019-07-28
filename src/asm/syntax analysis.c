@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/27 18:10:11 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/28 15:06:52 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,12 +110,27 @@ size_t		g_label_num = 0;
  *
  */
 
+int			ft_is_command(char *str)
+{
+	int i;
+
+	i = 0;
+	while (i <= REG_NUMBER)
+	{
+		if (!ft_strcmp(str, g_commands[i]))
+			return (1);
+		i++;
+	}
+	return (0);
+}
+
 void		ft_check_token(t_data *data)
 {
 	t_token *ptr;
 
 	if (data && data->tokens)
-	{;/*
+	{
+		;/*
 		ptr = data->tokens;
 		while (ptr->next)
 			ptr = ptr->next;
@@ -139,12 +154,28 @@ t_label		*ft_create_label()
 	label->name = NULL;
 	return (label);
 }
+t_label		*ft_labeladd_end(t_label *head, t_label *label)
+{
+	t_label *ptr;
 
+	if (head && head->name == NULL)
+		head = label;
+	else if (label && head)
+	{
+		ptr = head;
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = label;
+	}
+	return (head);
+}
 t_label		*ft_parse_label(t_data *data)
 {
 	t_token *cur;
 	t_label *label;
+	t_label *head;
 
+	head = ft_create_label();
 	cur = data->tokens;
 	while (cur)
 	{
@@ -153,16 +184,22 @@ t_label		*ft_parse_label(t_data *data)
 			label = ft_create_label();
 			label->line = cur->row;
 			label->name = ft_strdup(cur->content);
+			head = ft_labeladd_end(head, label);
 		}
 		cur = cur->next;
 	}
+	if (head && head->name)
+		return (head);
+	else
+		return (NULL);
 
 }
 
 void		ft_syntax_analysis(t_data *data)
 {
 	ft_check_token(data);
-	g_ops = ft_create_oper();
+//	g_ops = ft_create_oper();
 	data->labels = ft_parse_label(data);
+	return ;
 }
 

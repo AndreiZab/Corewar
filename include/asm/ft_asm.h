@@ -91,6 +91,7 @@ void	ft_add_newline_token(t_data *data);
 ** syntax_analysis.c
  */
 
+int			ft_is_command(char *str);
 void		ft_syntax_analysis(t_data *data);
 
 #endif

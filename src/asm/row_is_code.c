@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/26 17:08:14 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/28 14:48:06 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,20 +172,6 @@ int			ft_is_register(t_data *data, char *str)
 	}
 	return (0);
 
-}
-
-int			ft_is_command(char *str)
-{
-	int i;
-
-	i = 0;
-	while (i <= REG_NUMBER)
-	{
-		if (!ft_strcmp(str, g_commands[i]))
-			return (1);
-		i++;
-	}
-	return (0);
 }
 
 void		ft_parse_token(t_data *data, char *str, t_token	*token)
