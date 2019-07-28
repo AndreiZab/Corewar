@@ -20,7 +20,7 @@
 # define FT_TRASH_AFTER_BINARY_DATA -12
 # define FT_NO_PLAYERS -13
 # define MAX(x, y) ((x > y) ? x : y)
-# define FT_DUMP_ROW_SIZE 64
+# define FT_DUMP_ROW_SIZE 32
 # define FT_LINK 4
 # define FT_IDX_USE 8
 
@@ -57,6 +57,7 @@ typedef struct	s_corewar
 	char			pinfo;
 
 	int				cycles_to_die;
+	int				next_check;
 	int				cycle;
 	unsigned char	*map;
 
@@ -85,6 +86,7 @@ typedef struct	s_carriage
 	int					cycle_live;
 
 	char				*arg_types;
+	char				dead;
 	int					arg[3];
 
 	unsigned int		pc; //program counter

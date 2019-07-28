@@ -98,11 +98,10 @@ static int		ft_play(t_corewar *cw)
 	ft_commh_add(&(cw->commh_default), 0, 1, ft_comm_unknown);
 	ft_show_players(cw);
 	play = 1;
-	cw->cycle = 0;
 	while (play)
 	{
 		ft_tick(cw);
-		if (cw->cycles_to_die == cw->cycle)
+		if (cw->next_check == cw->cycle)
 		{
 			ft_kill_machine(cw, &play);
 		}
