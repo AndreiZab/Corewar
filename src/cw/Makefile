@@ -16,7 +16,8 @@ SRC=main.c\
 	map_get.c \
 	tick.c \
 	commh.c \
-	kill_machine.c
+	kill_machine.c \
+	bandles.c
 
 OBJ=$(SRC:.c=.o)
 
