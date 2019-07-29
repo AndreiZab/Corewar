@@ -31,6 +31,8 @@ void		ft_cw_free(t_corewar **cw)
 	ft_player_list_free(&((*cw)->players));
 	if ((*cw)->map)
 		free((*cw)->map);
+	//if ((*cw)->v)
+	//	ft_vis_free((*cw));
 	free(*cw);
 	*cw = NULL;
 }
