@@ -1,7 +1,7 @@
 NAME=corewar
 SRC=main.c\
 	argh.c \
-	arg_process.c \
+	arg_process_1.c \
 	arg_process_2.c \
 	players.c \
 	carriage.c \
