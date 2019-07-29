@@ -21,7 +21,7 @@ void	ft_carr_load_ind_link(t_corewar *cw, t_carriage *carr,
 void	ft_carr_load_ind(t_corewar *cw, t_carriage *carr,
 			int arg_n, char idx)
 {
-	int val;
+	int		val;
 
 	ft_carr_load_ind_link(cw, carr, arg_n);
 	val = carr->arg[arg_n];
@@ -37,7 +37,6 @@ void	ft_carr_load_ind(t_corewar *cw, t_carriage *carr,
 void	ft_carr_load_reg_link(t_corewar *cw, t_carriage *carr,
 			int arg_n)
 {
-	
 	carr->arg[arg_n] = ft_map_get_byte(cw, carr->pc);
 	carr->pc += 1;
 }
@@ -46,9 +45,6 @@ void	ft_carr_load_reg(t_corewar *cw, t_carriage *carr,
 			int arg_n)
 {
 	ft_carr_load_reg_link(cw, carr, arg_n);
-	ft_putstr("Link on: ");
-	ft_putnbr(carr->arg[arg_n]);
-	ft_putchar('\n');
 	if (ft_regnumber_contains(carr->arg[arg_n]))
 		carr->arg[arg_n] = carr->rg[carr->arg[arg_n] - 1];
 }
@@ -56,11 +52,11 @@ void	ft_carr_load_reg(t_corewar *cw, t_carriage *carr,
 void	ft_carr_load_value(t_corewar *cw, t_carriage *carr,
 			int arg_n, char value_type)
 {
-	char lnk;
-	char val;
-	char idx;
+	char	lnk;
+	char	val;
+	char	idx_val;
 
-	idx = value_type & FT_IDX_USE;
+	idx_val = value_type & FT_IDX_USE;
 	lnk = value_type & FT_LINK;
 	val = value_type & 0b00000011;
 	if (val == REG_CODE)
@@ -77,7 +73,7 @@ void	ft_carr_load_value(t_corewar *cw, t_carriage *carr,
 		if (lnk)
 			ft_carr_load_ind_link(cw, carr, arg_n);
 		else
-			ft_carr_load_ind(cw, carr, arg_n, idx);
+			ft_carr_load_ind(cw, carr, arg_n, idx_val);
 	}
 		
 }

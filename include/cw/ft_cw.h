@@ -38,6 +38,7 @@ typedef struct	s_player
 	char			*comment;
 
 	int				live;
+	char			dead;
 
 	int				exe_size;
 	char			*exe;

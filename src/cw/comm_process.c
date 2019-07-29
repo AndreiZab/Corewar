@@ -11,8 +11,12 @@ int		ft_comm_live(t_corewar *cw, t_carriage *carr)
 	ft_carr_move(carr, 1);
 	ft_carr_load_dir(cw, carr, 0);
 	carr->cycle_live = cw->cycle;
+	ft_putstr("Try to live for id: ");
+	ft_putnbr(carr->arg[0]);
+	ft_putchar('\n');
 	pl = ft_player_by_id(cw->players, -(carr->arg[0]));
-	pl->live = carr->cycle_live;
+	if (pl)
+		pl->live = carr->cycle_live;
 	return (FT_OK);
 }
 
@@ -99,7 +103,7 @@ int		ft_comm_and(t_corewar *cw, t_carriage *carr)
 	if (ft_regnumber_contains(carr->arg[2]))
 	{
 		carr->rg[carr->arg[2] - 1] = carr->arg[0] & carr->arg[1];
-		carr->carry = carr->rg[carr->arg[2]] == 0 ? 1 : 0;
+		carr->carry = carr->rg[carr->arg[2] - 1] == 0 ? 1 : 0;
 	}
 	return (FT_OK);
 }
@@ -115,7 +119,7 @@ int		ft_comm_or(t_corewar *cw, t_carriage *carr)
 	if (ft_regnumber_contains(carr->arg[2]))
 	{
 		carr->rg[carr->arg[2] - 1] = carr->arg[0] | carr->arg[1];
-		carr->carry = carr->rg[carr->arg[2]] == 0 ? 1 : 0;
+		carr->carry = carr->rg[carr->arg[2] - 1] == 0 ? 1 : 0;
 	}
 	return (FT_OK);
 }
@@ -131,7 +135,7 @@ int		ft_comm_xor(t_corewar *cw, t_carriage *carr)
 	if (ft_regnumber_contains(carr->arg[2]))
 	{
 		carr->rg[carr->arg[2] - 1] = carr->arg[0] ^ carr->arg[1];
-		carr->carry = carr->rg[carr->arg[2]] == 0 ? 1 : 0;
+		carr->carry = carr->rg[carr->arg[2] - 1] == 0 ? 1 : 0;
 	}
 	return (FT_OK);
 }
@@ -141,11 +145,11 @@ int		ft_comm_zjmp(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 2;
 	ft_carr_move(carr, 1);
 	ft_carr_load_value(cw, carr, 0, DIR_CODE);
+	ft_putstr("zjmp: ");
+	ft_putnbr(carr->arg[0]);
+	ft_putchar('\n');
 	if (carr->carry == 1)
-	{
-		ft_carr_move(carr, -3);
-		ft_carr_move(carr, carr->arg[0] % IDX_MOD);
-	}
+		ft_carr_move(carr, -1 - cw->dir_size + carr->arg[0] % IDX_MOD);
 	return (FT_OK);
 }
 
@@ -218,8 +222,8 @@ int		ft_comm_lldi(t_corewar *cw, t_carriage *carr)
 	ft_carr_load_value(cw, carr, 1, REG_CODE);
 	if (carr->arg[1] > 0 && carr->arg[1] <= REG_NUMBER)
 	{
-		carr->rg[carr->arg[1] - 1] = carr->arg[0];
-		carr->carry = (carr->arg[0] == 0) ? 1 : 0;
+		carr->rg[carr->arg[1] - 1] = carr->pc_comm + carr->arg[0] + carr->arg[1];
+		carr->carry = (carr->rg[carr->arg[1] - 1] == 0) ? 1 : 0;
 	}
 	return (FT_OK);
 }

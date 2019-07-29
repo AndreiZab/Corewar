@@ -98,6 +98,7 @@ static int		ft_play(t_corewar *cw)
 	ft_commh_add(&(cw->commh_default), 0, 1, ft_comm_unknown);
 	ft_show_players(cw);
 	play = 1;
+	cw->next_check = CYCLE_TO_DIE;
 	while (play)
 	{
 		ft_tick(cw);
@@ -128,8 +129,5 @@ int				main(int argc, char **argv)
 	err == FT_OK ? err = ft_play(cw) : 0;
 	//ft_output(&cw);
 	//ft_cw_free(&cw);
-	ft_putstr("Status: ");
-	ft_putnbr(err);
-	ft_putchar('\n');
 	return (0);
 }
