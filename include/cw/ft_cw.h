@@ -115,8 +115,12 @@ typedef struct	s_comm_handler
 }				t_comm_handler;
 
 
-void		ft_cw_free(t_corewar **cw);
+/*
+** cw.c
+*/
 
+t_corewar	*ft_cw_alloc(int *err);
+void		ft_cw_free(t_corewar **cw);
 
 /*
 **	argh.c
@@ -179,6 +183,7 @@ long			ft_map_get_dword(t_corewar *cw, int pos);
 t_player	*ft_player_new(t_player **players);
 void		ft_player_delete(t_player **player);
 t_player	*ft_player_by_id(t_player *players, int id);
+void		ft_player_list_free(t_player **players);
 
 
 /*
@@ -188,6 +193,7 @@ t_player	*ft_player_by_id(t_player *players, int id);
 t_carriage	*ft_carriage_new(t_carriage **carrs, int player_id, int pos);
 void		ft_carr_move(t_carriage *carr, int move);
 void		ft_carr_load_arg_types(t_corewar *cw, t_carriage *carr);
+void		ft_carriage_list_free(t_carriage **carrs);
 
 
 /*
@@ -209,6 +215,7 @@ void	ft_carr_load_value(t_corewar *cw, t_carriage *carr, int arg_n,
 int		ft_commh_add(t_comm_handler **commh, char command, int cycles,
 			int (*f)(t_corewar *cw, t_carriage *carr));
 t_comm_handler	*ft_commh_by_byte(t_corewar *cw, char command);
+void	ft_commh_free(t_comm_handler **comm_h);
 
 
 /*

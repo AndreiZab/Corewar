@@ -31,3 +31,22 @@ void			ft_carr_move(t_carriage *carr, int move)
 	carr->pc += move;
 	carr->pc = carr->pc % MEM_SIZE;
 }
+
+void			ft_carriage_list_free(t_carriage **carrs)
+{
+	t_carriage	*curr;
+	t_carriage	*next;
+
+	if (carrs == NULL || *carrs == NULL)
+		return ;
+	curr = *carrs;
+	while (curr)
+	{
+		next = curr->next;
+		if (curr->arg_types)
+			free(curr->arg_types);
+		free(curr);
+		curr = next;
+	}
+	*carrs = NULL;
+}

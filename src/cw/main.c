@@ -1,24 +1,5 @@
 #include "ft_cw.h"
 
-static t_corewar *ft_cw_alloc(int *err)
-{
-	t_corewar *cw;
-
-	if ((cw = (t_corewar*)ft_memalloc(sizeof(t_corewar))) == NULL)
-	{
-		*err = FT_MEMORY;
-		return (NULL);
-	}
-	if (ft_player_new(&cw->players) == NULL)
-	{
-		free(cw);
-		*err = FT_MEMORY;
-		return (NULL);
-	}
-	*err = FT_OK;
-	return (cw);
-}
-
 static int		ft_process_args(t_corewar *cw, int argc, char **argv)
 {
 	int				arg_i;
@@ -103,6 +84,6 @@ int				main(int argc, char **argv)
 	err == FT_OK ? err = ft_prepare_field(cw) : 0;
 	err == FT_OK ? err = ft_play(cw) : 0;
 	//ft_output(&cw);
-	//ft_cw_free(&cw);
+	ft_cw_free(&cw);
 	return (0);
 }

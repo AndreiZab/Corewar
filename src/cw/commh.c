@@ -29,3 +29,20 @@ t_comm_handler	*ft_commh_by_byte(t_corewar *cw, char command)
 	}
 	return (cw->commh_default);
 }
+
+void	ft_commh_free(t_comm_handler **comm_h)
+{
+	t_comm_handler	*curr;
+	t_comm_handler	*next;
+
+	if (comm_h == NULL)
+		return ;
+	curr = *comm_h;
+	while (curr)
+	{
+		next = curr->next;
+		free(curr);
+		curr = next;
+	}
+	*comm_h = NULL;
+}
