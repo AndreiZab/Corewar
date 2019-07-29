@@ -249,6 +249,15 @@ unsigned char	*ft_get_arg_types(unsigned char byte);
 void		ft_show_players(t_corewar *cw);
 int			ft_regnumber_contains(int num);
 
+
+/*
+** bandles.c 
+*/
+
+void	ft_bandle_args(t_corewar *cw);
+void	ft_bandle_commands(t_corewar *cw);
+
+
 /*
 ** comm_process.c
 */
