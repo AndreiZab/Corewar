@@ -13,10 +13,10 @@ void	ft_grab_command(t_corewar *cw, t_carriage *carr)
 {
 	t_comm_handler	*commh;
 
-	
 	carr->command = ft_map_get_byte(cw, carr->pc);
+	carr->pc_comm = carr->pc;
 	commh = ft_commh_by_byte(cw, carr->command);
-	carr->preparing_ticks = (commh != NULL) ? commh->cycles : 0;
+	carr->preparing_ticks = commh->cycles;
 }
 
 int	ft_tick(t_corewar *cw)
@@ -32,8 +32,7 @@ int	ft_tick(t_corewar *cw)
 			if (carr->command != 0)
 				ft_do_command(cw, carr);
 			ft_grab_command(cw, carr);
-			if (carr->preparing_ticks > 0)
-				--(carr->preparing_ticks);
+			--(carr->preparing_ticks);
 		}
 		carr = carr->next;
 	}

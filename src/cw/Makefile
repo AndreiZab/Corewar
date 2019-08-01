@@ -1,7 +1,8 @@
 NAME=corewar
 SRC=main.c\
 	argh.c \
-	arg_process.c \
+	arg_process_1.c \
+	arg_process_2.c \
 	players.c \
 	carriage.c \
 	accurate_reader.c \
@@ -14,7 +15,10 @@ SRC=main.c\
 	map_set.c \
 	map_get.c \
 	tick.c \
-	commh.c 
+	commh.c \
+	kill_machine.c \
+	bandles.c \
+	cw.c
 
 OBJ=$(SRC:.c=.o)
 

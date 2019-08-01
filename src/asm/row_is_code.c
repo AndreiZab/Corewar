@@ -6,30 +6,11 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/07/23 11:14:36 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/07/28 14:48:06 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-char	g_commands[REG_NUMBER][6] = {
-		"lfork",
-		"sti",
-		"fork",
-		"lld",
-		"ld",
-		"add",
-		"zjmp",
-		"sub",
-		"ldi",
-		"or",
-		"st",
-		"aff",
-		"live",
-		"xor",
-		"lldi",
-		"and"
-};
 
 t_token			*ft_token_create(void)
 {
@@ -193,20 +174,6 @@ int			ft_is_register(t_data *data, char *str)
 
 }
 
-int			ft_is_command(char *str)
-{
-	int i;
-
-	i = 0;
-	while (i <= REG_NUMBER)
-	{
-		if (!ft_strcmp(str, g_commands[i]))
-			return (1);
-		i++;
-	}
-	return (0);
-}
-
 void		ft_parse_token(t_data *data, char *str, t_token	*token)
 {
 	token->content = str;
@@ -232,6 +199,50 @@ void		ft_parse_token(t_data *data, char *str, t_token	*token)
 		ft_error("TOKEN_ERROR", data);
 }
 
+void	ft_add_newline_token(t_data *data)
+{
+	t_token *ptr;
+	t_token	*token;
+
+	if (data && data->tokens)
+	{
+		ptr = data->tokens;
+		token = ft_token_create();
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = token;
+		token->next = NULL;
+		token->row = data->num_current_row;
+		if (!(token->content = ft_strnew(1)))
+			ft_error("NO_MEMORY", NULL);
+		token->content[0] = '\n';
+		token->type = Line_feed;
+	}
+
+}
+
+void		ft_tokenadd_end(t_data *data, t_token *token)
+{
+	t_token *ptr;
+
+	if (!token || !data)
+		return ;
+	if (!data->tokens)
+	{
+		data->tokens = token;
+		token->next = NULL;
+	}
+
+	else
+	{
+		ptr = data->tokens;
+		while (ptr->next)
+			ptr = ptr->next;
+		ptr->next = token;
+		token->next = NULL;
+	}
+}
+
 void		ft_row_is_code (t_data *data, char *str)
 {
 	int i;
@@ -245,6 +256,7 @@ void		ft_row_is_code (t_data *data, char *str)
 			return ;
 		len = ft_len_one_word(str + i);
 		token = ft_token_create();
+		ft_tokenadd_end(data, token);
 		token->row = data->num_current_row;
 		ft_parse_token(data, ft_strsub(str, i, len), token);
 		i += len;

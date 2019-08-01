@@ -8,12 +8,17 @@
 # include "libft.h"
 # include "op.h"
 
+# define T_REGS 1
+# define T_DIRS 10
+# define T_INDS 100
+
 typedef enum
 {
 	Direct_number,
 	Direct_label,
 	Whitespace,
 	Label_arg,
+	Line_feed,
 	Separator,
 	Register,
 	Command,
@@ -28,7 +33,6 @@ typedef struct			s_token
 	unsigned			row;
 	struct s_token		*next;
 }						t_token;
-
 
 typedef struct		s_data
 {
@@ -81,5 +85,13 @@ void		ft_error(char *str, t_data *data);
  */
 
 void		ft_row_is_code (t_data *data, char *str);
+void	ft_add_newline_token(t_data *data);
+
+/*
+** syntax_analysis.c
+ */
+
+int			ft_is_command(char *str);
+void		ft_syntax_analysis(t_data *data);
 
 #endif

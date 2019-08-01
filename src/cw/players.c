@@ -40,3 +40,11 @@ t_player	*ft_player_by_id(t_player *players, int id)
 	}
 	return (NULL);
 }
+
+void		ft_player_list_free(t_player **players)
+{
+	if (players == NULL)
+		return ;
+	while (*players)
+		ft_player_delete(players);
+}

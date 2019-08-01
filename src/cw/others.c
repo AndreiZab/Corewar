@@ -57,22 +57,22 @@ void		ft_set_ids(t_corewar *cw)
 // 	return (bytes);
 // }
 
-char		*ft_get_arg_types(char byte)
+unsigned char	*ft_get_arg_types(unsigned char byte)
 {
-	char	*types;
+	unsigned char	*types;
 
-	if ((types = (char*)ft_memalloc(sizeof(char) * 3)) == NULL)
+	if ((types = (unsigned char*)ft_memalloc(sizeof(char) * 3)) == NULL)
 		return (NULL);
 	types[0] = byte >> 6;
-	types[1] = (byte << 2) >> 6;
-	types[2] = (byte << 4) >> 6;
-	ft_putstr("ARGTYPES[");
-	ft_putnbr(types[0]);
-	ft_putchar(' ');
-	ft_putnbr(types[1]);
-	ft_putchar(' ');
-	ft_putnbr(types[2]);
-	ft_putstr("]\n");
+	types[1] = (byte & 0b00110000) >> 4;
+	types[2] = (byte & 0b00001100) >> 2;
+	// ft_putstr("ARGTYPES[");
+	// ft_putnbr(types[0]);
+	// ft_putchar(' ');
+	// ft_putnbr(types[1]);
+	// ft_putchar(' ');
+	// ft_putnbr(types[2]);
+	// ft_putstr("]\n");
 	return (types);
 }
 
@@ -96,4 +96,9 @@ void		ft_show_players(t_corewar *cw)
 		ft_putstr(pl->comment);
 		ft_putstr("\") !\n");
 	}
+}
+
+int		ft_regnumber_contains(int num)
+{
+	return (num > 0 && num <= REG_NUMBER);
 }
