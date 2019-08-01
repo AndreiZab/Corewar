@@ -44,6 +44,7 @@ typedef struct		s_data
 	int					count_char;
 	unsigned int		comm_counter;
 	int					code_size;
+	char 				*processing_row;
 	char				quotes;
 
 	struct s_command	*comms;
