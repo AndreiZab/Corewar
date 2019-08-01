@@ -11,9 +11,11 @@ int		ft_comm_live(t_corewar *cw, t_carriage *carr)
 	ft_carr_move(carr, 1);
 	ft_carr_load_dir(cw, carr, 0);
 	carr->cycle_live = cw->cycle;
+
 	ft_putstr("Try to live for id: ");
 	ft_putnbr(carr->arg[0]);
 	ft_putchar('\n');
+
 	pl = ft_player_by_id(cw->players, -(carr->arg[0]));
 	if (pl)
 		pl->live = carr->cycle_live;
@@ -25,6 +27,12 @@ int		ft_comm_ld(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[0] == REG_CODE || carr->arg_types[1] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, carr->arg_types[0] | FT_IDX_USE);
 	ft_carr_load_value(cw, carr, 1, REG_CODE | FT_LINK);
 	if (carr->arg[1] > 0 && carr->arg[1] <= REG_NUMBER)
@@ -44,6 +52,12 @@ int		ft_comm_st(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[0] != REG_CODE || carr->arg_types[1] == DIR_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
 	if (carr->arg_types[1] == REG_CODE)
 	{
@@ -65,6 +79,14 @@ int		ft_comm_add(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[0] != REG_CODE || carr->arg_types[1] != REG_CODE ||
+		carr->arg_types[2] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
 	ft_carr_load_value(cw, carr, 1, REG_CODE);
 	ft_carr_load_value(cw, carr, 2, REG_CODE | FT_LINK);
@@ -81,6 +103,14 @@ int		ft_comm_sub(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[0] != REG_CODE || carr->arg_types[1] != REG_CODE ||
+		carr->arg_types[2] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
 	ft_carr_load_value(cw, carr, 1, REG_CODE);
 	ft_carr_load_value(cw, carr, 2, REG_CODE | FT_LINK);
@@ -97,6 +127,13 @@ int		ft_comm_and(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[2] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
 	ft_carr_load_value(cw, carr, 1, carr->arg_types[1]);
 	ft_carr_load_value(cw, carr, 2, REG_CODE | FT_LINK);
@@ -113,6 +150,13 @@ int		ft_comm_or(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[2] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
 	ft_carr_load_value(cw, carr, 1, carr->arg_types[1]);
 	ft_carr_load_value(cw, carr, 2, REG_CODE | FT_LINK);
@@ -129,6 +173,13 @@ int		ft_comm_xor(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[2] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
 	ft_carr_load_value(cw, carr, 1, carr->arg_types[1]);
 	ft_carr_load_value(cw, carr, 2, REG_CODE | FT_LINK);
@@ -158,6 +209,13 @@ int		ft_comm_ldi(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 2;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[1] == IND_CODE || carr->arg_types[2] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
 	ft_carr_load_value(cw, carr, 1, carr->arg_types[1]);
 	ft_carr_load_value(cw, carr, 2, REG_CODE | FT_LINK);
@@ -172,6 +230,13 @@ int		ft_comm_sti(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 2;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[0] != REG_CODE || carr->arg_types[2] == IND_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
 	ft_carr_load_value(cw, carr, 1, carr->arg_types[1]);
 	ft_carr_load_value(cw, carr, 2, carr->arg_types[2]);
@@ -202,6 +267,12 @@ int		ft_comm_lld(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[0] == REG_CODE || carr->arg_types[1] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
 	ft_carr_load_value(cw, carr, 1, REG_CODE | FT_LINK);
 	if (carr->arg[1] > 0 && carr->arg[1] <= REG_NUMBER)
@@ -217,6 +288,13 @@ int		ft_comm_lldi(t_corewar *cw, t_carriage *carr)
 	cw->dir_size = 4;
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[1] == IND_CODE || carr->arg_types[2] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[1]);
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[2]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, carr->arg_types[0] | FT_IDX_USE);
 	ft_carr_load_value(cw, carr, 1, carr->arg_types[1]);
 	ft_carr_load_value(cw, carr, 1, REG_CODE);
@@ -248,6 +326,11 @@ int		ft_comm_aff(t_corewar *cw, t_carriage *carr)
 {
 	ft_carr_move(carr, 1);
 	ft_carr_load_arg_types(cw, carr);
+	if (carr->arg_types[0] != REG_CODE)
+	{
+		ft_carr_load_value(cw, carr, 0, carr->arg_types[0]);
+		return (FT_OK);
+	}
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
 	ft_putchar(carr->arg[0]);
 	return (FT_OK);
