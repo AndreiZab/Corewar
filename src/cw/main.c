@@ -40,10 +40,9 @@ static int		ft_prepare_field(t_corewar *cw)
 		ft_carriage_new(&(cw->carriages), -i, (i - 1) * mem_part);
 	}
 	cw->cycles_to_die = CYCLE_TO_DIE;
+	cw->next_check = CYCLE_TO_DIE;
 	if (cw->v)
-	{
 		/*return (ft_vis_init(cw))*/;
-	}
 	return (FT_OK);
 }
 
@@ -54,7 +53,6 @@ static int		ft_play(t_corewar *cw)
 	ft_bandle_commands(cw);
 	ft_show_players(cw);
 	play = 1;
-	cw->next_check = CYCLE_TO_DIE;
 	while (play)
 	{
 		ft_tick(cw);
@@ -83,7 +81,6 @@ int				main(int argc, char **argv)
 	err == FT_OK ? err = ft_process_args(cw, argc, argv) : 0;
 	err == FT_OK ? err = ft_prepare_field(cw) : 0;
 	err == FT_OK ? err = ft_play(cw) : 0;
-	//ft_output(&cw);
 	ft_cw_free(&cw);
 	return (0);
 }
