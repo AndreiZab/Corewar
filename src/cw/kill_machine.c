@@ -37,16 +37,19 @@ void	ft_player_kill(t_corewar *cw, int *play)
 		if (pl->dead == 0)
 		{
 			if (pl->live != 0)
-			pl->live == 0;
+				pl->live == 0;
 			else
 			{
 				pl->dead = cw->cycle;
-				++deaths;	
+				++deaths;
+				ft_putstr("kill: ");
+				ft_putnbr(pl->id);
+				ft_putchar('\n');
 			}
 		}
 		pl = pl->next;
 	}
-	if (deaths >= cw->players_count - 1)
+	if (deaths >= cw->players_count)
 	{
 		ft_putstr("dead: ");
 		ft_putnbr(cw->next_check);
