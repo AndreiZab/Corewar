@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   syntax analysis.c                                  :+:      :+:    :+:   */
+/*   syntax_analysis.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/01 15:58:20 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/01 21:22:57 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -212,9 +212,10 @@ void		ft_validate_all_code(t_data *data)
 			continue ;
 		else if (ptr->type == Command)
 			ft_validate_command();
-
-		else if
-
+		else if (ft_find_arg())
+			ft_error("ARGUMENTS_WITHOUT_A_COMMAND", data);
+		else if () //124-129
+			;
 		ptr = ptr->next;
 	}
 }
