@@ -214,7 +214,7 @@ void		ft_validate_all_code(t_data *data)
 			ft_validate_command();
 		else if (ft_find_arg())
 			ft_error("ARGUMENTS_WITHOUT_A_COMMAND", data);
-		else if ()
+		else if () //124-129
 			;
 		ptr = ptr->next;
 	}
