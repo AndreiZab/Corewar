@@ -46,7 +46,7 @@ typedef struct		s_data
 	int					code_size;
 	char 				*processing_row;
 	char				quotes;
-	char				*past_type;
+	t_type				past_type;
 
 	struct s_command	*comms;
 	struct s_label		*labels;
