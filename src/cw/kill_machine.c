@@ -5,6 +5,7 @@ void	ft_find_winner(t_corewar *cw)
 	t_player *pl;
 	t_player *stored;
 
+	stored = NULL;
 	pl = cw->players;
 	while (pl)
 	{
@@ -37,7 +38,7 @@ void	ft_player_kill(t_corewar *cw, int *play)
 		if (pl->dead == 0)
 		{
 			if (pl->live != 0)
-				pl->live == 0;
+				pl->live = 0;
 			else
 			{
 				pl->dead = cw->cycle;
@@ -49,7 +50,7 @@ void	ft_player_kill(t_corewar *cw, int *play)
 		}
 		pl = pl->next;
 	}
-	if (deaths >= cw->players_count)
+	if (deaths >= cw->players_count || cw->cycles_to_die <= 0)
 	{
 		ft_putstr("dead: ");
 		ft_putnbr(cw->next_check);
