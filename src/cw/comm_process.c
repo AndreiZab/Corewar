@@ -366,7 +366,8 @@ int		ft_comm_aff(t_corewar *cw, t_carriage *carr)
 		return (FT_OK);
 	}
 	ft_carr_load_value(cw, carr, 0, REG_CODE);
-	ft_putchar(carr->arg[0]);
+	if (cw->aff)
+		ft_putchar(carr->arg[0]);
 	return (FT_OK);
 }
 

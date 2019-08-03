@@ -31,6 +31,6 @@ void	ft_bandle_commands(t_corewar *cw)
 	ft_commh_add(&(cw->commh), 13, 10, ft_comm_lld);
 	ft_commh_add(&(cw->commh), 14, 50, ft_comm_lldi);
 	ft_commh_add(&(cw->commh), 15, 1000, ft_comm_lfork);
-	(cw->aff) ? ft_commh_add(&(cw->commh), 16, 2, ft_comm_aff) : 0;
+	ft_commh_add(&(cw->commh), 16, 2, ft_comm_aff);
 	ft_commh_add(&(cw->commh_default), 0, 1, ft_comm_unknown);
 }
