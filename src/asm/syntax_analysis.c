@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/01 21:22:57 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/02 20:25:02 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -199,11 +199,8 @@ void		ft_syntax_analysis01(t_data *data)
 
 }
 
-void		ft_validate_all_code(t_data *data)
+void		ft_validate_all_code(t_data *data, t_token *ptr)
 {
-	t_token *ptr;
-
-	ptr = data->tokens;
 	while (ptr)
 	{
 		if (ptr->type == Label)
@@ -214,8 +211,19 @@ void		ft_validate_all_code(t_data *data)
 			ft_validate_command();
 		else if (ft_find_arg())
 			ft_error("ARGUMENTS_WITHOUT_A_COMMAND", data);
-		else if () //124-129
-			;
+		else if (ft_add_content_in_row(data)) //124-129-131
+			continue;
+		else if (ptr->type == Separator && data->past_type && data->past_type == Separator)
+			ft_error("EXTRA_SEPARATOR", data);
+		else if (ft_sep_before_n(data))//86-93 - 95
+			ft_error("SEPARATOR_BEFORE_NEWLINE", data);
+		else if (ptr->type == Line_feed)
+			ft_define(data);
+		else if (ft_validate_label_arg(data))
+			ft_error("LABEL_NOT_INITIALIZED", data);
+		else if (ft_is_arg(data))
+			ft_validate_arg(data); //71-74
+		data->past_type = ptr->type; // унеси отсюда
 		ptr = ptr->next;
 	}
 }
@@ -226,7 +234,7 @@ void		ft_syntax_analysis(t_data *data)
 	ft_check_token(data);
 //	g_ops = ft_create_oper();
 	data->labels = ft_parse_label(data);
-	ft_validate_all_code(data);
+	ft_validate_all_code(data, data->tokens);
 
 }
 
