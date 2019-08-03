@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/02 20:25:02 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/03 10:09:07 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -204,11 +204,11 @@ void		ft_validate_all_code(t_data *data, t_token *ptr)
 	while (ptr)
 	{
 		if (ptr->type == Label)
-			ft_validate_label();
+			ft_validate_label(data, ptr->type); // progress: 0----------*----100
 		else if (!data->processing_row && (ptr->type == Whitespace || ptr->type == Line_feed))
 			continue ;
 		else if (ptr->type == Command)
-			ft_validate_command();
+			ft_validate_command(); //115
 		else if (ft_find_arg())
 			ft_error("ARGUMENTS_WITHOUT_A_COMMAND", data);
 		else if (ft_add_content_in_row(data)) //124-129-131
@@ -221,10 +221,10 @@ void		ft_validate_all_code(t_data *data, t_token *ptr)
 			ft_define(data);
 		else if (ft_validate_label_arg(data))
 			ft_error("LABEL_NOT_INITIALIZED", data);
-		else if (ft_is_arg(data))
+		else if (ft_is_argument(ptr->type))
 			ft_validate_arg(data); //71-74
-		data->past_type = ptr->type; // унеси отсюда
-		ptr = ptr->next;
+		data->past_type = ptr->type; // унеси отсюда и будет место на else
+		ptr = ptr->next; // else с ошибкой нужен?
 	}
 }
 

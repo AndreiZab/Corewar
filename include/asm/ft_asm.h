@@ -46,6 +46,7 @@ typedef struct		s_data
 	int					code_size;
 	char 				*processing_row;
 	char				quotes;
+	char				*past_type;
 
 	struct s_command	*comms;
 	struct s_label		*labels;
@@ -94,5 +95,12 @@ void	ft_add_newline_token(t_data *data);
 
 int			ft_is_command(char *str);
 void		ft_syntax_analysis(t_data *data);
+
+/*
+** syntax_analysis_helper.c
+ */
+
+void	ft_validate_label(t_data *data, t_type type);
+int 	ft_is_argument(t_type type);
 
 #endif
