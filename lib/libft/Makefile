@@ -55,7 +55,9 @@ SRCS=ft_memset.c \
 	 ft_putendl_fd.c \
 	 ft_strjoin.c \
 	 ft_isdigit.c \
-	 ft_strsub.c
+	 ft_strsub.c \
+	 ft_setcolor_fd.c \
+	 ft_setcolor.c
 
 OBJS=$(SRCS:.c=.o)
 

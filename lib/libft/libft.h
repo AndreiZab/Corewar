@@ -105,4 +105,21 @@ void			ft_lstr_destroy(t_lstr **lstr);
 void			ft_lstr_minimize(t_lstr *lstr);
 int				ft_lstr_resize(t_lstr *lstr, int new_length);
 
+typedef enum	e_ccolor
+{
+	cc_current = -2,
+	cc_default = 9,
+	cc_black = 0,
+	cc_red = 1,
+	cc_green = 2,
+	cc_yellow = 3,
+	cc_blue = 4,
+	cc_magenta = 5,
+	cc_cyan = 6,
+	cc_white = 7
+}				t_ccolor;
+
+void			ft_setcolor_fd(int fd, t_ccolor backg, t_ccolor foreg);
+void			ft_setcolor(t_ccolor backg, t_ccolor foreg);
+
 #endif
