@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/16 11:56:21 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/01 16:54:51 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:08:58 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,13 @@ t_token			*ft_token_create(void)
 {
 	t_token *token;
 
-	if (!(token = (t_token *) malloc(sizeof(t_token))))
+	if (!(token = (t_token *)malloc(sizeof(t_token))))
 		ft_error("NO_MEMORY", NULL);
 	token->row = 0;
 	token->content = NULL;
 	token->type = -1;
 	token->next = NULL;
+	token->prev = NULL;
 	return (token);
 }
 
@@ -212,6 +213,7 @@ void	ft_add_newline_token(t_data *data)
 			ptr = ptr->next;
 		ptr->next = token;
 		token->next = NULL;
+		token->prev = ptr;
 		token->row = data->num_current_row;
 		if (!(token->content = ft_strnew(1)))
 			ft_error("NO_MEMORY", NULL);
@@ -231,14 +233,15 @@ void		ft_tokenadd_end(t_data *data, t_token *token)
 	{
 		data->tokens = token;
 		token->next = NULL;
+		token->prev = NULL;
 	}
-
 	else
 	{
 		ptr = data->tokens;
 		while (ptr->next)
 			ptr = ptr->next;
 		ptr->next = token;
+		token->prev = ptr;
 		token->next = NULL;
 	}
 }
@@ -261,5 +264,5 @@ void		ft_row_is_code (t_data *data, char *str)
 		ft_parse_token(data, ft_strsub(str, i, len), token);
 		i += len;
 	}
-	//токены - в цепь и почистить перед выходом
+	//токены - соединить и почистить перед выходом
 }

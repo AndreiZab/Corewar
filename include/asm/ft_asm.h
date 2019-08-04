@@ -32,6 +32,7 @@ typedef struct			s_token
 	t_type				type;
 	unsigned			row;
 	struct s_token		*next;
+	struct s_token		*prev;
 }						t_token;
 
 typedef struct		s_data
@@ -46,7 +47,6 @@ typedef struct		s_data
 	int					code_size;
 	char 				*processing_row;
 	char				quotes;
-	t_type				past_type;
 
 	struct s_command	*comms;
 	struct s_label		*labels;
@@ -59,6 +59,7 @@ typedef struct		s_command
 	int					*argv;
 
 	struct s_command 	*next;
+	struct s_command 	*prev;
 }					t_command;
 
 typedef struct		s_label
@@ -67,6 +68,7 @@ typedef struct		s_label
 	int					line;
 
 	struct s_label		*next;
+	struct s_label		*prev;
 }					t_label;
 
 

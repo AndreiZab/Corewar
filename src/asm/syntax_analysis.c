@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/03 10:47:09 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/04 17:39:36 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -150,6 +150,7 @@ t_label		*ft_create_label()
 	if (!(label = (t_label *)ft_memalloc(sizeof(t_label))))
 		ft_error("NO_MEMORY", NULL);
 	label->next = NULL;
+	label->prev = NULL;
 	label->line = 0;
 	label->name = NULL;
 	return (label);
@@ -176,9 +177,11 @@ t_label		*ft_parse_label(t_data *data)
 	t_token *cur;
 	t_label *label;
 	t_label *head;
+	t_label *prev;
 
 	head = ft_create_label();
 	cur = data->tokens;
+	prev = NULL;
 	while (cur)
 	{
 		if (cur->type == Label)
@@ -186,7 +189,9 @@ t_label		*ft_parse_label(t_data *data)
 			label = ft_create_label();
 			label->line = cur->row;
 			label->name = ft_strdup(cur->content);
+			label->prev = prev;
 			head = ft_labeladd_end(head, label);
+			prev = label;
 		}
 		cur = cur->next;
 	}
@@ -194,7 +199,6 @@ t_label		*ft_parse_label(t_data *data)
 		return (head);
 	else
 		return (NULL);
-
 }
 
 void		ft_validate_all_code(t_data *data, t_token *ptr)
@@ -207,11 +211,11 @@ void		ft_validate_all_code(t_data *data, t_token *ptr)
 			continue ;
 		else if (ptr->type == Command)
 			ft_validate_command(); //115
-		else if (ft_find_arg()
+		else if (ft_find_arg())
 			ft_error("ARGUMENTS_WITHOUT_A_COMMAND", data);
 		else if (ft_add_content_in_row(data)) //124-129-131
 			continue;
-		else if (ptr->type == Separator && data->past_type && data->past_type == Separator)
+		else if (ptr->type == Separator && ptr->prev && ptr->prev->type == Separator)
 			ft_error("EXTRA_SEPARATOR", data);
 		else if (ft_sep_before_n(data))//86-93 - 95
 			ft_error("SEPARATOR_BEFORE_NEWLINE", data);
@@ -221,7 +225,7 @@ void		ft_validate_all_code(t_data *data, t_token *ptr)
 			ft_error("LABEL_NOT_INITIALIZED", data);
 		else if (ft_is_argument(ptr->type))
 			ft_validate_arg(data); //71-74
-		data->past_type = ptr->type; // унеси отсюда и будет место на else
+		//data->past_type = ptr->type;  del и будет место на else
 		ptr = ptr->next; // else с ошибкой нужен?
 	}
 }

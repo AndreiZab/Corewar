@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/01 16:54:51 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/04 12:04:18 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -209,7 +209,7 @@ void		ft_read_champ(t_data *data)
 		ft_add_newline_token(data);
 		ft_check_row(data, line);
 	}
-		ft_syntax_analysis(data);
+	ft_syntax_analysis(data);
 	if (data->quotes == 1 || data->quotes == 3)
 		ft_error("ERROR_WITH_QUOTES", NULL);
 	if (err == -1)
@@ -230,5 +230,7 @@ void	ft_asm(char *str)
 	data = ft_create(fd);
 	ft_read_champ(data);
 //	ft_write_bytes(data);
+	if (close(fd) < 0)
+		ft_error("CANT_CLOSE_FILE", NULL);
 	ft_free_data(data);
 }
