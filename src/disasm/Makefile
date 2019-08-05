@@ -33,7 +33,7 @@ $(OBJS_DIR):
 	@mkdir -p $(OBJS_DIR)
 
 $(OBJS_DIR)/%.o: $(SRCS_DIR)/%.c
-	@gcc -o $@ $(INCLUDE) -c $<
+	@gcc $(CFLAGS) -o $@ $(INCLUDE) -c $<
 	@printf "Compiling %23s => %-23s\r" $< $@
 
 clean:
