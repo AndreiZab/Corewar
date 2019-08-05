@@ -8,9 +8,11 @@
 # include "libft.h"
 # include "op.h"
 
-# define T_REGS 1
-# define T_DIRS 10
-# define T_INDS 100
+# include <stdbool.h>	// можно или сделать enum?
+
+//# define T_REGS 1
+//# define T_DIRS 10
+//# define T_INDS 100
 
 typedef enum
 {
@@ -25,6 +27,19 @@ typedef enum
 	Number,
 	Label
 }	t_type;
+
+typedef struct	s_op
+{
+	char			*name;
+	unsigned char	code;
+	unsigned char	args_num;
+	bool			args_types_code;
+	t_arg_type		args_types[3];
+	unsigned char	t_dir_size;
+}				t_op;
+
+
+const t_op	g_op_tab[REG_NUMBER];
 
 typedef struct			s_token
 {

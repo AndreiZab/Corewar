@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
+/*
 typedef struct		s_ops
 {
 	int				*command_nums;
@@ -102,6 +102,7 @@ int				g_arg_type_3[REG_NUMBER] = {
 t_ops		*g_ops = NULL;
 
 size_t		g_label_num = 0;
+*/
 
 /*
  *
@@ -200,7 +201,7 @@ t_label		*ft_parse_label(t_data *data)
 	else
 		return (NULL);
 }
-
+/*
 void		ft_validate_all_code(t_data *data, t_token *ptr)
 {
 	while (ptr)
@@ -234,14 +235,14 @@ void		ft_syntax_analysis01(t_data *data)
 {
 
 }
-
+*/
 void		ft_syntax_analysis(t_data *data)
 {
 
 	ft_check_token(data);
 //	g_ops = ft_create_oper();
 	data->labels = ft_parse_label(data);
-	ft_validate_all_code(data, data->tokens);
-
+//	ft_validate_all_code(data, data->tokens);
+	return ;
 }
 
