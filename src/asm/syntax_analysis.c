@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/26 14:11:02 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/04 17:39:36 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/06 16:36:42 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,7 +118,8 @@ int			ft_is_command(char *str)
 	i = 0;
 	while (i <= REG_NUMBER)
 	{
-		if (!ft_strcmp(str, g_commands[i]))
+//		if (!ft_strcmp(str, g_commands[i]))
+		if (!ft_strcmp(str, g_op_tab[i].name))
 			return (1);
 		i++;
 	}
@@ -201,7 +202,7 @@ t_label		*ft_parse_label(t_data *data)
 	else
 		return (NULL);
 }
-/*
+
 void		ft_validate_all_code(t_data *data, t_token *ptr)
 {
 	while (ptr)
@@ -226,7 +227,6 @@ void		ft_validate_all_code(t_data *data, t_token *ptr)
 			ft_error("LABEL_NOT_INITIALIZED", data);
 		else if (ft_is_argument(ptr->type))
 			ft_validate_arg(data); //71-74
-		//data->past_type = ptr->type;  del и будет место на else
 		ptr = ptr->next; // else с ошибкой нужен?
 	}
 }
@@ -235,14 +235,14 @@ void		ft_syntax_analysis01(t_data *data)
 {
 
 }
-*/
+
 void		ft_syntax_analysis(t_data *data)
 {
 
 	ft_check_token(data);
 //	g_ops = ft_create_oper();
 	data->labels = ft_parse_label(data);
-//	ft_validate_all_code(data, data->tokens);
+	ft_validate_all_code(data, data->tokens);
 	return ;
 }
 
