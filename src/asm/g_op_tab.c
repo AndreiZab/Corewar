@@ -12,7 +12,7 @@
 
 #include "ft_asm.h"
 
-const t_op		g_op_tab[16] =
+const t_ops		g_op_tab[16] =
 		{
 				{
 						.name = "live",

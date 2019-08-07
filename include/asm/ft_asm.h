@@ -28,18 +28,18 @@ typedef enum
 	Label
 }	t_type;
 
-typedef struct	s_op
+typedef struct	s_ops
 {
 	char			*name;
 	unsigned char	code;
 	unsigned char	args_num;
 	bool			args_types_code;
-	t_arg_type		args_types[3];
+	char			args_types[3];
 	unsigned char	t_dir_size;
-}				t_op;
+}				t_ops;
 
 
-const t_op	g_op_tab[REG_NUMBER];
+const t_ops	g_op_tab[REG_NUMBER];
 
 typedef struct			s_token
 {
@@ -63,19 +63,19 @@ typedef struct		s_data
 	char 				*processing_row;
 	char				quotes;
 
-	struct s_command	*comms;
+//	struct s_command	*comms;
 	struct s_label		*labels;
 }					t_data;
 
-typedef struct		s_command
-{
-	int					opcode;
-	int					argc;
-	int					*argv;
-
-	struct s_command 	*next;
-	struct s_command 	*prev;
-}					t_command;
+//typedef struct		s_command
+//{
+//	int					opcode;
+//	int					argc;
+//	int					*argv;
+//
+//	struct s_command 	*next;
+//	struct s_command 	*prev;
+//}					t_command;
 
 typedef struct		s_label
 {
