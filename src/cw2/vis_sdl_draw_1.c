@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/11 15:56:17 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/11 17:51:28 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ void	ft_frames(t_corewar *cw)
 	SDL_Rect	rect;
 	int			i;
 
-	SDL_SetRenderDrawColor(cw->ren, 0, 0, 0, 0);
+	SDL_SetRenderDrawColor(cw->ren, BLK);
 	SDL_RenderClear(cw->ren);
-	SDL_SetRenderDrawColor(cw->ren, 255, 255, 255, 0);
+	SDL_SetRenderDrawColor(cw->ren, WHT);
 	i = 0;
 	rect.x = 0;
 	rect.y = 0;
@@ -76,10 +76,11 @@ void	ft_label(t_corewar *cw)
 	SDL_Rect	dest;
 
 	clr.a = 0;
-	clr.b = 250;
-	clr.g = 250;
-	clr.r = 250;
-	tmp_surf = TTF_RenderText_Blended(cw->fnt, "CORE WAR - CORE WAR - CORE WAR - CORE WAR", clr);
+	clr.b = 255;
+	clr.g = 255;
+	clr.r = 255;
+	tmp_surf = TTF_RenderText_Blended(cw->fnt,
+				"CORE WAR - CORE WAR - CORE WAR - CORE WAR - CORE WAR", clr);
 	tex = SDL_CreateTextureFromSurface(cw->ren, tmp_surf);
 	dest.x = cw->xl + ((cw->xr - cw->xl - tmp_surf->w) / 2);
 	dest.y = cw->yd - tmp_surf->h;
@@ -88,9 +89,9 @@ void	ft_label(t_corewar *cw)
 	SDL_RenderCopy(cw->ren, tex, NULL, &dest);
 	SDL_DestroyTexture(tex);
 	SDL_FreeSurface(tmp_surf);
-	SDL_SetRenderDrawColor(cw->ren, 255, 255, 255, 0);
-	SDL_RenderDrawLine(cw->ren, cw->xl, dest.y - 15, cw->xr, dest.y - 15);
+	SDL_SetRenderDrawColor(cw->ren, WHT);
 	SDL_RenderDrawLine(cw->ren, cw->xl, dest.y - 10, cw->xr, dest.y - 10);
+	SDL_RenderDrawLine(cw->ren, cw->xl, dest.y - 5, cw->xr, dest.y - 5);
 }
 
 void	ft_fields(t_corewar *cw)
@@ -101,9 +102,19 @@ void	ft_fields(t_corewar *cw)
 	i = -1;
 	rect.h = (cw->scr_h - 128) / 64;
 	rect.w = rect.h;
-	SDL_SetRenderDrawColor(cw->ren, 170, 255, 187, 0);
+	// SDL_SetRenderDrawColor(cw->ren, 170, 255, 187, 0);
 	while (++i < MEM_SIZE)
 	{
+		if (cw->players_map[i] == 1)
+			SDL_SetRenderDrawColor(cw->ren, RD);
+		else if (cw->players_map[i] == 2)
+			SDL_SetRenderDrawColor(cw->ren, GRN);
+		else if (cw->players_map[i] == 3)
+			SDL_SetRenderDrawColor(cw->ren, BL);
+		else if (cw->players_map[i] == 4)
+			SDL_SetRenderDrawColor(cw->ren, PPL);
+		else
+			SDL_SetRenderDrawColor(cw->ren, GRY);
 		rect.x = (i % 64) * rect.w + 2 * (i % 64) + 17;
 		rect.y = (i / 64) * rect.h + 2 * (i / 64) + 17;
 		SDL_RenderFillRect(cw->ren, &rect);

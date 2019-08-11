@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:22:04 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/11 15:51:52 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/11 16:48:50 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,4 +64,5 @@ void	ft_quit(t_corewar *cw)
 	TTF_CloseFont(cw->fnt);
 	TTF_Quit();
 	SDL_Quit();
+	cw->options -= COREWAR_OPT_VISUALIZER;
 }

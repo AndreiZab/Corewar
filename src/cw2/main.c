@@ -20,7 +20,8 @@ int		main(int argc, char **argv)
 		show_players(cw);
 		status = corewar_play(cw);
 	}
-	ft_quit(cw);
+	if (cw->options & COREWAR_OPT_VISUALIZER)
+		ft_quit(cw);
 	corewar_free(&cw);
 	return ((status >= 0) ? 0 : status);
 }

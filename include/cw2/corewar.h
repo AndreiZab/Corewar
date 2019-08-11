@@ -37,11 +37,12 @@
 
 # define COURIER_TTF "../../include/cw2/courier.ttf"
 # define BLK 0, 0, 0, 0
-# define RD 255, 0, 0, 0
-# define GRN 0, 255, 0, 0
+# define RD 170, 0, 0, 0
+# define GRN 0, 170, 0, 0
 # define BL 0, 0, 255, 0
 # define WHT 255, 255, 255, 0
-# define PPL 255, 0, 255, 0
+# define PPL 170, 0, 170, 0
+# define GRY 127, 127, 127, 0
 
 typedef struct s_corewar t_corewar;
 
@@ -359,6 +360,7 @@ void			ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str);
 void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest);
 void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
 int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
+void			ft_set_clr(SDL_Color *clr, int num);
 
 
 #endif
