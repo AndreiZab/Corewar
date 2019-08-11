@@ -5,6 +5,9 @@
 # include <fcntl.h>
 # include <limits.h>
 # include "libft.h"
+# include "SDL.h"
+// # include "SDL2_gfxPrimitives.h"
+# include "SDL_ttf.h"
 # include "op.h"
 # define COREWAR_STATUS_OK 0
 # define COREWAR_STATUS_WARNING 1
@@ -109,6 +112,17 @@ struct s_corewar
 	int				cycle_to_die;
 	int				die_step;
 	int				cycle_lives_counter;
+
+	SDL_Window		*win;
+	SDL_Renderer	*ren;
+	TTF_Font		*fnt;
+	int				scr_w;
+	int				scr_h;
+	int				col;
+	int				xl;
+	int				xr;
+	int				yu;
+	int				yd;
 };
 
 
