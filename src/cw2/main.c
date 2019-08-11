@@ -13,11 +13,14 @@ int		main(int argc, char **argv)
 		status = check_players(cw);
 	if (status >= 0)
 		status = prepare_for_battle(cw);
+	if (status >= 0 && (cw->options & COREWAR_OPT_VISUALIZER))
+		status = ft_init_sdl(cw);
 	if (status >= 0)
 	{
 		show_players(cw);
 		status = corewar_play(cw);
 	}
+	ft_quit(cw);
 	corewar_free(&cw);
 	return ((status >= 0) ? 0 : status);
 }

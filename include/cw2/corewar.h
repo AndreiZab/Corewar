@@ -35,6 +35,8 @@
 # define COREWAR_IDX 8
 # define COREWAR_DUMP_COLUMNS 64 //временно
 
+# define COURIER_TTF "../../include/cw2/courier.ttf"
+
 typedef struct s_corewar t_corewar;
 
 typedef struct s_player t_player;
@@ -323,5 +325,34 @@ void			print_log(t_corewar *cw, t_carriage *carr);
 */
 
 int				kill_machine(t_corewar *cw);
+
+/*
+** vis_sdl_help.c
+*/
+
+int				init_sdl(t_corewar *cw);
+int				ft_init_sdl(t_corewar *cw);
+void			ft_quit(t_corewar *cw);
+
+/*
+** vis_sdl_draw_1.c
+*/
+
+void			ft_vis_redraw(t_corewar *cw);
+void			ft_frames(t_corewar *cw);
+void			ft_label(t_corewar *cw);
+void			ft_fields(t_corewar *cw);
+
+/*
+** vis_sdl_ttf_1.c
+*/
+
+void			ttf_print(t_corewar *cw, int x_pos, int y_pos);
+void			ft_arena(t_corewar *cw, SDL_Color clr, SDL_Rect dest);
+void			ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str);
+void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest);
+void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
+int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
+
 
 #endif
