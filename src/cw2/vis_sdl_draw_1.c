@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/11 17:51:28 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/12 17:22:20 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ void	ft_vis_redraw(t_corewar *cw)
 	ft_frames(cw);
 	ft_fields(cw);
 	ft_label(cw);
-	ttf_print(cw, 10, 10);
+	ttf_print_system(cw, 10, 10);
+	ttf_print_info(cw, (cw->xr - cw->xl) / 2, 10);
 	SDL_RenderPresent(cw->ren);
 	while (SDL_PollEvent(&e) != 0)
 	{
@@ -102,7 +103,6 @@ void	ft_fields(t_corewar *cw)
 	i = -1;
 	rect.h = (cw->scr_h - 128) / 64;
 	rect.w = rect.h;
-	// SDL_SetRenderDrawColor(cw->ren, 170, 255, 187, 0);
 	while (++i < MEM_SIZE)
 	{
 		if (cw->players_map[i] == 1)
@@ -112,7 +112,7 @@ void	ft_fields(t_corewar *cw)
 		else if (cw->players_map[i] == 3)
 			SDL_SetRenderDrawColor(cw->ren, BL);
 		else if (cw->players_map[i] == 4)
-			SDL_SetRenderDrawColor(cw->ren, PPL);
+			SDL_SetRenderDrawColor(cw->ren, YLW);
 		else
 			SDL_SetRenderDrawColor(cw->ren, GRY);
 		rect.x = (i % 64) * rect.w + 2 * (i % 64) + 17;

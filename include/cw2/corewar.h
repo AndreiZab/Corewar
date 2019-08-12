@@ -41,8 +41,15 @@
 # define GRN 0, 170, 0, 0
 # define BL 0, 0, 255, 0
 # define WHT 255, 255, 255, 0
-# define PPL 170, 170, 0, 0
+# define YLW 170, 170, 0, 0
 # define GRY 127, 127, 127, 0
+
+# define BLK_COL -1
+# define WHT_COL 0
+# define RD_COL 1
+# define GRN_COL 2
+# define BL_COL 3
+# define YLW_COL 4
 
 typedef struct s_corewar t_corewar;
 
@@ -127,6 +134,7 @@ struct s_corewar
 	TTF_Font		*fnt;
 	int				scr_w;
 	int				scr_h;
+	int				fnt_h;
 	int				col;
 	int				xl;
 	int				xr;
@@ -353,14 +361,19 @@ void			ft_fields(t_corewar *cw);
 /*
 ** vis_sdl_ttf_1.c
 */
+void			ttf_print_system(t_corewar *cw, int x_pos, int y_pos);
+void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest, int num);
+void			ft_set_clr(SDL_Color *clr, int num);
+int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
+int				ft_count_carrs(t_carriage *carrs);
 
-void			ttf_print(t_corewar *cw, int x_pos, int y_pos);
+void			ttf_print_info(t_corewar *cw, int x_pos, int y_pos);
+// void			ttf_print(t_corewar *cw, int x_pos, int y_pos);
 void			ft_arena(t_corewar *cw, SDL_Color clr, SDL_Rect dest);
 void			ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str);
-void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest);
 void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
-int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str, unsigned int param);
-void			ft_set_clr(SDL_Color *clr, int num);
+
+
 
 
 #endif
