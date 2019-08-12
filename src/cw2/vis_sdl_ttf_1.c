@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 16:01:39 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/11 18:54:20 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/12 15:05:58 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,34 +20,46 @@ void	ttf_print(t_corewar *cw, int x_pos, int y_pos)
 
 	ft_add_param(cw, &clr, &dest);
 	ft_change_dst(&dest, x_pos, y_pos);
-	fnt_h = ttf_print_str(cw, clr, &dest, "total process: ");
+	fnt_h = ttf_print_str(cw, clr, &dest, "total process: ", 0);
 	ft_change_dst(&dest, (cw->xr - cw->xl) / 2, 0);
-	ttf_print_str(cw, clr, &dest, "<<ESC>> for exit");
+	ttf_print_str(cw, clr, &dest, "<<ESC>> for exit", 0);
 	ft_change_dst(&dest, 0, fnt_h * 2);
-	ttf_print_str(cw, clr, &dest, "<<P>> for pause");
+	ttf_print_str(cw, clr, &dest, "<<P>> for pause", 0);
 	ft_change_dst(&dest, -(cw->xr - cw->xl) / 2, 0);
-	ttf_print_str(cw, clr, &dest, "cycle: ");
+	ttf_print_str(cw, clr, &dest, "cycle: ", cw->cycle);
 	ft_change_dst(&dest, 0, fnt_h * 4);
-	ttf_print_str(cw, clr, &dest, "cycles to die: ");
+	ttf_print_str(cw, clr, &dest, "cycles to die: ", cw->cycle_to_die);
 	ft_change_dst(&dest, 0, fnt_h * 2);
-	ttf_print_str(cw, clr, &dest, "cycle delta: ");
+	ttf_print_str(cw, clr, &dest, "cycle delta: ", cw->die_step);
 	ft_change_dst(&dest, 0, fnt_h * 4);
 	ft_set_clr(&clr, 1);
-	ttf_player(cw, clr, dest, "Player 1");
-	ft_change_dst(&dest, (cw->xr - cw->xl) / 2, 0);
-	ft_set_clr(&clr, 2);
-	ttf_player(cw, clr, dest, "Player 2");
-	ft_change_dst(&dest, 0, fnt_h * 2 * 6);
-	ft_set_clr(&clr, 4);
-	ttf_player(cw, clr, dest, "Player 4");
-	ft_change_dst(&dest, -(cw->xr - cw->xl) / 2, 0);
-	ft_set_clr(&clr, 3);
-	ttf_player(cw, clr, dest, "Player 3");
-	ft_change_dst(&dest, 0, fnt_h * 2 * 6);
+	if (cw->players_count >= 1)
+	{
+		ttf_player(cw, clr, dest, "Player ");
+		ft_change_dst(&dest, (cw->xr - cw->xl) / 2, 0);
+		ft_set_clr(&clr, 2);
+	}
+	if (cw->players_count >= 2)
+	{
+		ttf_player(cw, clr, dest, "Player ");
+		ft_change_dst(&dest, 0, fnt_h * 2 * 6);
+		ft_set_clr(&clr, 4);
+	}
+	if (cw->players_count >= 4)
+	{
+		ttf_player(cw, clr, dest, "Player ");
+		ft_change_dst(&dest, -(cw->xr - cw->xl) / 2, 0);
+		ft_set_clr(&clr, 3);
+	}
+	if (cw->players_count >= 3)
+	{
+		ttf_player(cw, clr, dest, "Player ");
+		ft_change_dst(&dest, 0, fnt_h * 2 * 6);
+	}
 	clr.r = 255;
 	clr.g = 255;
 	clr.b = 255;
-	ttf_print_str(cw, clr, &dest, "Arena distribution:");
+	ttf_print_str(cw, clr, &dest, "Arena distribution:", 0);
 	ft_change_dst(&dest, 0, fnt_h * 2);
 	ft_arena(cw, clr, dest);
 }
@@ -66,7 +78,7 @@ void	ft_set_clr(SDL_Color *clr, int num)
 	else
 	{
 		clr->r = 170;
-		clr->b = 170;
+		clr->g = 170;
 	}
 }
 
@@ -96,7 +108,6 @@ void	ft_arena(t_corewar *cw, SDL_Color clr, SDL_Rect dest)
 			p4++;
 		i++;
 	}
-	printf("delta = %d\n", delta);
 	SDL_SetRenderDrawColor(cw->ren, GRY);
 	dest.w = (cw->xr - cw->xl) - 100;
 	dest.h = 30;
@@ -124,13 +135,13 @@ void	ft_arena(t_corewar *cw, SDL_Color clr, SDL_Rect dest)
 
 void	ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str)
 {
-	ttf_print_str(cw, clr, &dest, str);
+	ttf_print_str(cw, clr, &dest, str, 0);
 	ft_change_dst(&dest, 0, dest.h * 2);
-	ttf_print_str(cw, clr, &dest, "Name");
+	ttf_print_str(cw, clr, &dest, "Name", 0);
 	ft_change_dst(&dest, 0, dest.h * 2);
-	ttf_print_str(cw, clr, &dest, "Last live: ");
+	ttf_print_str(cw, clr, &dest, "Last live: ", 0);
 	ft_change_dst(&dest, 0, dest.h * 2);
-	ttf_print_str(cw, clr, &dest, "Lives in current period: ");
+	ttf_print_str(cw, clr, &dest, "Lives in current period: ", 0);
 }
 
 void	ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest)
@@ -149,20 +160,32 @@ void	ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y)
 	dest->y += delta_y;
 }
 
-int		ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str)
+int		ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str, unsigned int param)
 {
 	SDL_Surface	*tmp_surf;
 	SDL_Texture	*tex;
 	int			fnt_h;
+	int			tmp;
 
 	tmp_surf = TTF_RenderText_Blended(cw->fnt, str, clr);
 	tex = SDL_CreateTextureFromSurface(cw->ren, tmp_surf);
 	dest->w = tmp_surf->w;
 	dest->h = tmp_surf->h;
 	fnt_h = tmp_surf->h;
+	tmp = dest->w;
 	SDL_RenderCopy(cw->ren, tex, NULL, dest);
 	SDL_DestroyTexture(tex);
 	SDL_FreeSurface(tmp_surf);
+	tmp_surf = TTF_RenderText_Blended(cw->fnt, ft_itoa(param), clr);
+	tex = SDL_CreateTextureFromSurface(cw->ren, tmp_surf);
+	dest->x += tmp;
+	dest->w = tmp_surf->w;
+	dest->h = tmp_surf->h;
+	fnt_h = tmp_surf->h;
+	SDL_RenderCopy(cw->ren, tex, NULL, dest);
+	SDL_DestroyTexture(tex);
+	SDL_FreeSurface(tmp_surf);
+	dest->x -= tmp;
 	return (fnt_h);
 }
 

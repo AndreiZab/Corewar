@@ -41,7 +41,7 @@
 # define GRN 0, 170, 0, 0
 # define BL 0, 0, 255, 0
 # define WHT 255, 255, 255, 0
-# define PPL 170, 0, 170, 0
+# define PPL 170, 170, 0, 0
 # define GRY 127, 127, 127, 0
 
 typedef struct s_corewar t_corewar;
@@ -359,7 +359,7 @@ void			ft_arena(t_corewar *cw, SDL_Color clr, SDL_Rect dest);
 void			ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str);
 void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest);
 void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
-int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
+int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str, unsigned int param);
 void			ft_set_clr(SDL_Color *clr, int num);
 
 
