@@ -6,18 +6,18 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:54:16 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/13 15:48:08 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/13 15:48:13 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-void	ft_error(char *str, t_data *data)
+void	ft_error(char *str)
 {
-	if (data && data->num_current_row)
+	if (g_data && g_data->y != 0)
 	{
 		ft_putstr_fd("line:", 2);
-		ft_putnbr_fd(data->num_current_row, 2);
+		ft_putnbr_fd(g_data->y, 2);
 		ft_putchar_fd(' ', 2);
 	}
 	ft_putendl_fd(str, 2);
