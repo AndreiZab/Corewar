@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/13 16:52:40 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:02:09 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,10 +185,6 @@ void		ft_row_is_data(char *str, int i)
 
 void		ft_check_row(char *str)
 {
-	while (str[g_data->x] == ' ' || str[g_data->x] == '\t')
-		g_data->x++;
-	if (str[g_data->x] == COMMENT_CHAR || str[g_data->x] == ALT_COMMENT_CHAR)
-		return ;
 	if (!g_data->comment || !g_data->name || str[g_data->x] == '.' || g_data->quotes == 1 || g_data->quotes == 3)
 		ft_row_is_data(str, g_data->x);
 	else
@@ -205,10 +201,14 @@ void		ft_read_champ(void)
 	line = NULL;
 	while (ft_free_l(line) && (err = get_next_line(g_data->fd, &line)) > 0 && !(g_data->x = 0) && ++g_data->y)
 	{
+		while (line[g_data->x] == ' ' || line[g_data->x] == '\t')
+			g_data->x++;
+		if (line[g_data->x] == COMMENT_CHAR || line[g_data->x] == ALT_COMMENT_CHAR)
+			return ;
 	//	ft_add_newline_token(data);
 		ft_check_row(line);
 	}
-//	ft_syntax_analysis(data);
+
 	if (g_data->quotes == 1 || g_data->quotes == 3)
 		ft_error("ERROR_WITH_QUOTES");
 	if (err == -1)
@@ -227,6 +227,7 @@ void	ft_asm(char *str)
 		ft_error("FILE_NOT_FOUND");
 	ft_create(fd);
 	ft_read_champ();
+	ft_syntax_champ();
 //	ft_write_bytes(data);
 	if (close(fd) < 0)
 		ft_error("CANT_CLOSE_FILE");

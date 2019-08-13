@@ -6,15 +6,50 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/13 16:55:41 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/13 17:21:13 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-//
 
+void		ft_parse_token(char **line)
+{
+	char *str;
+	str = *line;
+	if (str[g_data->x] == SEPARATOR_CHAR && ++g_data->x)
+		token_add(Separator);
+	else if (str[g_data->x] == '\n' && ++g_data->x)
+		token_add(Line_feed);
+	else if (str[g_data->x] == '.' && ++g_data->x) //del
+		get_text(str, Command);
+	else if (str[g_data->x] == DIRECT_CHAR && ++g_data->x)
+	{
+		if (str[g_data->x] == LABEL_CHAR && ++g_data->x)
+			get_text(str, Direct_label);
+		else
+			get_number(str, Direct);
+	}
+	else if (str[g_data->x] == '\"' && ++g_data->x)
+		get_string(&str);
+	else if (str[g_data->x] == LABEL_CHAR && ++g_data->x)
+		get_text(str, Inderect_label);
+	else
+		get_number(str, Indirect);
+	*line = str;
+}
 
-
+void		ft_row_is_code (char *line)
+{
+	while (line[g_data->x])
+	{
+		while (line[g_data->x] == ' ' || line[g_data->x] == '\t')
+			g_data->x++;
+		if (line[g_data->x] == COMMENT_CHAR || line[g_data->x] == ALT_COMMENT_CHAR)
+			return ;
+		if (line[g_data->x])
+			ft_parse_token(&line);
+	}
+}
 //t_token			*ft_token_create(void)
 //{
 //	t_token *token;

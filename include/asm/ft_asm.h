@@ -16,16 +16,18 @@
 
 typedef enum	e_type
 {
-	Direct_number,
+	Inderect_label,
 	Direct_label,
-	Whitespace,
-	Label_arg,
+	Instruction,
 	Line_feed,
 	Separator,
+	Indirect,
 	Register,
 	Command,
-	Number,
-	Label
+	Direct,
+	String,
+	Label,
+	EOF
 }	t_type;
 
 typedef struct	s_ops
@@ -94,7 +96,7 @@ void		ft_error(char *str);
 ** row_is_code.c
  */
 
-//void		ft_row_is_code (char *str);
+void		ft_row_is_code (char *str);
 //void	ft_add_newline_token(void);
 
 /*
