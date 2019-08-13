@@ -56,7 +56,7 @@ typedef struct		s_data
 	char				*comment;
 	t_token				*tokens;
 	int					fd;
-	int					num_current_row;
+	int					x;
 	int					count_char;
 	unsigned int		comm_counter;
 	int					code_size;
@@ -85,6 +85,7 @@ typedef struct		s_label
 	struct s_label		*next;
 	struct s_label		*prev;
 }					t_label;
+
 
 
 /*
