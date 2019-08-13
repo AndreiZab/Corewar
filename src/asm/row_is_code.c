@@ -6,35 +6,168 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/13 17:21:13 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/13 19:08:51 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == c)
+			return ((char*)s);
+		++s;
+	}
+	if (c == '\0')
+		return ((char*)s);
+	return (0);
+}
+
+void		ft_token_create(t_type type)
+{
+	t_token	*token;
+	if (!(token = (t_token*)ft_memalloc(sizeof(t_token))))
+		ft_error("NO_MEMORY");
+	token->x = g_data->x;
+	token->y = g_data->y;
+	token->type = type;
+	if (g_data->tokens)
+		g_data->tokens->prev = token;
+	token->next = g_data->tokens;
+	g_data->tokens = token;
+}
+
+void		lable_dup(void)
+{
+	char	*cont;
+	t_label	*lable;
+
+	cont = g_data->labels->ptr->content;
+	lable = g_data->labels->next;
+	while (lable)
+	{
+		if (!ft_strcmp(cont, lable->ptr->content))
+			ft_error("DUPLICATES_LABEL");
+		lable = lable->next;
+	}
+}
+
+void		label_add(void)
+{
+	t_label	*label;
+
+	if (!(label = (t_label*)ft_memalloc(sizeof(t_label))))
+		ft_error("NO_MEMORY");
+	ft_bzero(label, sizeof(label));
+	g_data->x++;
+	g_data->tokens->type = Label;
+	label->ptr = g_data->tokens;
+	if (g_data->labels)
+		g_data->labels->prev = label;
+	label->next = g_data->labels;
+	g_data->labels = label;
+	lable_dup();
+}
+
+int	is_reg(char *line, int len)
+{
+	int	i;
+
+	i = 0;
+	if ((len == 2 || len == 3) && line[i + 1] == 'r')
+	{
+		while (ft_isdigit(line[i]) && i < len)
+			i++;
+		if (i == len && ft_atoi(line + 1) > 0)
+			return (1);
+	}
+	return (0);
+}
+
+static void	get_text(char *line, t_type type)
+{
+	int temp;
+
+	temp = g_data->x;
+	ft_token_create(type);
+	while (line[g_data->x] && ft_strchr(LABEL_CHARS, line[g_data->x]))
+		g_data->x++;
+	g_data->tokens->content = ft_strsub(line, temp, g_data->x - temp);
+	if ((g_data->x - temp) && line[g_data->x] == LABEL_CHAR)
+		label_add();
+	else if ((g_data->x - temp) && (line[g_data->x] == DIRECT_CHAR || line[g_data->x] == SEPARATOR_CHAR))
+	{
+		if (type == Indirect)
+			g_data->tokens->type = (is_reg(line + temp, g_data->x - temp)) ? Register : Instruction;
+	}
+	else
+		ft_error("ERROR_WITH_TEXT");
+}
+
+static void	ft_direct_number(char *line)
+{
+	int		temp;
+
+	temp = g_data->x;
+	if (line[g_data->x] == '-' || line[g_data->x] == '+' )
+		g_data->x++;
+	while (ft_isdigit(line[g_data->x]))
+		g_data->x++;
+	if (g_data->x - temp)
+	{
+		ft_token_create(Direct);
+		g_data->tokens->content = ft_strsub(line, temp, g_data->x - temp);
+	}
+	else
+		ft_error("INVALID_DIRECT");
+}
+
+void		ft_indirect_number(char *line)
+{
+	int temp;
+
+	temp = g_data->x;
+	if (line[g_data->x] == '-' || line[g_data->x] == '+')
+		g_data->x++;
+	while (ft_isdigit(line[g_data->x]))
+		g_data->x++;
+	if ((g_data->x - temp) && (line[g_data->x] == DIRECT_CHAR || line[g_data->x] == SEPARATOR_CHAR))
+	{
+		ft_token_create(Indirect);
+		g_data->tokens->content = ft_strsub(line, temp, g_data->x - temp);
+	}
+	else
+	{
+		g_data->x = temp;
+		get_text(line, Indirect);
+	}
+}
 
 void		ft_parse_token(char **line)
 {
 	char *str;
 	str = *line;
 	if (str[g_data->x] == SEPARATOR_CHAR && ++g_data->x)
-		token_add(Separator);
+		ft_token_create(Separator);
 	else if (str[g_data->x] == '\n' && ++g_data->x)
-		token_add(Line_feed);
-	else if (str[g_data->x] == '.' && ++g_data->x) //del
+		ft_token_create(Line_feed);
+	else if (str[g_data->x] == '.' && ++g_data->x)
 		get_text(str, Command);
 	else if (str[g_data->x] == DIRECT_CHAR && ++g_data->x)
 	{
 		if (str[g_data->x] == LABEL_CHAR && ++g_data->x)
 			get_text(str, Direct_label);
 		else
-			get_number(str, Direct);
+			ft_direct_number(str);
 	}
-	else if (str[g_data->x] == '\"' && ++g_data->x)
-		get_string(&str);
+//	else if (str[g_data->x] == '\"' && ++g_data->x) del
+//		get_string(&str);
 	else if (str[g_data->x] == LABEL_CHAR && ++g_data->x)
 		get_text(str, Inderect_label);
 	else
-		get_number(str, Indirect);
+		ft_indirect_number(str);
 	*line = str;
 }
 
@@ -50,6 +183,7 @@ void		ft_row_is_code (char *line)
 			ft_parse_token(&line);
 	}
 }
+
 //t_token			*ft_token_create(void)
 //{
 //	t_token *token;
