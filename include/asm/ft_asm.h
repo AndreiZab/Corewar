@@ -96,6 +96,7 @@ void		ft_error(char *str);
 ** row_is_code.c
  */
 
+void		ft_token_create(t_type type);
 void		ft_row_is_code (char *str);
 //void	ft_add_newline_token(void);
 

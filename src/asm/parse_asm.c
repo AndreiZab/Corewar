@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/13 17:02:09 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/14 15:16:54 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,18 +58,18 @@ char		*ft_get_name_or_comment(char *src, int *i, char flag)
 	g_data->quotes = 0;
 	if (!(dst = ft_strnew(ft_strlen(src + (*i)))))
 		ft_error("NO_MEMORY");
-	if (src[++(*i) - 1] == '"')
+	if (src[++(*i) - 1] == '\"')
 		g_data->quotes++;
-	while (src[*i] && src[*i] != '"')
+	while (src[*i] && src[*i] != '\"')
 		dst[j++] = src[(*i)++];
-	if (src[(*i)] == '"')
+	if (src[(*i)] == '\"')
 	{
 		g_data->quotes++;
 		(*i)++;
 	}
 	while (src[*i])
 	{
-		if (src[*i] == '"' && g_data->quotes++ && g_data->quotes > 2)
+		if (src[*i] == '\"' && g_data->quotes++ && g_data->quotes > 2)
 			ft_error("TOO_MANY_QUOTES");
 		if (g_data->quotes == 2 && src[*i] != ' ' && src[*i] != '\t')
 			ft_error("WRONG_SYMBOL_AFTER_QUOTES");
@@ -82,7 +82,7 @@ char		*ft_get_name_or_comment(char *src, int *i, char flag)
 
 void		ft_check_quotes(char *str, int *i)
 {
-	while (str[*i] && str[*i] != '"')
+	while (str[*i] && str[*i] != '\"')
 	{
 		str[*i] == '\'' ? ft_error("WRONG_QUOTES") : 0;
 		if (str[*i] != ' ' && str[*i] != '\t')
@@ -142,17 +142,17 @@ int			ft_add_text(char *src, int i)
 	if (!(dst = ft_strnew(ft_strlen(src + ++i) + 1)))
 		ft_error("NO_MEMORY");
 	dst[0] = '\n';
-	while (src[i] && src[i] != '"')
+	while (src[i] && src[i] != '\"')
 		dst[j++] = src[i++];
 	ft_string_connection(dst);
-	if (src[i] == '"')
+	if (src[i] == '\"')
 	{
 		g_data->quotes++;
 		i++;
 	}
 	while (src[i])
 	{
-		if (src[i] == '"' && g_data->quotes++ && g_data->quotes > 2)
+		if (src[i] == '\"' && g_data->quotes++ && g_data->quotes > 2)
 			ft_error("TOO_MANY_QUOTES");
 		if ((g_data->quotes == 2 || g_data->quotes == 4) && src[i] != '\0' && src[i] != ' ' && src[i] != '\t')
 			ft_error("WRONG_SYMBOL_AFTER_QUOTES");
@@ -208,7 +208,7 @@ void		ft_read_champ(void)
 	//	ft_add_newline_token(data);
 		ft_check_row(line);
 	}
-
+	ft_token_create(EOF);
 	if (g_data->quotes == 1 || g_data->quotes == 3)
 		ft_error("ERROR_WITH_QUOTES");
 	if (err == -1)
@@ -227,8 +227,8 @@ void	ft_asm(char *str)
 		ft_error("FILE_NOT_FOUND");
 	ft_create(fd);
 	ft_read_champ();
-	ft_syntax_champ();
-//	ft_write_bytes(data);
+//	ft_syntax_champ();
+//	ft_write_bytes();
 	if (close(fd) < 0)
 		ft_error("CANT_CLOSE_FILE");
 	ft_free_data();
