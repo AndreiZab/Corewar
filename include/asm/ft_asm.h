@@ -67,7 +67,9 @@ typedef struct		s_data
 	struct s_label		*labels;
 }					t_data;
 
+char		*g_buf;
 t_data		*g_data;
+u_int32_t	g_bytes;
 
 typedef struct		s_label
 {
@@ -104,6 +106,7 @@ void		ft_row_is_code (char *str);
 ** syntax_analysis.c
  */
 
+void 		ft_syntax_champ(void);
 //int			ft_is_command(char *str);
 //void		ft_syntax_analysis(void);
 

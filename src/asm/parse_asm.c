@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/14 15:16:54 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/14 17:24:49 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,9 @@ void	*ft_create(int fd)
 {
 	t_data *data;
 
+	g_data = 0;
+	g_bytes = 0;
+	g_buf = NULL;
 	if (!(data = (t_data *)ft_memalloc(sizeof(t_data))))
 		ft_error("NO_MEMORY");
 	data->fd = fd;
@@ -191,7 +194,26 @@ void		ft_check_row(char *str)
 		ft_row_is_code(str);
 }
 
+void		ft_revert_tokens(void)
+{
+	t_token *curr;
+	t_token *prev;
 
+	prev = NULL;
+	if (g_data && g_data->tokens)
+	{
+		while (g_data->tokens)
+		{
+			curr = g_data->tokens->next;
+			g_data->tokens->next = prev;
+			g_data->tokens->prev = curr;
+			prev = g_data->tokens;
+			g_data->tokens = curr;
+		}
+		if (prev)
+			g_data->tokens = prev;
+	}
+}
 
 void		ft_read_champ(void)
 {
@@ -204,11 +226,11 @@ void		ft_read_champ(void)
 		while (line[g_data->x] == ' ' || line[g_data->x] == '\t')
 			g_data->x++;
 		if (line[g_data->x] == COMMENT_CHAR || line[g_data->x] == ALT_COMMENT_CHAR)
-			return ;
-	//	ft_add_newline_token(data);
+			continue ;
 		ft_check_row(line);
 	}
 	ft_token_create(EOF);
+	ft_revert_tokens();
 	if (g_data->quotes == 1 || g_data->quotes == 3)
 		ft_error("ERROR_WITH_QUOTES");
 	if (err == -1)
@@ -227,7 +249,7 @@ void	ft_asm(char *str)
 		ft_error("FILE_NOT_FOUND");
 	ft_create(fd);
 	ft_read_champ();
-//	ft_syntax_champ();
+	ft_syntax_champ();
 //	ft_write_bytes();
 	if (close(fd) < 0)
 		ft_error("CANT_CLOSE_FILE");
