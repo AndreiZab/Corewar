@@ -345,8 +345,8 @@ int				kill_machine(t_corewar *cw);
 ** vis_sdl_help.c
 */
 
-int				init_sdl(t_corewar *cw);
 int				ft_init_sdl(t_corewar *cw);
+int				init_sdl(t_corewar *cw);
 void			ft_quit(t_corewar *cw);
 
 /*
@@ -354,9 +354,9 @@ void			ft_quit(t_corewar *cw);
 */
 
 void			ft_vis_redraw(t_corewar *cw);
-void			ft_frames(t_corewar *cw);
-void			ft_label(t_corewar *cw);
-void			ft_fields(t_corewar *cw);
+void			ttf_print_frames(t_corewar *cw);
+void			ttf_print_label(t_corewar *cw);
+void			ttf_print_fields(t_corewar *cw);
 
 /*
 ** vis_sdl_ttf_1.c
@@ -370,7 +370,9 @@ void			ttf_print_info(t_corewar *cw, int x_pos, int y_pos);
 
 void			ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i);
 void			ttf_print_players(t_corewar *cw, int x_pos, int y_pos);
-void			ft_arena(t_corewar *cw, int x_pos);
+void			ttf_arena_ds(t_corewar *cw, int x_pos);
+void			ttf_print_carrs(t_corewar *cw);
+void			ft_init_borders(t_corewar *cw);
 // void			ttf_print(t_corewar *cw, int x_pos, int y_pos);
 
 // void			ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str);

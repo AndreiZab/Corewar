@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 16:01:39 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/12 18:56:06 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/15 15:36:17 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	ttf_print_system(t_corewar *cw, int x_pos, int y_pos)
 	ft_change_dst(&dest, x_pos, y_pos);
 	x_dif = ttf_print_str(cw, clr, &dest, "total process: ");
 	ft_change_dst(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(ft_count_carrs(cw->carrs))); // верность указания переменной cw->carrs как total process;
+	ttf_print_str(cw, clr, &dest, ft_itoa(ft_count_carrs(cw->carrs)));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
 	x_dif = ttf_print_str(cw, clr, &dest, "cycle: ");
 	ft_change_dst(&dest, x_dif, 0);
@@ -90,16 +90,13 @@ void	ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i)
 	x_dif = ttf_print_str(cw, clr, &dest, "Player ");
 	ft_change_dst(&dest, x_dif, 0);
 	ttf_print_str(cw, clr, &dest, ft_itoa(i + 1));
-
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
 	ttf_print_str(cw, clr, &dest, cw->players[i].name);
-
 	ft_change_dst(&dest, 0, cw->fnt_h * 2);
 	x_dif = ttf_print_str(cw, clr, &dest, "Last live: ");
 	ft_change_dst(&dest, x_dif, 0);
 	ttf_print_str(cw, clr, &dest, ft_itoa(cw->players[i].live));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
-	
 	x_dif = ttf_print_str(cw, clr, &dest, "Dead or alive: ");
 	ft_change_dst(&dest, x_dif, 0);
 	if (cw->players[i].dead == 0)
@@ -155,7 +152,7 @@ void	ft_set_clr(SDL_Color *clr, int num)
 	}
 }
 
-void	ft_arena(t_corewar *cw, int x_pos)
+void	ttf_arena_ds(t_corewar *cw, int x_pos)
 {
 	SDL_Rect	dest;
 	SDL_Color	clr;
@@ -208,17 +205,6 @@ void	ft_arena(t_corewar *cw, int x_pos)
 	SDL_RenderFillRect(cw->ren, &dest);
 }
 
-// void	ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str)
-// {
-// 	ttf_print_str(cw, clr, &dest, str);
-// 	ft_change_dst(&dest, 0, dest.h * 2);
-// 	ttf_print_str(cw, clr, &dest, "Name");
-// 	ft_change_dst(&dest, 0, dest.h * 2);
-// 	ttf_print_str(cw, clr, &dest, "Last live: ");
-// 	ft_change_dst(&dest, 0, dest.h * 2);
-// 	ttf_print_str(cw, clr, &dest, "Lives in current period: ");
-// }
-
 void	ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y)
 {
 	dest->x += delta_x;
@@ -240,21 +226,3 @@ int		ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str)
 	SDL_FreeSurface(tmp_surf);
 	return (dest->w);
 }
-
-// void	timer(int msec)
-// {
-// 	double	sec;
-// 	time_t	start;
-// 	time_t	end;
-// 	double	elapsed;
-
-// 	sec = (double)msec / 1000;
-//     time(&start);
-// 	time(&end);
-//     elapsed = difftime(end, start);
-//     while(elapsed < sec)
-// 	{
-// 		time(&end);
-//     	elapsed = difftime(end, start);
-// 	}
-// }

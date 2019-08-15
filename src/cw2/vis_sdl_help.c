@@ -6,13 +6,13 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:22:04 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/11 16:48:50 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/15 15:25:48 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		init_sdl(t_corewar *cw)
+int		ft_init_sdl(t_corewar *cw)
 {
 	cw->win = NULL;
 	cw->ren = NULL;
@@ -24,10 +24,10 @@ int		init_sdl(t_corewar *cw)
 	cw->xr = -1;
 	cw->yu = -1;
 	cw->yd = -1;
-	return (ft_init_sdl(cw));
+	return (init_sdl(cw));
 }
 
-int		ft_init_sdl(t_corewar *cw)
+int		init_sdl(t_corewar *cw)
 {
 	SDL_DisplayMode	dm;
 	int				ok;
@@ -52,6 +52,7 @@ int		ft_init_sdl(t_corewar *cw)
 		cw->scr_w = dm.w;
 		cw->scr_h == -1 || cw->scr_w == -1 ? ok = 6 : 0;
 	}
+	ft_init_borders(cw);
 	return (ok);
 }
 
@@ -65,4 +66,12 @@ void	ft_quit(t_corewar *cw)
 	TTF_Quit();
 	SDL_Quit();
 	cw->options -= COREWAR_OPT_VISUALIZER;
+}
+
+void	ft_init_borders(t_corewar *cw)
+{
+	cw->xl = cw->scr_h - 5;
+	cw->xr = cw->scr_w - 10 - 2;
+	cw->yu = 10;
+	cw->yd = cw->scr_h - 10 - 1;
 }
