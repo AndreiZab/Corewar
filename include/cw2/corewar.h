@@ -342,46 +342,50 @@ void			print_log(t_corewar *cw, t_carriage *carr);
 int				kill_machine(t_corewar *cw);
 
 /*
-** vis_sdl_help.c
+** vis_sdl_help_1.c
 */
 
 int				ft_init_sdl(t_corewar *cw);
 int				init_sdl(t_corewar *cw);
 void			ft_quit(t_corewar *cw);
+void			ft_init_borders(t_corewar *cw);
+int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
 
 /*
-** vis_sdl_draw_1.c
+** vis_sdl_help_2.c
+*/
+
+void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
+void			ft_set_clr(SDL_Color *clr, int num);
+void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest, int num);
+
+/*
+** vis_sdl_draw.c
 */
 
 void			ft_vis_redraw(t_corewar *cw);
 void			ttf_print_frames(t_corewar *cw);
-void			ttf_print_label(t_corewar *cw);
 void			ttf_print_fields(t_corewar *cw);
+void			ttf_print_carrs(t_corewar *cw);
+int				ft_count_carrs(t_carriage *carrs);
 
 /*
 ** vis_sdl_ttf_1.c
 */
-void			ttf_print_system(t_corewar *cw, int x_pos, int y_pos);
-void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest, int num);
-void			ft_set_clr(SDL_Color *clr, int num);
-int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
-int				ft_count_carrs(t_carriage *carrs);
-void			ttf_print_info(t_corewar *cw, int x_pos, int y_pos);
 
-void			ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i);
+void			ttf_print_system(t_corewar *cw, int x_pos, int y_pos);
+void			ttf_print_info(t_corewar *cw, int x_pos, int y_pos);
 void			ttf_print_players_1_2(t_corewar *cw, int x_pos, int y_pos);
 void			ttf_print_players_3_4(t_corewar *cw, int y_pos, int *i);
+void			ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i);
+
+/*
+** vis_sdl_ttf_2.c
+*/
+
+void			ttf_print_label(t_corewar *cw);
 void			ttf_arena_ds(t_corewar *cw, int x_pos);
-void			ttf_print_carrs(t_corewar *cw);
-void			ft_init_borders(t_corewar *cw);
 void			ft_count_fields(t_corewar *cw, int *p);
 void			ft_draw_arena_fields(t_corewar *cw, SDL_Rect dest, int p[], int del);
-// void			ttf_print(t_corewar *cw, int x_pos, int y_pos);
-
-// void			ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str);
-void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
-
-
-
 
 #endif

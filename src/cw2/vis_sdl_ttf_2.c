@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/15 16:46:26 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:55:35 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,27 @@ void	ttf_arena_ds(t_corewar *cw, int x_pos)
 	ft_draw_arena_fields(cw, dest, p, del);
 }
 
+void	ft_count_fields(t_corewar *cw, int *p)
+{
+	int	i;
+
+	i = -1;
+	while (++i < 4)
+		p[i] = 0;
+	while (i < MEM_SIZE)
+	{
+		if (cw->players_map[i] == 1)
+			p[0] += 1;
+		else if (cw->players_map[i] == 2)
+			p[1] += 1;
+		else if (cw->players_map[i] == 3)
+			p[2] += 1;
+		else if (cw->players_map[i] == 4)
+			p[3] += 1;
+		i++;
+	}
+}
+
 void	ft_draw_arena_fields(t_corewar *cw, SDL_Rect dest, int p[], int del)
 {
 	SDL_SetRenderDrawColor(cw->ren, GRY);
@@ -79,25 +100,4 @@ void	ft_draw_arena_fields(t_corewar *cw, SDL_Rect dest, int p[], int del)
 	dest.x += dest.w;
 	dest.w = p[3] / del;
 	SDL_RenderFillRect(cw->ren, &dest);
-}
-
-void	ft_count_fields(t_corewar *cw, int *p)
-{
-	int	i;
-
-	i = -1;
-	while (++i < 4)
-		p[i] = 0;
-	while (i < MEM_SIZE)
-	{
-		if (cw->players_map[i] == 1)
-			p[0] += 1;
-		else if (cw->players_map[i] == 2)
-			p[1] += 1;
-		else if (cw->players_map[i] == 3)
-			p[2] += 1;
-		else if (cw->players_map[i] == 4)
-			p[3] += 1;
-		i++;
-	}
 }
