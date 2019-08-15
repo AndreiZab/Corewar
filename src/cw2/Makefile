@@ -29,9 +29,11 @@ SRCS=main.c\
 	casting_uc_hex.c \
 	print_log.c \
 	kill_machine.c \
-	vis_sdl_help.c \
-	vis_sdl_draw_1.c \
+	vis_sdl_help_1.c \
+	vis_sdl_help_2.c \
+	vis_sdl_draw.c \
 	vis_sdl_ttf_1.c  \
+	vis_sdl_ttf_2.c
 
 SRCS_DIR=.
 OBJS_DIR=obj

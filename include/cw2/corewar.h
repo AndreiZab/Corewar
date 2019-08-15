@@ -369,10 +369,13 @@ int				ft_count_carrs(t_carriage *carrs);
 void			ttf_print_info(t_corewar *cw, int x_pos, int y_pos);
 
 void			ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i);
-void			ttf_print_players(t_corewar *cw, int x_pos, int y_pos);
+void			ttf_print_players_1_2(t_corewar *cw, int x_pos, int y_pos);
+void			ttf_print_players_3_4(t_corewar *cw, int y_pos, int *i);
 void			ttf_arena_ds(t_corewar *cw, int x_pos);
 void			ttf_print_carrs(t_corewar *cw);
 void			ft_init_borders(t_corewar *cw);
+void			ft_count_fields(t_corewar *cw, int *p);
+void			ft_draw_arena_fields(t_corewar *cw, SDL_Rect dest, int p[], int del);
 // void			ttf_print(t_corewar *cw, int x_pos, int y_pos);
 
 // void			ttf_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, char *str);

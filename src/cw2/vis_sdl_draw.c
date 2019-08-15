@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/15 15:27:34 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/15 16:42:39 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_vis_redraw(t_corewar *cw)
 	ttf_print_label(cw);
 	ttf_print_system(cw, 20, 10);
 	ttf_print_info(cw, 20, 10);
-	ttf_print_players(cw, 20, 10);
+	ttf_print_players_1_2(cw, 20, 10);
 	ttf_arena_ds(cw, 20);
 	SDL_RenderPresent(cw->ren);
 	while (SDL_PollEvent(&e) != 0)
@@ -115,28 +115,17 @@ void	ttf_print_carrs(t_corewar *cw)
 	tmp = NULL;
 }
 
-void	ttf_print_label(t_corewar *cw)
+int		ft_count_carrs(t_carriage *carrs)
 {
-	SDL_Surface	*tmp_surf;
-	SDL_Texture	*tex;
-	SDL_Color	clr;
-	SDL_Rect	dest;
+	t_carriage	*tmp;
+	int			i;
 
-	clr.a = 0;
-	clr.b = 255;
-	clr.g = 255;
-	clr.r = 255;
-	tmp_surf = TTF_RenderText_Blended(cw->fnt,
-				"CORE WAR - CORE WAR - CORE WAR - CORE WAR - CORE WAR", clr);
-	tex = SDL_CreateTextureFromSurface(cw->ren, tmp_surf);
-	dest.x = cw->xl + ((cw->xr - cw->xl - tmp_surf->w) / 2);
-	dest.y = cw->yd - tmp_surf->h;
-	dest.w = tmp_surf->w;
-	dest.h = tmp_surf->h;
-	SDL_RenderCopy(cw->ren, tex, NULL, &dest);
-	SDL_DestroyTexture(tex);
-	SDL_FreeSurface(tmp_surf);
-	SDL_SetRenderDrawColor(cw->ren, WHT);
-	SDL_RenderDrawLine(cw->ren, cw->xl, dest.y - 10, cw->xr, dest.y - 10);
-	SDL_RenderDrawLine(cw->ren, cw->xl, dest.y - 5, cw->xr, dest.y - 5);
+	i = 0;
+	tmp = carrs;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
 }
