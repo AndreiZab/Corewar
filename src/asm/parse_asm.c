@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/14 17:24:49 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/15 21:35:01 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_free_data(void)
 	free(g_data);
 }
 
-void	*ft_create(int fd)
+void	*ft_create(int fd, char *filename)
 {
 	t_data *data;
 
@@ -48,6 +48,7 @@ void	*ft_create(int fd)
 	if (!(data = (t_data *)ft_memalloc(sizeof(t_data))))
 		ft_error("NO_MEMORY");
 	data->fd = fd;
+	data->filename = filename;
 	g_data = data;
 	return (data);
 }
@@ -223,6 +224,8 @@ void		ft_read_champ(void)
 	line = NULL;
 	while (ft_free_l(line) && (err = get_next_line(g_data->fd, &line)) > 0 && !(g_data->x = 0) && ++g_data->y)
 	{
+		if (g_data->tokens)
+			ft_token_create(Line_feed);
 		while (line[g_data->x] == ' ' || line[g_data->x] == '\t')
 			g_data->x++;
 		if (line[g_data->x] == COMMENT_CHAR || line[g_data->x] == ALT_COMMENT_CHAR)
@@ -247,10 +250,11 @@ void	ft_asm(char *str)
 
 	if ((fd = open(str, O_RDONLY)) == -1)
 		ft_error("FILE_NOT_FOUND");
-	ft_create(fd);
+	ft_create(fd, str);
 	ft_read_champ();
 	ft_syntax_champ();
-//	ft_write_bytes();
+	ft_compilation_champ();
+	ft_write_bytes();
 	if (close(fd) < 0)
 		ft_error("CANT_CLOSE_FILE");
 	ft_free_data();

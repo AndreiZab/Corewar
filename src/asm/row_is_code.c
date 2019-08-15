@@ -6,37 +6,11 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/14 15:16:54 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/15 21:12:41 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
-
-
-
-
-# define A(c) (c == ' ')
-# define B(c) (c == '\n')
-# define C(c) (c == '\t')
-# define D(c) (c == '\v')
-# define I(c) (c == '\f')
-# define F(c) (c == '\r')
-
-# define SP1(c) (A(c) || C(c) || D(c) || I(c) || F(c))
-
-# define Q(c) (c == '\0')
-# define W(c) (c == '\n')
-# define E(c) (c == '\"')
-# define R(c) (c == DIRECT_CHAR)
-# define T(c) (c == SEPARATOR_CHAR)
-# define Y(c) (c == COMMENT_CHAR)
-# define U(c) (SP1(c))
-
-# define DELIMITER(c) (Q(c) || W(c) || E(c) || R(c) || T(c) || Y(c) || U(c))
-
-
-
-
 
 int 	ft_sep_search(char c)
 {
@@ -114,7 +88,7 @@ int	is_reg(char *line, int len)
 	int	i;
 
 	i = 0;
-	if ((len == 2 || len == 3) && line[i + 1] == 'r')
+	if ((len == 2 || len == 3) && line[i++] == 'r')
 	{
 		while (ft_isdigit(line[i]) && i < len)
 			i++;
@@ -189,8 +163,8 @@ void		ft_parse_token(char **line)
 	str = *line;
 	if (str[g_data->x] == SEPARATOR_CHAR && ++g_data->x)
 		ft_token_create(Separator);
-	else if (str[g_data->x] == '\n' && ++g_data->x)
-		ft_token_create(Line_feed);
+//	else if (str[g_data->x] == '\n' && ++g_data->x)
+//		ft_token_create(Line_feed);
 	else if (str[g_data->x] == '.' && ++g_data->x)
 		get_text(str, Command);
 	else if (str[g_data->x] == DIRECT_CHAR && ++g_data->x)
@@ -203,7 +177,7 @@ void		ft_parse_token(char **line)
 //	else if (str[g_data->x] == '\"' && ++g_data->x) del
 //		get_string(&str);
 	else if (str[g_data->x] == LABEL_CHAR && ++g_data->x)
-		get_text(str, Inderect_label);
+		get_text(str, Indirect_label);
 	else
 		ft_indirect_number(str);
 	*line = str;

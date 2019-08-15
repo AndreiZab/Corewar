@@ -16,28 +16,28 @@
 
 typedef enum	e_type
 {
-	Inderect_label,
-	Direct_label,
-	Instruction,
-	Line_feed,
-	Separator,
-	Indirect,
-	Register,
-	Command,
+	Register = 1,
 	Direct,
+	Direct_label,
+	Indirect,
+	Indirect_label,
+	Command,
 	String,
 	Label,
+	Instruction,
+	Separator,
+	Line_feed,
 	EOF
 }	t_type;
 
 typedef struct	s_ops
 {
 	char			*name;
-	unsigned char	code;
-	unsigned char	args_num;
+	unsigned int	code;
+	unsigned int	args_num;
 	bool			args_types_code;
-	char			args_types[3];
-	unsigned char	t_dir_size;
+	unsigned int	args_types[3];
+	unsigned int	t_dir_size;
 }				t_ops;
 
 
@@ -58,9 +58,9 @@ typedef struct		s_data
 	char				*comment;
 	t_token				*tokens;
 	int					fd;
+	char				*filename;
 	int					x;
 	int					y;
-//	char 				*processing_row;
 	char				quotes;
 	struct s_label		*labels;
 }					t_data;
@@ -98,22 +98,28 @@ void		ft_error(char *str);
 
 void		ft_token_create(t_type type);
 void		ft_row_is_code (char *str);
-//void	ft_add_newline_token(void);
 
 /*
 ** syntax_analysis.c
  */
 
 void 		ft_syntax_champ(void);
-//int			ft_is_command(char *str);
-//void		ft_syntax_analysis(void);
 
 /*
-** syntax_analysis_helper.c
+** compilation.c
  */
 
-//void	ft_validate_label(t_type type);
-//int 	ft_is_argument(t_type type);
+void	 	ft_compilation_champ(void);
+
+/*
+** write_bytes.c
+ */
+
+void		ft_write_bytes(void);
+
+/*
+**
+ */
 
 static t_ops			g_op_tab[16] = {
 		{

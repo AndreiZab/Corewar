@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:54:16 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/14 14:20:56 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/15 20:04:19 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,9 @@ int 	ft_check_name(char *str)
 	l = strlen(str);
 	//чек га две точки
 	if (l > 2 && str[l] == '\0' && str[l - 1] == 's' && str[l - 2] == '.')
+	{
 		return (1);
+	}
 	return (0);
 }
 
