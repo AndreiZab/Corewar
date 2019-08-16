@@ -6,15 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:24:06 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 18:27:53 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:14:23 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-
-
-void			ft_revert_tokens(void)
+void		ft_revert_tokens(void)
 {
 	t_token *curr;
 	t_token *prev;
@@ -35,7 +33,7 @@ void			ft_revert_tokens(void)
 	}
 }
 
-void static		ft_free_label_and_token(void)
+static void	ft_free_label_and_token(void)
 {
 	t_label *temp_l;
 	t_token *temp_t;
@@ -56,7 +54,7 @@ void static		ft_free_label_and_token(void)
 	}
 }
 
-void			ft_free_data(void)
+void		ft_free_data(void)
 {
 	if (g_data->name)
 		free(g_data->name);
@@ -69,7 +67,7 @@ void			ft_free_data(void)
 	free(g_data);
 }
 
-void			ft_create(int fd, char *str)
+void		ft_create(int fd, char *str)
 {
 	t_data *data;
 

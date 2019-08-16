@@ -6,13 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:33:06 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 17:52:04 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:07:30 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-void		ft_itoh(int32_t dec, int dir_size, u_int32_t *curr)
+void			ft_itoh(int32_t dec, int dir_size, u_int32_t *curr)
 {
 	int			step;
 	int			start_size;
@@ -28,7 +28,7 @@ void		ft_itoh(int32_t dec, int dir_size, u_int32_t *curr)
 	*curr += start_size;
 }
 
-int32_t		ft_atoi_cor(const char *str, u_int8_t size)
+int32_t			ft_atoi_cor(const char *str, u_int8_t size)
 {
 	int				sign;
 	int				i;
@@ -50,7 +50,8 @@ int32_t		ft_atoi_cor(const char *str, u_int8_t size)
 	size == 4 ? (nbr = (int32_t)nbr) : 1;
 	return (nbr * (int64_t)sign);
 }
-static char			*ft_new_file(char *s_name)
+
+static char		*ft_new_file(char *s_name)
 {
 	u_int16_t		len;
 	char			*cor_name;
@@ -66,7 +67,7 @@ static char			*ft_new_file(char *s_name)
 	return (cor_name);
 }
 
-void				ft_write_bytes(void)
+void			ft_write_bytes(void)
 {
 	int				fd;
 	char			*cor_name;

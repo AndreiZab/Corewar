@@ -6,13 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 18:33:36 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:13:45 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-void static		ft_txt(char *line, t_type type)
+static void		ft_txt(char *line, t_type type)
 {
 	int temp;
 
@@ -37,7 +37,7 @@ void static		ft_txt(char *line, t_type type)
 		ft_error("ERROR_WITH_TEXT");
 }
 
-void static		ft_direct_number(char *line)
+static void		ft_direct_number(char *line)
 {
 	int		temp;
 
@@ -55,7 +55,7 @@ void static		ft_direct_number(char *line)
 		ft_error("INVALID_DIRECT");
 }
 
-void static		ft_indirect_number(char *line)
+static void		ft_indirect_number(char *line)
 {
 	int temp;
 
@@ -77,7 +77,7 @@ void static		ft_indirect_number(char *line)
 	}
 }
 
-void static		ft_parse_token(char **line)
+static void		ft_parse_token(char **line)
 {
 	char *str;
 
@@ -100,7 +100,7 @@ void static		ft_parse_token(char **line)
 	*line = str;
 }
 
-void		ft_row_is_code(char *line)
+void			ft_row_is_code(char *line)
 {
 	while (line[g_data->x])
 	{

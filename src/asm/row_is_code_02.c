@@ -6,13 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:31:50 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 18:33:36 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:07:49 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int			ft_sep_search(char c)
+int				ft_sep_search(char c)
 {
 	if (c == DIRECT_CHAR || c == SEPARATOR_CHAR || c == COMMENT_CHAR)
 		return (1);
@@ -23,7 +23,7 @@ int			ft_sep_search(char c)
 	return (0);
 }
 
-void static		ft_dup_label(void)
+static void		ft_dup_label(void)
 {
 	char	*cont;
 	t_label	*lable;
@@ -38,7 +38,7 @@ void static		ft_dup_label(void)
 	}
 }
 
-void		ft_create_label(void)
+void			ft_create_label(void)
 {
 	t_label	*label;
 
@@ -54,7 +54,7 @@ void		ft_create_label(void)
 	ft_dup_label();
 }
 
-int			ft_register(char *line, int len)
+int				ft_register(char *line, int len)
 {
 	int	i;
 

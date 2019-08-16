@@ -6,13 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 17:28:01 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 18:03:10 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:11:48 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int32_t		ft_label(u_int32_t bytes, t_token *token)
+static int32_t	ft_label(u_int32_t bytes, t_token *token)
 {
 	int32_t	move;
 	t_label	*label;
@@ -30,7 +30,7 @@ int32_t		ft_label(u_int32_t bytes, t_token *token)
 	return (move);
 }
 
-void		arg_types_code(t_token *com, u_int32_t *carriage, u_int8_t n_arg)
+static void		arg_types_code(t_token *com, u_int32_t *carr, u_int8_t n_arg)
 {
 	int8_t	tmp;
 	int		arg;
@@ -47,18 +47,18 @@ void		arg_types_code(t_token *com, u_int32_t *carriage, u_int8_t n_arg)
 			tmp |= 3 << 2 * (3 - arg++);
 		com = com->next;
 	}
-	ft_itoh(tmp, 1, carriage);
+	ft_itoh(tmp, 1, carr);
 }
 
-void		ft_command_in_buf(t_token **com, u_int32_t *carriage, u_int8_t type)
+static void		ft_command_in_buf(t_token **com, u_int32_t *carr, u_int8_t type)
 {
 	u_int8_t n_arg;
 	u_int8_t d_size;
 
-	ft_itoh(g_op_tab[type].code, 1, carriage);
+	ft_itoh(g_op_tab[type].code, 1, carr);
 	n_arg = g_op_tab[type].args_num;
 	if (g_op_tab[type].args_types_code)
-		arg_types_code(*com, carriage, n_arg);
+		arg_types_code(*com, carr, n_arg);
 	*com = (*com)->next;
 	while (n_arg--)
 	{
@@ -66,20 +66,20 @@ void		ft_command_in_buf(t_token **com, u_int32_t *carriage, u_int8_t type)
 			*com = (*com)->next;
 		d_size = g_op_tab[type].t_dir_size;
 		if ((*com)->type == Register)
-			ft_itoh(ft_atoi_cor((*com)->content + 1, 1), 1, carriage);
+			ft_itoh(ft_atoi_cor((*com)->content + 1, 1), 1, carr);
 		else if ((*com)->type == Direct)
-			ft_itoh(ft_atoi_cor((*com)->content, d_size), d_size, carriage);
+			ft_itoh(ft_atoi_cor((*com)->content, d_size), d_size, carr);
 		else if ((*com)->type == Indirect)
-			ft_itoh(ft_atoi_cor((*com)->content, IND_SIZE), IND_SIZE, carriage);
+			ft_itoh(ft_atoi_cor((*com)->content, IND_SIZE), IND_SIZE, carr);
 		else if ((*com)->type == Direct_label)
-			ft_itoh(ft_label((*com)->bytes, *com), d_size, carriage);
+			ft_itoh(ft_label((*com)->bytes, *com), d_size, carr);
 		else if ((*com)->type == Indirect_label)
-			ft_itoh(ft_label((*com)->bytes, *com), IND_SIZE, carriage);
+			ft_itoh(ft_label((*com)->bytes, *com), IND_SIZE, carr);
 		*com = (*com)->next;
 	}
 }
 
-void		ft_compilation_champ(void)
+void			ft_compilation_champ(void)
 {
 	t_token		*token;
 	u_int32_t	carriage;
