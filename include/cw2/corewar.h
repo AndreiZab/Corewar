@@ -135,6 +135,8 @@ struct s_corewar
 	int				die_step;
 	int				cycle_lives_counter;
 
+	t_player		*winner;
+
 	SDL_Window		*win;
 	SDL_Renderer	*ren;
 	TTF_Font		*fnt;
