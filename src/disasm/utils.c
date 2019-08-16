@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/14 10:49:55 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/14 10:49:57 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "disasm.h"
 
-int 			accurate_read(int fd, char *buffer, int n_bytes)
+int				accurate_read(int fd, char *buffer, int n_bytes)
 {
 	int readed;
 	int i;

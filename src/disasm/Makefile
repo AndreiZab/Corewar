@@ -4,6 +4,7 @@ SRCS=main.c\
 	print_1.c \
 	print_2.c \
 	print_3.c \
+	print_utils.c \
 	check_1.c \
 	check_2.c \
 	check_3.c \

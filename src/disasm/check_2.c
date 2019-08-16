@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/14 10:53:09 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/14 10:53:10 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "disasm.h"
 
 static void	get_types(char types[3], char from)
@@ -27,7 +39,7 @@ static int	check_arg(char permission, char current)
 	return (0);
 }
 
-static int	check_type(t_exe *exe, t_instruction *inst, int i, char colored)
+static int	check_type(t_exe *exe, t_instruction *inst, int i, char options)
 {
 	int		j;
 
@@ -40,11 +52,11 @@ static int	check_type(t_exe *exe, t_instruction *inst, int i, char colored)
 			while (++j < inst->argc)
 				if (!check_arg(inst->argt[j], inst->types[j]))
 					return (print_error_inst(inst->name, "Wrong argument type",
-						colored) - 1);
+						options) - 1);
 		}
 		else
 			return (print_error_inst(inst->name,
-				"Champion's code was ended before type byte", colored) - 1);		
+				"Champion's code was ended before type byte", options) - 1);
 	}
 	else
 	{
@@ -57,13 +69,13 @@ static int	check_type(t_exe *exe, t_instruction *inst, int i, char colored)
 }
 
 int			check_instruction(t_exe *exe, t_instruction *inst, int i,
-				char colored)
+				char options)
 {
 	int				arg1_size;
 	int				arg2_size;
 	int				arg3_size;
-	
-	i = check_type(exe, inst, i, colored);
+
+	i = check_type(exe, inst, i, options);
 	if (i < 0)
 		return (-1);
 	arg1_size = get_size(inst, inst->types[0]);
@@ -71,7 +83,7 @@ int			check_instruction(t_exe *exe, t_instruction *inst, int i,
 	arg3_size = (inst->argc >= 3) ? get_size(inst, inst->types[2]) : 0;
 	++i;
 	if (i + arg1_size + arg2_size + arg3_size > exe->size)
-		return (print_error_inst(inst->name, "No enough space", colored) - 1);
-	print_args(exe, inst, i, colored);
+		return (print_error_inst(inst->name, "No enough space", options) - 1);
+	print_args(exe, inst, i, options);
 	return (i + arg1_size + arg2_size + arg3_size);
 }

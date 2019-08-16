@@ -1,57 +1,57 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/14 10:50:20 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/14 10:50:23 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "disasm.h"
 
-void	print_filename(char *filename, char colored)
+void	print_filename(char *filename, char options)
 {
 	ft_putstr("=====> ");
-	if (colored)
-		ft_setcolor(cc_current, DISASM_COL_FILENAME);
-	ft_putstr(filename);
-	if (colored)
-		ft_setcolor(cc_current, cc_default);
+	print_col_str(filename, options, DISASM_COL_FILENAME);
 	ft_putstr(" <=====\n");
 }
 
-int		print_error(char *str, char colored)
+int		print_error(char *str, char options)
 {
-	if (colored)
-		ft_setcolor(cc_current, DISASM_COL_ERROR);
-	ft_putstr("Error: ");
-	if (colored)
-		ft_setcolor(cc_current, cc_default);
+	print_col_str("Error: ", options, DISASM_COL_ERROR);
 	ft_putstr(str);
 	ft_putchar('\n');
 	return (0);
 }
 
-void	print_name(char *str, char colored)
+void	print_name(char *str, char options)
 {
-	if (colored)
-		ft_setcolor(cc_current, DISASM_COL_NAME);
-	ft_putstr("Name: ");
-	if (colored)
-		ft_setcolor(cc_current, cc_default);
+	print_col_str(options & DISASM_OPT_FILE_FORMAT ? ".name" : "Name: ",
+		options, DISASM_COL_NAME);
+	if (options & DISASM_OPT_FILE_FORMAT)
+		ft_putchar('"');
 	ft_putstr(str);
+	if (options & DISASM_OPT_FILE_FORMAT)
+		ft_putchar('"');
 	ft_putchar('\n');
 }
 
-void	print_code_size(int nbr, char colored)
+void	print_code_size(int nbr, char options)
 {
-	if (colored)
-		ft_setcolor(cc_current, DISASM_COL_NAME);
-	ft_putstr("Code size: ");
-	if (colored)
-		ft_setcolor(cc_current, cc_default);
-	ft_putnbr(nbr);
-	ft_putchar('\n');
+	if (!(options & DISASM_OPT_FILE_FORMAT))
+	{
+		print_col_str("Code size: ", options, DISASM_COL_NAME);
+		ft_putnbr(nbr);
+		ft_putchar('\n');
+	}
 }
 
-void	print_warning(char *str, char colored)
+void	print_warning(char *str, char options)
 {
-	if (colored)
-		ft_setcolor(cc_current, DISASM_COL_WARNING);
-	ft_putstr("Warning: ");
-	if (colored)
-		ft_setcolor(cc_current, cc_default);
+	print_col_str("Warning: ", options, DISASM_COL_WARNING);
 	ft_putstr(str);
 	ft_putchar('\n');
 }

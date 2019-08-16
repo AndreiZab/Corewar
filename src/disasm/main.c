@@ -1,56 +1,108 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/14 10:55:36 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/14 10:55:37 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "disasm.h"
 
-int		disasm(char *filename, char colored)
+static int		try_set_option(char flag, char *opt)
+{
+	if (flag == 'c')
+		*opt |= DISASM_OPT_COLORS;
+	else if (flag == 'f')
+		*opt |= DISASM_OPT_FILE_FORMAT;
+	else
+		return (0);
+	return (1);
+}
+
+static int		get_options(int argc, char **argv, char *opt)
+{
+	int		i;
+	int		j;
+	int		files_cnt;
+
+	files_cnt = 0;
+	i = 0;
+	while (++i < argc)
+		if (argv[i][0] == '-')
+		{
+			j = -0;
+			while (argv[i][++j])
+			{
+				if (!try_set_option(argv[i][j], opt))
+					return (print_usage());
+			}
+		}
+		else
+			++files_cnt;
+	if (files_cnt == 0)
+		return (print_error("No files in arguments", *opt));
+	return (files_cnt);
+}
+
+static void		load_checks(int (*checks[8])(int fd, char colored, void *arg))
+{
+	checks[0] = check_magic_header;
+	checks[1] = check_name;
+	checks[2] = check_null;
+	checks[3] = check_code_size;
+	checks[4] = check_comment;
+	checks[5] = check_null;
+	checks[6] = check_exe;
+	checks[7] = check_eof;
+}
+
+static int		disasm(char *filename, char options, int (*checks[8])
+					(int fd, char colored, void *arg))
 {
 	int		fd;
 	int		code_size;
+	int		i;
 
+	if (options & DISASM_OPT_FILENAME)
+		print_filename(filename, options);
 	code_size = 0;
 	if (!end_with(filename, ".cor"))
-		return (print_error(".cor file expected", colored));
+		return (print_error(".cor file expected", options));
 	if ((fd = open(filename, O_RDONLY)) <= 0)
-		return (print_error("Can't open this file", colored));
-	if (!check_magic_header(fd, colored))
-		return (close(fd) & 0);
-	if (!check_name(fd, colored))
-		return (close(fd) & 0);
-	if (!check_null(fd, colored))
-		return (close(fd) & 0);
-	if (!check_code_size(fd, &code_size, colored))
-		return (close(fd) & 0);
-	if (!check_comment(fd, colored))
-		return (close(fd) & 0);
-	if (!check_null(fd, colored))
-		return (close(fd) & 0);
-	if (!check_exe(fd, code_size, colored))
-		return(close(fd) & 0);
-	check_eof(fd, colored);
+		return (print_error("Can't open this file", options));
+	i = -1;
+	while (++i < 8)
+		if (!checks[i](fd, options, &code_size))
+			return (close(fd) & 0);
 	return (close(fd));
 }
 
-int		main(int argc, char **argv)
+int				main(int argc, char **argv)
 {
+	int		(*checks[8])(int fd, char colored, void *arg);
 	int		i;
-	char	colored;
+	char	options;
+	int		files;
 
-	colored = 0;
-	if (argc == 1 || (argc == 2 && ft_strcmp(argv[1], "-c") == 0))
-		ft_putstr("usage: ./disasm [-c] [filename1.cor ...]\n");
-	else
+	options = 0;
+	if (argc == 1)
+		return (print_usage());
+	if ((files = get_options(argc, argv, &options)) == 0)
+		return (0);
+	options |= (files > 1) ? DISASM_OPT_FILENAME : 0;
+	load_checks(checks);
+	i = 0;
+	while (++i < argc)
 	{
-		i = 0;
-		if (ft_strcmp(argv[1], "-c") == 0)
-			colored = ++i;
-		while (++i < argc)
-		{
-			if (argc != 2 + colored)
-			{
-				if (i > 1 + colored)
-					ft_putchar('\n');
-				print_filename(argv[i], colored);
-			}
-			disasm(argv[i], colored);
-		}	
+		if (argv[i][0] != '-')
+			disasm(argv[i], options, checks);
+		if (argv[i][0] != '-' && (files-- > 1 ||
+			options & DISASM_OPT_FILE_FORMAT))
+			ft_putchar('\n');
 	}
 	return (0);
 }

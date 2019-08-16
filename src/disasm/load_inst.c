@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_inst.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/14 10:51:15 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/14 10:51:16 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "disasm.h"
 
 static void		argt_set(t_instruction *inst, char arg1, char arg2, char arg3)
@@ -11,7 +23,7 @@ static void		argt_set(t_instruction *inst, char arg1, char arg2, char arg3)
 	while (++i < 3)
 	{
 		if (inst->argt[i] == 0)
-			break;
+			break ;
 	}
 	inst->argc = i;
 }

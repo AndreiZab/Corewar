@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   disasm.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/14 10:56:05 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/14 10:56:07 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef DISASM_H
 # define DISASM_H
 # include <unistd.h>
@@ -13,6 +25,9 @@
 # define DISASM_COL_NAME cc_cyan
 # define DISASM_COL_WARNING cc_yellow
 # define DISASM_COL_INSTRUCTION cc_blue
+# define DISASM_OPT_COLORS 1
+# define DISASM_OPT_FILE_FORMAT 2
+# define DISASM_OPT_FILENAME 4
 
 typedef struct	s_instruction
 {
@@ -39,34 +54,41 @@ typedef struct	s_exe
 ** print_1.c, print_2.c, print_3.c
 */
 
-void			print_filename(char *filename, char colored);
-int				print_error(char *str, char colored);
-void			print_name(char *str, char colored);
-void			print_code_size(int nbr, char colored);
-void			print_warning(char *str, char colored);
+void			print_filename(char *filename, char options);
+int				print_error(char *str, char options);
+void			print_name(char *str, char options);
+void			print_code_size(int nbr, char options);
+void			print_warning(char *str, char options);
 
-void			print_comment(char *str, char colored);
-int				print_error_unknown_inst(unsigned char byte, char colored);
-int				print_error_inst(char *inst, char *str, char colored);
+void			print_comment(char *str, char options);
+int				print_error_unknown_inst(unsigned char byte, char options);
+int				print_error_inst(char *inst, char *str, char options);
 
+int				print_usage(void);
 void			print_args(t_exe *exe, t_instruction *inst, int i,
-					char colored);
+					char options);
+
+/*
+** print_utils.c
+*/
+
+void			print_col_str(char *str, char options, t_ccolor col);
 
 /*
 ** check_1.c, check_2.c, check_3.c
 */
 
-int				check_magic_header(int fd, char colored);
-int				check_name(int fd, char colored);
-int				check_null(int fd, char colored);
-int				check_code_size(int fd, int *code_size, char colored);
-int				check_comment(int fd, char colored);
+int				check_magic_header(int fd, char options, void *arg);
+int				check_name(int fd, char options, void *arg);
+int				check_null(int fd, char options, void *arg);
+int				check_code_size(int fd, char options, void *arg);
+int				check_comment(int fd, char options, void *arg);
 
 int				check_instruction(t_exe *exe, t_instruction *inst, int i,
-					char colored);
+					char options);
 
-int				check_exe(int fd, int code_size, char colored);
-int				check_eof(int fd, char colored);
+int				check_exe(int fd, char options, void *arg);
+int				check_eof(int fd, char options, void *arg);
 
 /*
 ** load_inst.c
