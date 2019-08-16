@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_3.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:57:09 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:57:11 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 static int		check_executable(t_corewar *cw, t_player *pl)
@@ -18,7 +30,7 @@ static int		check_executable(t_corewar *cw, t_player *pl)
 	return (COREWAR_STATUS_OK);
 }
 
-int		check_exe(int fd, t_corewar *cw, t_player *pl)
+int				check_exe(int fd, t_corewar *cw, t_player *pl)
 {
 	unsigned char	buff[pl->size + 1];
 
@@ -30,7 +42,7 @@ int		check_exe(int fd, t_corewar *cw, t_player *pl)
 	return (check_executable(cw, pl));
 }
 
-int		check_eof(int fd, t_corewar *cw, t_player *pl)
+int				check_eof(int fd, t_corewar *cw, t_player *pl)
 {
 	char	buff[1];
 

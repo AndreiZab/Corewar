@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instruction_functions_3.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 13:04:27 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 13:04:30 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 int		zjmp_function(t_corewar *cw, t_carriage *carr)
@@ -9,8 +21,8 @@ int		zjmp_function(t_corewar *cw, t_carriage *carr)
 			cw->args[0] % IDX_MOD);
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
-		ft_putstr(carr->carry ? " Accepted\n" : " Denied\n");
-	return (COREWAR_STATUS_OK);	
+		print_log_zjmp(cw, carr);
+	return (COREWAR_STATUS_OK);
 }
 
 int		ldi_function(t_corewar *cw, t_carriage *carr)
@@ -27,8 +39,8 @@ int		ldi_function(t_corewar *cw, t_carriage *carr)
 		carr->rg[cw->args[2] - 1] = value;
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
-		ft_putchar('\n');
-	return (COREWAR_STATUS_OK);	
+		print_log_ldi(cw, carr);
+	return (COREWAR_STATUS_OK);
 }
 
 int		sti_function(t_corewar *cw, t_carriage *carr)
@@ -43,28 +55,16 @@ int		sti_function(t_corewar *cw, t_carriage *carr)
 		(void*)&(cw->args[0]));
 	map_set_color(cw, pos, 4, carr->owner_id);
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
-	{
-		ft_putstr("; ");
-		ft_putnbr(cw->args[0]);
-		ft_putstr(" -> store to ");
-		ft_putnbr(cw->args[1]);
-		ft_putstr(" + ");
-		ft_putnbr(cw->args[2]);
-		ft_putstr(" = ");
-		ft_putnbr(cw->args[1] + cw->args[2]);
-		ft_putstr(" (with pc and mod ");
-		ft_putnbr(carr->pc_comm + (cw->args[1] + cw->args[2]) % IDX_MOD);
-		ft_putstr(")\n");
-	}
-	return (COREWAR_STATUS_OK);	
+		print_log_sti(cw, carr);
+	return (COREWAR_STATUS_OK);
 }
 
 int		fork_function(t_corewar *cw, t_carriage *carr)
 {
-	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
-		ft_putchar('\n');
 	load_value(cw, carr, 0, DIR_CODE);
-	return (carriage_copy(cw, carr, carr->pc_comm + (cw->args[0] % IDX_MOD)));	
+	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
+		print_log_fork(cw, carr);
+	return (carriage_copy(cw, carr, carr->pc_comm + (cw->args[0] % IDX_MOD)));
 }
 
 int		lld_function(t_corewar *cw, t_carriage *carr)
@@ -76,5 +76,7 @@ int		lld_function(t_corewar *cw, t_carriage *carr)
 		carr->rg[cw->args[1] - 1] = cw->args[0];
 		carr->carry = (cw->args[0] == 0) ? 1 : 0;
 	}
-	return (COREWAR_STATUS_OK);	
+	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
+		ft_putchar('\n');
+	return (COREWAR_STATUS_OK);
 }

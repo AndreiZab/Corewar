@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   preparations.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 13:01:23 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 13:01:25 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 static int		check_sequence(t_corewar *cw)
@@ -32,7 +44,7 @@ int				prepare_for_battle(t_corewar *cw)
 	{
 		pl = cw->players + i;
 		ft_memcpy(cw->map + (i * mem_part), pl->code, pl->size);
-		ft_memset(cw->players_map + (i * mem_part), i + 1, pl->size);
+		map_set_color(cw, (i * mem_part), pl->size, i + 1);
 		if ((carriage_new(cw, i + 1, i * mem_part)) != COREWAR_STATUS_OK)
 			return (COREWAR_STATUS_FATAL);
 	}
@@ -45,15 +57,14 @@ int				prepare_for_battle(t_corewar *cw)
 
 static void		print_player(t_player *pl, int id, t_corewar *cw)
 {
-	(void)cw;
 	ft_putstr("* Player ");
-	ft_putnbr(id);
+	print_col_nbr(cw, id, COREWAR_COLOR_PLAYER);
 	ft_putstr(", weighing ");
 	ft_putnbr(pl->size);
 	ft_putstr(" bytes, \"");
-	ft_putstr(pl->name);
+	print_col_str(cw, pl->name, COREWAR_COLOR_PLAYER);
 	ft_putstr("\" (\"");
-	ft_putstr(pl->comment);
+	print_col_str(cw, pl->comment, COREWAR_COLOR_PLAYER);
 	ft_putstr("\") !\n");
 }
 

@@ -16,6 +16,7 @@ SRCS=main.c\
 	check_3.c \
 	preparations.c \
 	carriage.c \
+	print_carriage.c \
 	corewar_play.c \
 	map.c \
 	instruction_functions_1.c \
@@ -26,9 +27,13 @@ SRCS=main.c\
 	load_value_1.c \
 	load_value_2.c \
 	dump.c \
+	print_dump.c \
 	casting_uc_hex.c \
 	print_log.c \
-	kill_machine.c
+	print_log_2.c \
+	print_log_functions.c \
+	kill_machine.c \
+	print_kill_machine.c
 SRCS_DIR=.
 OBJS_DIR=obj
 

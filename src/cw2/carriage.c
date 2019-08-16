@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   carriage.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:53:39 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:53:41 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 int		carriage_new(t_corewar *cw, unsigned char owner_id, int pos)
@@ -22,22 +34,8 @@ int		carriage_new(t_corewar *cw, unsigned char owner_id, int pos)
 
 void	carriage_grab_instruction(t_corewar *cw, t_carriage *carr)
 {
-	char	*str;
-
 	if (carr->pc_comm != carr->pc && cw->log & COREWAR_OPT_LOG_PC_MOVEMENTS)
-	{
-		ft_putstr("ADV ");
-		ft_putnbr(carr->pc - carr->pc_comm);
-		ft_putstr(" (0x");
-		str = casting_uc_hex(carr->pc_comm, 4);
-		ft_putstr(str);
-		free(str);
-		ft_putstr(" -> 0x");
-		str = casting_uc_hex(carr->pc, 4);
-		ft_putstr(str);
-		free(str);
-		ft_putstr(")\n");
-	}
+		print_pc_movements(cw, carr);
 	carr->pc_comm = carr->pc;
 	if ((carr->instruction = insts_find(cw, cw->map[carr->pc_comm])) != NULL)
 		carr->sleep = carr->instruction->sleep;
@@ -47,7 +45,6 @@ void	carriage_grab_instruction(t_corewar *cw, t_carriage *carr)
 void	carriage_move(t_carriage *carr, int move)
 {
 	carr->pc = map_normilize(carr->pc + move);
-
 }
 
 int		carriage_copy(t_corewar *cw, t_carriage *carr, int pos)
@@ -58,6 +55,7 @@ int		carriage_copy(t_corewar *cw, t_carriage *carr, int pos)
 		return (COREWAR_STATUS_FATAL);
 	ft_memcpy(copy, carr, sizeof(t_carriage));
 	copy->pc = map_normilize(pos);
+	copy->pc_comm = copy->pc;
 	copy->next = cw->carrs;
 	cw->carrs = copy;
 	copy->id = copy->next->id + 1;
@@ -68,8 +66,12 @@ int		carriage_copy(t_corewar *cw, t_carriage *carr, int pos)
 void	carriage_move_by_types(t_corewar *cw, t_carriage *carr)
 {
 	int		i;
+	int		step;
 
 	i = -1;
 	while (++i < carr->instruction->argc)
-		load_value(cw, carr, 0, cw->temp_types[i]);
+	{
+		step = get_size(carr->instruction, cw->temp_types[i]);
+		carriage_move(carr, step);
+	}
 }

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_file.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:41:18 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:41:19 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 int		get_next_id(t_corewar *cw)
@@ -18,7 +30,7 @@ int		process_file(t_corewar *cw, char *filename)
 	int			i;
 
 	if (cw->players_count == MAX_PLAYERS)
-		return (print_error("Limit exceeded the maximum number of players", cw));
+		return (print_error("Too many players", cw));
 	if (cw->next_id == 0)
 		cw->next_id = get_next_id(cw);
 	pl = cw->players + cw->next_id - 1;

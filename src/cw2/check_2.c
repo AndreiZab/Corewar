@@ -1,13 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_2.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:56:02 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:56:04 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-void	get_types(char types[3], char from)
+void		get_types(char types[3], char from)
 {
 	types[0] = (from & 0b11000000) >> 6;
 	types[1] = (from & 0b00110000) >> 4;
 	types[2] = (from & 0b00001100) >> 2;
 }
 
-static int	get_size(t_instruction *inst, char type)
+int			get_size(t_instruction *inst, char type)
 {
 	if (type == REG_CODE)
 		return (1);
@@ -18,7 +30,7 @@ static int	get_size(t_instruction *inst, char type)
 	return (0);
 }
 
-int	check_arg(char permission, char current)
+int			check_arg(char permission, char current)
 {
 	if ((permission & DISASM_REG && current == REG_CODE) ||
 		(permission & DISASM_DIR && current == DIR_CODE) ||
@@ -45,7 +57,7 @@ static int	check_type(t_corewar *cw, t_player *pl, t_instruction *inst, int i)
 		}
 		else
 			return (print_error_file_inst(inst->name,
-				"Champion's code was ended before type byte", cw));		
+				"Champion's code was ended before type byte", cw));
 	}
 	else
 	{
@@ -63,7 +75,7 @@ int			check_instruction(t_corewar *cw, t_player *pl, t_instruction *inst,
 	int				arg1_size;
 	int				arg2_size;
 	int				arg3_size;
-	
+
 	i = check_type(cw, pl, inst, i);
 	if (i < 0)
 		return (-1);

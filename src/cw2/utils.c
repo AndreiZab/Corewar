@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:40:53 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:40:54 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
-int 			accurate_read(int fd, char *buffer, int n_bytes)
+int				accurate_read(int fd, char *buffer, int n_bytes)
 {
 	int readed;
 	int i;

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instruction_functions_1.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 13:03:00 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 13:03:02 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void	print_live(t_corewar *cw, int player_id)
@@ -35,7 +47,7 @@ int		live_function(t_corewar *cw, t_carriage *carr)
 		if (cw->log & COREWAR_OPT_LOG_LIVES)
 			print_live(cw, cw->args[0]);
 	}
-	return (COREWAR_STATUS_OK);	
+	return (COREWAR_STATUS_OK);
 }
 
 int		ld_function(t_corewar *cw, t_carriage *carr)
@@ -49,7 +61,7 @@ int		ld_function(t_corewar *cw, t_carriage *carr)
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
 		ft_putchar('\n');
-	return (COREWAR_STATUS_OK);	
+	return (COREWAR_STATUS_OK);
 }
 
 int		st_function(t_corewar *cw, t_carriage *carr)
@@ -71,5 +83,5 @@ int		st_function(t_corewar *cw, t_carriage *carr)
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
 		ft_putchar('\n');
-	return (COREWAR_STATUS_OK);	
+	return (COREWAR_STATUS_OK);
 }

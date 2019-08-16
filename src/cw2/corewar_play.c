@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   corewar_play.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:57:50 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:57:51 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void	permission_to_types(t_corewar *cw, t_instruction *inst)
@@ -16,7 +28,7 @@ int		execude_function(t_corewar *cw, t_carriage *carr)
 	if (carr->instruction->type_byte)
 	{
 		load_types(cw, carr);
-		if (!check_types(cw, carr))
+		if (!check_types(cw, carr) || !check_registers(cw, carr))
 			carriage_move_by_types(cw, carr);
 		else
 		{
@@ -69,11 +81,7 @@ int		execude_carriages(t_corewar *cw)
 void	print_now_cycle(t_corewar *cw)
 {
 	ft_putstr("It is now cycle ");
-	if (cw->options & COREWAR_OPT_COLORS)
-		ft_setcolor(cc_default, cc_cyan);
-	ft_putnbr(cw->cycle);
-	if (cw->options & COREWAR_OPT_COLORS)
-		ft_setcolor(cc_default, cc_default);
+	print_col_nbr(cw, cw->cycle, COREWAR_COLOR_CYCLE);
 	ft_putchar('\n');
 }
 

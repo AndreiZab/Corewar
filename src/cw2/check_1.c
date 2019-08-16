@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   check_1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:54:15 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:54:16 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 int		check_magic_header(int fd, t_corewar *cw, t_player *pl)
@@ -50,8 +62,7 @@ int		check_code_size(int fd, t_corewar *cw, t_player *pl)
 	revert_bytes(buff, 4);
 	pl->size = *((int*)buff);
 	if (pl->size > CHAMP_MAX_SIZE)
-		return (print_error_file("Code size greater than current CHAMP_MAX_SIZE!",
-			cw));
+		return (print_error_file("Code size greater CHAMP_MAX_SIZE!", cw));
 	return (COREWAR_STATUS_OK);
 }
 

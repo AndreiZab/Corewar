@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   process_arguments.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 12:40:42 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 12:40:45 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 int		load_option(t_corewar *cw, char *str)
@@ -26,10 +38,31 @@ int		load_option(t_corewar *cw, char *str)
 	return (1);
 }
 
+void	print_usage(void)
+{
+	ft_putstr("usage: ./corewar [-cva] [-dump nbr_cycles] [-dinfo] ");
+	ft_putstr("[[-n champ_number] champ.cor]\n");
+	ft_putstr("Flags:\n");
+	ft_putstr("\t-c - colored mode\n");
+	ft_putstr("\t-v - visualization mode\n");
+	ft_putstr("\t-a - enable aff output\n");
+	ft_putstr("Dump memory:\n");
+	ft_putstr("\t-dump nbr_cycle - output dump memory\n");
+	ft_putstr("\t-dinfo - output additional information on -dump\n");
+	ft_putstr("Champions:\n");
+	ft_putstr("\t-n champ_number - set number of the champion\n");
+	ft_putstr("\tchamp.cor - binary file with champions code\n");
+}
+
 int		get_options(t_corewar *cw, int argc, char **argv)
 {
 	int		i;
 
+	if (argc == 1)
+	{
+		print_usage();
+		return (0);
+	}
 	i = 0;
 	while (++i < argc)
 	{
@@ -38,7 +71,7 @@ int		get_options(t_corewar *cw, int argc, char **argv)
 			ft_strcmp(argv[i], "-dump") != 0)
 			if (load_option(cw, argv[i]) == 0)
 			{
-				ft_putstr(COREWAR_USAGE);
+				print_usage();
 				return (0);
 			}
 	}

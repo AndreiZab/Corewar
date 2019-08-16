@@ -10,7 +10,6 @@
 # define COREWAR_STATUS_WARNING 1
 # define COREWAR_STATUS_FINISH 2
 # define COREWAR_STATUS_FATAL -1
-# define COREWAR_USAGE "usage: ./corewar ******\n"
 # define COREWAR_OPT_COLORS 1
 # define COREWAR_OPT_VISUALIZER 2
 # define COREWAR_OPT_AFF 4
@@ -23,11 +22,18 @@
 # define COREWAR_OPT_LOG_ORIGINAL 32
 # define COREWAR_COLOR_ERROR cc_red
 # define COREWAR_COLOR_FILENAME cc_cyan
+# define COREWAR_COLOR_CYCLE cc_cyan
+# define COREWAR_COLOR_DIE_STEP cc_yellow
+# define COREWAR_COLOR_PLAYER cc_yellow
+# define COREWAR_COLOR_CARRIAGE cc_magenta
+# define COREWAR_COLOR_INSTRUCTION cc_blue
+# define COREWAR_COLOR_ADDRESS cc_green
 # define COREWAR_CHECKS_COUNT 8
 # define COREWAR_INSTRUCTIONS_COUNT 16
 # define DISASM_REG 1
 # define DISASM_DIR 2
 # define DISASM_IND 4
+# define DISASM_LINK 8
 # define COREWAR_LINK 4
 # define COREWAR_IDX 8
 # define COREWAR_DUMP_COLUMNS 64 //временно
@@ -155,6 +161,8 @@ int				print_error_file_inst(char *inst, char *str, t_corewar *cw);
 
 void			print_utils_error(t_corewar *cw, char clear_color);
 void			print_utils_file(t_corewar *cw, char clear_color);
+void			print_col_str(t_corewar *cw, char *str, t_ccolor col);
+void			print_col_nbr(t_corewar *cw, int nbr, t_ccolor col);
 
 /*
 ** utils.c
@@ -176,6 +184,7 @@ int				check_code_size(int fd, t_corewar *cw, t_player *pl);
 int				check_comment(int fd, t_corewar *cw, t_player *pl);
 
 void			get_types(char types[3], char from);
+int				get_size(t_instruction *inst, char type);
 int				check_arg(char permission, char current);
 int				check_instruction(t_corewar *cw, t_player *pl,
 					t_instruction *inst, int i);
@@ -215,7 +224,7 @@ int				prepare_for_battle(t_corewar *cw);
 void			show_players(t_corewar *cw);
 
 /*
-** carriage_1.c
+** carriage.c
 */
 
 int				carriage_new(t_corewar *cw, unsigned char owner_id, int pos);
@@ -223,6 +232,14 @@ void			carriage_grab_instruction(t_corewar *cw, t_carriage *carr);
 void			carriage_move(t_carriage *carr, int move);
 int				carriage_copy(t_corewar *cw, t_carriage *carr, int pos);
 void			carriage_move_by_types(t_corewar *cw, t_carriage *carr);
+
+/*
+** print_carriage.c
+*/
+
+void			print_bytes(t_corewar *cw, int pos, int count);
+void			print_pc_movements(t_corewar *cw, t_carriage *carr);
+
 
 /*
 ** corewar_play.c
@@ -272,6 +289,7 @@ int				aff_function(t_corewar *cw, t_carriage *carr);
 
 void			load_types(t_corewar *cw, t_carriage *carr);
 int				check_types(t_corewar *cw, t_carriage *carr);
+int				check_registers(t_corewar *cw, t_carriage *carr);
 
 /*
 ** load_value_1.c, load_value_2.c
@@ -293,21 +311,49 @@ void			load_reg(t_corewar *cw, t_carriage *carr, int arg_n);
 int				corewar_dump(t_corewar *cw);
 
 /*
+** print_dump.c
+*/
+
+int				print_address(t_corewar *cw, int address);
+void			print_map_byte(t_corewar *cw, int pos);
+
+/*
 ** catsing_uc_hex.c
 */
 
 char			*casting_uc_hex(int num, int width);
 
 /*
-** print_log.c
+** print_log.c, print_log_2.c
 */
 
 void			print_log(t_corewar *cw, t_carriage *carr);
+
+void			print_reg(t_corewar *cw, t_carriage *carr, int *i, int j);
+
+
+/*
+** print_log_functions.c
+*/
+
+void			print_log_zjmp(t_corewar *cw, t_carriage *carr);
+void			print_log_ldi(t_corewar *cw, t_carriage *carr);
+void			print_log_sti(t_corewar *cw, t_carriage *carr);
+void			print_log_fork(t_corewar *cw, t_carriage *carr);
+void			print_log_lfork(t_corewar *cw, t_carriage *carr);
 
 /*
 ** kill_machine.c
 */
 
 int				kill_machine(t_corewar *cw);
+
+/*
+** print_kill_machine.c
+*/
+
+void			print_carriage_death(t_corewar *cw, t_carriage *carr);
+void			print_die_step(t_corewar *cw);
+void			print_winner(t_corewar *cw, int id);
 
 #endif

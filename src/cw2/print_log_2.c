@@ -1,35 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   print_log_2.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/08/16 12:41:48 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/16 12:41:49 by larlyne          ###   ########.fr       */
+/*   Created: 2019/08/16 13:28:33 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 13:28:35 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "corewar.h"
 
-int		main(int argc, char **argv)
+void		print_reg(t_corewar *cw, t_carriage *carr, int *i, int j)
 {
-	int			status;
-	t_corewar	*cw;
+	unsigned char	reg_n;
 
-	status = COREWAR_STATUS_OK;
-	cw = corewar_init(&status);
-	if (status >= 0)
-		status = process_arguments(cw, argc, argv);
-	if (status >= 0)
-		status = check_players(cw);
-	if (status >= 0)
-		status = prepare_for_battle(cw);
-	if (status >= 0)
+	map_get(cw, 1, (*i)++, &reg_n);
+	if (carr->instruction->argt[j] & DISASM_LINK ||
+		cw->options & COREWAR_OPT_LOG_ORIGINAL)
 	{
-		show_players(cw);
-		status = corewar_play(cw);
+		ft_putchar('r');
+		ft_putnbr(reg_n);
 	}
-	corewar_free(&cw);
-	return ((status >= 0) ? 0 : status);
+	else
+	{
+		if (regnumber_contains(reg_n))
+			ft_putnbr(carr->rg[reg_n - 1]);
+		else
+			ft_putstr("rNAN");
+	}
 }

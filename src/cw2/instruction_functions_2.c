@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   instruction_functions_2.c                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 13:03:54 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 13:03:55 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 int		add_function(t_corewar *cw, t_carriage *carr)
@@ -12,7 +24,7 @@ int		add_function(t_corewar *cw, t_carriage *carr)
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
 		ft_putchar('\n');
-	return (COREWAR_STATUS_OK);	
+	return (COREWAR_STATUS_OK);
 }
 
 int		sub_function(t_corewar *cw, t_carriage *carr)
@@ -25,7 +37,9 @@ int		sub_function(t_corewar *cw, t_carriage *carr)
 		carr->rg[cw->args[2] - 1] = cw->args[0] - cw->args[1];
 		carr->carry = (carr->rg[cw->args[2] - 1] == 0) ? 1 : 0;
 	}
-	return (COREWAR_STATUS_OK);	
+	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
+		ft_putchar('\n');
+	return (COREWAR_STATUS_OK);
 }
 
 int		and_function(t_corewar *cw, t_carriage *carr)
@@ -40,7 +54,7 @@ int		and_function(t_corewar *cw, t_carriage *carr)
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
 		ft_putchar('\n');
-	return (COREWAR_STATUS_OK);	
+	return (COREWAR_STATUS_OK);
 }
 
 int		or_function(t_corewar *cw, t_carriage *carr)
@@ -55,7 +69,7 @@ int		or_function(t_corewar *cw, t_carriage *carr)
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
 		ft_putchar('\n');
-	return (COREWAR_STATUS_OK);	
+	return (COREWAR_STATUS_OK);
 }
 
 int		xor_function(t_corewar *cw, t_carriage *carr)
@@ -70,5 +84,5 @@ int		xor_function(t_corewar *cw, t_carriage *carr)
 	}
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
 		ft_putchar('\n');
-	return (COREWAR_STATUS_OK);	
+	return (COREWAR_STATUS_OK);
 }

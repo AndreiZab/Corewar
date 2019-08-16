@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print_1.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 13:02:21 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 13:02:23 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 int		print_error(char *str, t_corewar *cw)
@@ -19,8 +31,8 @@ int		print_error_file(char *str, t_corewar *cw)
 
 int		print_error_file_unknown_inst(unsigned char byte, t_corewar *cw)
 {
-	char	*str;
-	char	alpha[] = "0123456789abcdef";
+	char		*str;
+	static char	alpha[] = "0123456789abcdef";
 
 	if ((str = ft_strdup("Unknown instruction **")) == NULL)
 		return (print_error("DISASM Memory Error", cw));

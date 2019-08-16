@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   load_value_1.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2019/08/16 13:00:42 by larlyne           #+#    #+#             */
+/*   Updated: 2019/08/16 13:00:44 by larlyne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "corewar.h"
 
 void	load_ind_link(t_corewar *cw, t_carriage *carr, int arg_n)
@@ -15,7 +27,7 @@ void	load_ind(t_corewar *cw, t_carriage *carr, int arg_n, char idx)
 	short int	dir2;
 
 	load_ind_link(cw, carr, arg_n);
-	if (idx)
+	if (idx & COREWAR_IDX)
 		cw->args[arg_n] %= IDX_MOD;
 	if (carr->instruction->dir_size == 4)
 	{
