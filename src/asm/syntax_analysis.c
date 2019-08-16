@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 17:17:31 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 16:28:27 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:07:10 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ static int			ft_find_cmd(t_token *operation)
 	operation->bytes = i;
 	return (i);
 }
-
 
 static void			ft_valid_arg(int cmd, t_token *tkn, int cmp, u_int32_t beg)
 {
@@ -76,11 +75,11 @@ static void			ft_valid_command(t_token **command, int i)
 	if (token && !(token->type == Line_feed || token->type == EOF))
 		ft_error("NEED_NEWLINE_IN_EOF");
 	if (args != 0)
-	ft_error("INVALID_NUM_OF_ARGUMENTS");
+		ft_error("INVALID_NUM_OF_ARGUMENTS");
 	*command = token;
 }
 
-void 		ft_syntax_champ(void)
+void				ft_syntax_champ(void)
 {
 	t_token *token;
 

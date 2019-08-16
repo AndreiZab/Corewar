@@ -6,13 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 16:42:13 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:05:06 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int 	ft_sep_search(char c)
+int			ft_sep_search(char c)
 {
 	if (c == DIRECT_CHAR || c == SEPARATOR_CHAR || c == COMMENT_CHAR)
 		return (1);
@@ -26,6 +26,7 @@ int 	ft_sep_search(char c)
 void		ft_token_create(t_type type)
 {
 	t_token	*token;
+
 	if (!(token = (t_token*)ft_memalloc(sizeof(t_token))))
 		ft_error("NO_MEMORY");
 	token->x = g_data->x;
@@ -68,7 +69,7 @@ void		ft_create_label(void)
 	ft_dup_lable();
 }
 
-int	ft_register(char *line, int len)
+int			ft_register(char *line, int len)
 {
 	int	i;
 
@@ -135,7 +136,8 @@ void		ft_indirect_number(char *line)
 		g_data->x++;
 	while (ft_isdigit(line[g_data->x]))
 		g_data->x++;
-	if ((g_data->x - temp) && (line[g_data->x] == DIRECT_CHAR || line[g_data->x] == SEPARATOR_CHAR))
+	if ((g_data->x - temp) && (line[g_data->x] == DIRECT_CHAR
+	|| line[g_data->x] == SEPARATOR_CHAR))
 	{
 		ft_token_create(Indirect);
 		g_data->tokens->content = ft_strsub(line, temp, g_data->x - temp);
@@ -150,6 +152,7 @@ void		ft_indirect_number(char *line)
 void		ft_parse_token(char **line)
 {
 	char *str;
+
 	str = *line;
 	if (str[g_data->x] == SEPARATOR_CHAR && ++g_data->x)
 		ft_token_create(Separator);
@@ -169,13 +172,14 @@ void		ft_parse_token(char **line)
 	*line = str;
 }
 
-void		ft_row_is_code (char *line)
+void		ft_row_is_code(char *line)
 {
 	while (line[g_data->x])
 	{
 		while (line[g_data->x] == ' ' || line[g_data->x] == '\t')
 			g_data->x++;
-		if (line[g_data->x] == COMMENT_CHAR || line[g_data->x] == ALT_COMMENT_CHAR)
+		if (line[g_data->x] == COMMENT_CHAR
+		|| line[g_data->x] == ALT_COMMENT_CHAR)
 			return ;
 		if (line[g_data->x])
 			ft_parse_token(&line);

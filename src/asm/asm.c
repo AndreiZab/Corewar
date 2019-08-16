@@ -6,15 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:54:16 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 14:33:57 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:52:31 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-
-
-void	ft_error(char *str)
+void		ft_error(char *str)
 {
 	if (g_data && g_data->y && g_data->x)
 	{
@@ -29,7 +27,7 @@ void	ft_error(char *str)
 	exit(1);
 }
 
-int 	ft_check_name(char *str)
+int			ft_check_name(char *str)
 {
 	int l;
 
@@ -41,7 +39,7 @@ int 	ft_check_name(char *str)
 	return (0);
 }
 
-int		main(int argc, char **argv)
+int			main(int argc, char **argv)
 {
 	int err;
 
@@ -57,7 +55,7 @@ int		main(int argc, char **argv)
 	else if (err)
 		write(2, "WRONG_FILE_TYPE,_NEED_.s_FILE\n", 29);
 	write(2, "Usage: ./asm champ.s\n", 21);
-	return(0);
+	return (0);
 }
 
 /*

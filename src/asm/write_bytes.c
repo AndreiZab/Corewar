@@ -6,14 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:33:06 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 16:08:51 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:51:30 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-
-char			*ft_new_file(char *s_name)
+static char			*ft_new_file(char *s_name)
 {
 	u_int16_t		len;
 	char			*cor_name;
@@ -40,7 +39,8 @@ void				ft_write_bytes(void)
 	write(1, "Writing output program to ", 26);
 	ft_putendl_fd(cor_name, 1);
 	free(cor_name);
-	if (write(fd, g_data->output, 2192 + g_bytes) == 2192 + g_bytes && close(fd) == 0)
+	if (write(fd, g_data->output, 2192 + g_bytes) == 2192 + g_bytes
+	&& close(fd) == 0)
 		;
 	else
 		ft_error("ERROR_WRITING_FILE");
