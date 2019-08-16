@@ -38,6 +38,7 @@ SRCS=ft_memset.c \
 	 ft_strdup.c \
 	 ft_strcpy.c \
 	 ft_strchr.c \
+	 ft_strncmp.c \
 \
 	 ft_lstr_new_empty.c \
 	 ft_lstr_new.c \

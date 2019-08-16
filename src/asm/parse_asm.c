@@ -6,24 +6,12 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 18:27:53 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 19:27:30 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 #include "get_next_line.h"
-
-int				ft_strncmp(char *s1, char *s2, unsigned int n)
-{
-	unsigned int i;
-
-	i = 0;
-	if (n == 0)
-		return (0);
-	while (s1[i] == s2[i] && s1[i] != '\0' && s2[i] != '\0' && i < n - 1)
-		i++;
-	return (s1[i] - s2[i]);
-}
 
 static int		ft_free_l(char *line)
 {

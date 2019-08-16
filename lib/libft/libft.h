@@ -60,6 +60,7 @@ char			*ft_strsub(char const *s, unsigned int start, size_t len);
 int				ft_isdigit(int c);
 char			*ft_strcpy(char *dst, const char *src);
 char			*ft_strchr(const char *s, int c);
+int				ft_strncmp(char *s1, char *s2, unsigned int n);
 
 /*
 ** Larlyne's String
