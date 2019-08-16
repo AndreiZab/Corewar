@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   vis_sdl_draw_1.c                                   :+:      :+:    :+:   */
+/*   vis_sdl_draw.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/15 16:42:39 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/16 14:39:57 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	ft_vis_redraw(t_corewar *cw)
 				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
 					break ;
 				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
-					ft_quit(cw);
+					break ;
 			}
 		}
 		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)

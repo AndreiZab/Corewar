@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 16:01:39 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/15 16:31:54 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/16 14:42:12 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,11 +109,4 @@ void	ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i)
 	x_dif = ttf_print_str(cw, clr, &dest, "Last live: ");
 	ft_change_dst(&dest, x_dif, 0);
 	ttf_print_str(cw, clr, &dest, ft_itoa(cw->players[i].live));
-	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
-	x_dif = ttf_print_str(cw, clr, &dest, "Dead or alive: ");
-	ft_change_dst(&dest, x_dif, 0);
-	if (cw->players[i].dead == 0)
-		ttf_print_str(cw, clr, &dest, "ALIVE!");
-	else
-		ttf_print_str(cw, clr, &dest, "DEAD!");
 }
