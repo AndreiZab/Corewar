@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 16:38:59 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:06:53 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_free_label_and_token(void)
 
 	while (g_data->labels)
 	{
-		temp_l = g_data->labels->next;
+		temp_l = g_data->labels->prev;
 		free(g_data->labels);
 		g_data->labels = temp_l;
 	}

@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 16:38:24 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:42:13 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,7 +113,7 @@ static void	ft_direct_number(char *line)
 	int		temp;
 
 	temp = g_data->x;
-	if (line[g_data->x] == '-' || line[g_data->x] == '+' )
+	if (line[g_data->x] == '-' || line[g_data->x] == '+')
 		g_data->x++;
 	while (ft_isdigit(line[g_data->x]))
 		g_data->x++;
