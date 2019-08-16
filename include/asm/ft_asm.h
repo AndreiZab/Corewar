@@ -85,6 +85,13 @@ typedef struct		s_label
 void		ft_asm(char *str);
 
 /*
+** parse_asm_01.c
+ */
+
+int				ft_find_name_or_comment(char *str, int i);
+int				ft_add_text(char *src, int i);
+
+/*
 ** asm.c
  */
 

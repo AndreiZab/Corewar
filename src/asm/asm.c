@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:54:16 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 17:52:31 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:53:01 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void		ft_error(char *str)
 	exit(1);
 }
 
-int			ft_check_name(char *str)
+static int	ft_check_name(char *str)
 {
 	int l;
 
