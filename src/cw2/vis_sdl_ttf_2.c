@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/15 16:55:35 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:36:14 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,4 +100,16 @@ void	ft_draw_arena_fields(t_corewar *cw, SDL_Rect dest, int p[], int del)
 	dest.x += dest.w;
 	dest.w = p[3] / del;
 	SDL_RenderFillRect(cw->ren, &dest);
+}
+
+void	ttf_print_winner(t_corewar *cw, int x_pos, int y_pos)
+{
+	SDL_Color	clr;
+	SDL_Rect	dest;
+
+	ft_add_param(cw, &clr, &dest, WHT_COL);
+	ft_change_dst(&dest, x_pos, y_pos - cw->fnt_h * 8);
+	ttf_print_str(cw, clr, &dest, "WINNER IS ");
+	ft_change_dst(&dest, 0, cw->fnt_h * 2);
+	ttf_print_str(cw, clr, &dest, cw->winner->name);
 }

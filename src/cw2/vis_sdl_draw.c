@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/16 14:39:57 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:37:52 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,12 @@ void	ft_vis_redraw(t_corewar *cw)
 	ttf_print_info(cw, 20, 10);
 	ttf_print_players_1_2(cw, 20, 10);
 	ttf_arena_ds(cw, 20);
+	if (cw->winner)
+		ttf_print_winner(cw, 20, cw->yd - cw->yu);
 	SDL_RenderPresent(cw->ren);
 	while (SDL_PollEvent(&e) != 0)
 	{
-		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
+		if ((e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p) || cw->winner)
 		{
 			while (SDL_PollEvent(&e) != 0 || 1)
 			{

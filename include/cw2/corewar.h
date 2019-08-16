@@ -435,5 +435,6 @@ void			ttf_print_label(t_corewar *cw);
 void			ttf_arena_ds(t_corewar *cw, int x_pos);
 void			ft_count_fields(t_corewar *cw, int *p);
 void			ft_draw_arena_fields(t_corewar *cw, SDL_Rect dest, int p[], int del);
+void			ttf_print_winner(t_corewar *cw, int x_pos, int y_pos);
 
 #endif
