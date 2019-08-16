@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 12:28:37 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:38:59 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,25 +36,19 @@ void	ft_free_label_and_token(void)
 	t_label *temp_l;
 	t_token *temp_t;
 
-	if (g_data->labels)
+	while (g_data->labels)
 	{
-		while(g_data->labels)
-		{
-			temp_l = g_data->labels->next;
-			free(g_data->labels);
-			g_data->labels = temp_l;
-		}
+		temp_l = g_data->labels->next;
+		free(g_data->labels);
+		g_data->labels = temp_l;
 	}
-	if (g_data->tokens)
+	while (g_data->tokens)
 	{
-		while (g_data->tokens)
-		{
-			temp_t = g_data->tokens->next;
-			if (g_data->tokens->content)
-				free(g_data->tokens->content);
-			free(g_data->tokens);
-			g_data->tokens = temp_t;
-		}
+		temp_t = g_data->tokens->next;
+		if (g_data->tokens->content)
+			free(g_data->tokens->content);
+		free(g_data->tokens);
+		g_data->tokens = temp_t;
 	}
 }
 
@@ -66,23 +60,22 @@ void	ft_free_data(void)
 		free(g_data->comment);
 	if (g_data->labels || g_data->tokens)
 		ft_free_label_and_token();
-	free(g_buf);
+	if (g_data->output)
+		free(g_data->output);
 	free(g_data);
 }
 
-void	*ft_create(int fd, char *filename)
+void	*ft_create(int fd, char *str)
 {
 	t_data *data;
 
 	g_data = 0;
 	g_bytes = 0;
-	g_buf = NULL;
 	if (!(data = (t_data *)ft_memalloc(sizeof(t_data))))
 		ft_error("NO_MEMORY");
 	data->fd = fd;
-	data->filename = filename;
+	data->filename = str;
 	g_data = data;
-	return (data);
 }
 
 char		*ft_get_name_or_comment(char *src, int *i, char flag)

@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 14:33:13 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:38:24 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void		ft_create_label(void)
 	ft_dup_lable();
 }
 
-int	is_reg(char *line, int len)
+int	ft_register(char *line, int len)
 {
 	int	i;
 
@@ -83,7 +83,7 @@ int	is_reg(char *line, int len)
 	return (0);
 }
 
-static void	ft_get_txt(char *line, t_type type)
+static void	ft_txt(char *line, t_type type)
 {
 	int temp;
 
@@ -97,7 +97,12 @@ static void	ft_get_txt(char *line, t_type type)
 	else if ((g_data->x - temp) && ft_sep_search(line[g_data->x]))
 	{
 		if (type == Indirect)
-			g_data->tokens->type = (is_reg(line + temp, g_data->x - temp)) ? Register : Instruction;
+		{
+			if (ft_register(line + temp, g_data->x - temp))
+				g_data->tokens->type = Register;
+			else
+				g_data->tokens->type = Instruction;
+		}
 	}
 	else
 		ft_error("ERROR_WITH_TEXT");
@@ -138,7 +143,7 @@ void		ft_indirect_number(char *line)
 	else
 	{
 		g_data->x = temp;
-		ft_get_txt(line, Indirect);
+		ft_txt(line, Indirect);
 	}
 }
 
@@ -149,16 +154,16 @@ void		ft_parse_token(char **line)
 	if (str[g_data->x] == SEPARATOR_CHAR && ++g_data->x)
 		ft_token_create(Separator);
 	else if (str[g_data->x] == '.' && ++g_data->x)
-		ft_get_txt(str, Command);
+		ft_txt(str, Command);
 	else if (str[g_data->x] == DIRECT_CHAR && ++g_data->x)
 	{
 		if (str[g_data->x] == LABEL_CHAR && ++g_data->x)
-			ft_get_txt(str, Direct_label);
+			ft_txt(str, Direct_label);
 		else
 			ft_direct_number(str);
 	}
 	else if (str[g_data->x] == LABEL_CHAR && ++g_data->x)
-		ft_get_txt(str, Indirect_label);
+		ft_txt(str, Indirect_label);
 	else
 		ft_indirect_number(str);
 	*line = str;

@@ -56,6 +56,7 @@ typedef struct		s_data
 	char				*name;
 	char				*comment;
 	t_token				*tokens;
+	char				*output;
 	int					fd;
 	char				*filename;
 	int					x;
@@ -64,7 +65,6 @@ typedef struct		s_data
 	struct s_label		*labels;
 }					t_data;
 
-char		*g_buf;
 t_data		*g_data;
 u_int32_t	g_bytes;
 

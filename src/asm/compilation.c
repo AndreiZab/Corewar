@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 17:28:01 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/15 19:26:28 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:38:24 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	ft_itoh(int32_t dec, int dir_size, u_int32_t *curr)
 	step = 0;
 	while (dir_size)
 	{
-		g_buf[*curr + dir_size - 1] = (u_int8_t)((dec >> step) & 0xFF);
+		g_data->output[*curr + dir_size - 1] = (u_int8_t)((dec >> step) & 0xFF);
 		step += 8;
 		dir_size--;
 	}
@@ -129,15 +129,15 @@ void 	ft_compilation_champ(void)
 	u_int32_t	carriage;
 
 	token = g_data->tokens;
-	if (!(g_buf = (char*)ft_memalloc(sizeof(char) * (2192 + g_bytes)))) // сделать не глобал
+	if (!(g_data->output = (char*)ft_memalloc(sizeof(char) * (2192 + g_bytes)))) // сделать не глобал
 		ft_error("NO_MEMORY");
 	carriage = 0;
 	ft_itoh(COREWAR_EXEC_MAGIC, 4, &carriage);
 	carriage = 4 + PROG_NAME_LENGTH + 4;
 	ft_itoh(g_bytes, 4, &carriage);
 	carriage = 2192;
-	ft_memcpy(g_buf + 4 + PROG_NAME_LENGTH + 4 * 2, g_data->comment, ft_strlen(g_data->comment));
-	ft_memcpy(g_buf + 4, g_data->name, ft_strlen(g_data->name));
+	ft_memcpy(g_data->output + 4 + PROG_NAME_LENGTH + 4 * 2, g_data->comment, ft_strlen(g_data->comment));
+	ft_memcpy(g_data->output + 4, g_data->name, ft_strlen(g_data->name));
 	while (token)
 	{
 		if (token->type == Instruction)

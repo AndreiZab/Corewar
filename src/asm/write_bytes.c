@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:33:06 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 16:05:23 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 16:08:51 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ void				ft_write_bytes(void)
 	write(1, "Writing output program to ", 26);
 	ft_putendl_fd(cor_name, 1);
 	free(cor_name);
-	if (write(fd, g_buf, 2192 + g_bytes) == 2192 + g_bytes && close(fd) == 0)
+	if (write(fd, g_data->output, 2192 + g_bytes) == 2192 + g_bytes && close(fd) == 0)
 		;
 	else
 		ft_error("ERROR_WRITING_FILE");
