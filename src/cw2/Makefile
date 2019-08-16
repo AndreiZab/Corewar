@@ -33,11 +33,23 @@ SRCS=main.c\
 	print_log_2.c \
 	print_log_functions.c \
 	kill_machine.c \
-	print_kill_machine.c
+	print_kill_machine.c \
+	vis_sdl_help_1.c \
+	vis_sdl_help_2.c \
+	vis_sdl_draw.c \
+	vis_sdl_ttf_1.c  \
+	vis_sdl_ttf_2.c
+
 SRCS_DIR=.
 OBJS_DIR=obj
 
-INCLUDE=-I ../../include/ -I ../../include/cw2 -I ../../lib/libft
+SDL_LIBS=-L /Users/qclubfoo/brew/Cellar/sdl2_ttf/2.0.15/lib -lSDL2_ttf \
+		-L /Users/qclubfoo/brew/Cellar/sdl2/2.0.9_1/lib -lSDL2
+
+# Указать нужные пути для библиотек SDL
+INCLUDE=-I ../../include/ -I ../../include/cw2 -I ../../lib/libft \
+		-I /Users/qclubfoo/brew/Cellar/sdl2/2.0.9_1/include/SDL2 \
+		-I /Users/qclubfoo/brew/Cellar/sdl2_ttf/2.0.15/include/SDL2
 LIBFT_DIR=../../lib/libft
 
 CFLAGS=-Wall -Wextra -Werror
@@ -48,7 +60,7 @@ all: $(NAME)
 
 $(NAME): $(LIBFT_DIR)/libft.a $(OBJS_DIR) $(addprefix $(OBJS_DIR)/, $(OBJS))
 	@printf "%-72c\rCreating corewar... " ' '
-	@gcc $(CFLAGS) -o $(NAME) $(INCLUDE) $(addprefix $(OBJS_DIR)/, $(OBJS)) -L $(LIBFT_DIR) -lft
+	@gcc $(CFLAGS) -o $(NAME) $(INCLUDE) $(addprefix $(OBJS_DIR)/, $(OBJS)) -L $(LIBFT_DIR) -lft $(SDL_LIBS)
 	@printf "Done!\n"
 
 $(LIBFT_DIR)/libft.a:

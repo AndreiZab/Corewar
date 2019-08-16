@@ -100,6 +100,8 @@ int		corewar_play(t_corewar *cw)
 			status = kill_machine(cw);
 		if (status != COREWAR_STATUS_OK)
 			break ;
+		if (cw->options & COREWAR_OPT_VISUALIZER)
+			ft_vis_redraw(cw);
 		if (cw->dump == (signed)cw->cycle)
 		{
 			status = corewar_dump(cw);
