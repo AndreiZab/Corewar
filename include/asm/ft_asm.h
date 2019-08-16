@@ -22,7 +22,6 @@ typedef enum	e_type
 	Indirect,
 	Indirect_label,
 	Command,
-	String,
 	Label,
 	Instruction,
 	Separator,
@@ -71,7 +70,6 @@ u_int32_t	g_bytes;
 
 typedef struct		s_label
 {
-	char				*name;
 	t_token				*ptr;
 
 	struct s_label		*next;
@@ -84,6 +82,7 @@ typedef struct		s_label
 ** parse_asm.c
  */
 
+void		ft_free_data(void);
 void		ft_asm(char *str);
 
 /*
