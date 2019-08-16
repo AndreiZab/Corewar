@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 15:14:10 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/15 21:35:01 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:28:37 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,42 @@ int			ft_free_l(char *line)
 	return (1);
 }
 
+void	ft_free_label_and_token(void)
+{
+	t_label *temp_l;
+	t_token *temp_t;
+
+	if (g_data->labels)
+	{
+		while(g_data->labels)
+		{
+			temp_l = g_data->labels->next;
+			free(g_data->labels);
+			g_data->labels = temp_l;
+		}
+	}
+	if (g_data->tokens)
+	{
+		while (g_data->tokens)
+		{
+			temp_t = g_data->tokens->next;
+			if (g_data->tokens->content)
+				free(g_data->tokens->content);
+			free(g_data->tokens);
+			g_data->tokens = temp_t;
+		}
+	}
+}
+
 void	ft_free_data(void)
 {
-	free(g_data->name);
-	free(g_data->comment);
+	if (g_data->name)
+		free(g_data->name);
+	if (g_data->comment)
+		free(g_data->comment);
+	if (g_data->labels || g_data->tokens)
+		ft_free_label_and_token();
+	free(g_buf);
 	free(g_data);
 }
 

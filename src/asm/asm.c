@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 13:54:16 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/15 20:04:19 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:49:14 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,15 @@
 
 void	ft_error(char *str)
 {
-	if (g_data && g_data->y != 0)
+	if (g_data && g_data->y && g_data->x)
 	{
 		ft_putstr_fd("line:", 2);
 		ft_putnbr_fd(g_data->y, 2);
+		ft_putstr_fd(" column:", 2);
+		ft_putnbr_fd(g_data->x, 2);
 		ft_putchar_fd(' ', 2);
 	}
+	ft_free_data();
 	ft_putendl_fd(str, 2);
 	exit(1);
 }
@@ -63,6 +66,6 @@ int		main(int argc, char **argv)
  ** Добавить чек последней строки (наличие \n)
  ** Чекнуть на имя больше норм и коммент больше нормы
  ** Чек на пустые строки перед именем
- **
+ ** Не положил \n в имени
  **
  */

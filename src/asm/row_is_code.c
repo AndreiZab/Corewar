@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/15 21:12:41 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:25:14 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,13 +72,13 @@ void		label_add(void)
 
 	if (!(label = (t_label*)ft_memalloc(sizeof(t_label))))
 		ft_error("NO_MEMORY");
-	ft_bzero(label, sizeof(label));
+//	ft_bzero(label, sizeof(label));
 	g_data->x++;
 	g_data->tokens->type = Label;
 	label->ptr = g_data->tokens;
 	if (g_data->labels)
-		g_data->labels->prev = label;
-	label->next = g_data->labels;
+		g_data->labels->next = label;
+	label->prev = g_data->labels;
 	g_data->labels = label;
 	lable_dup();
 }
