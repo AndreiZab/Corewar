@@ -6,7 +6,7 @@
 #    By: larlyne <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/04/07 13:38:08 by larlyne           #+#    #+#              #
-#    Updated: 2019/08/04 12:04:20 by rhealitt         ###   ########.fr        #
+#    Updated: 2019/08/16 15:03:56 by larlyne          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRCS=ft_memset.c \
 	 ft_isint.c \
 	 ft_itoa.c \
 	 ft_strdup.c \
+	 ft_strcpy.c \
+	 ft_strchr.c \
 \
 	 ft_lstr_new_empty.c \
 	 ft_lstr_new.c \

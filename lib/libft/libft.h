@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/04/06 13:18:52 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/04 12:04:20 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 15:03:22 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,8 @@ void			*ft_memchr(const void *s, int c, size_t n);
 char			*ft_strjoin(char const *s1, char const *s2);
 char			*ft_strsub(char const *s, unsigned int start, size_t len);
 int				ft_isdigit(int c);
+char			*ft_strcpy(char *dst, const char *src);
+char			*ft_strchr(const char *s, int c);
 
 /*
 ** Larlyne's String
