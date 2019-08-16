@@ -117,6 +117,15 @@ void	 	ft_compilation_champ(void);
 void		ft_write_bytes(void);
 
 /*
+** tools.c
+ */
+
+void		ft_revert_tokens(void);
+void		ft_free_data(void);
+void		ft_create(int fd, char *str);
+void		ft_token_create(t_type type);
+
+/*
 **
  */
 

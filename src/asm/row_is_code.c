@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 18:05:06 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:05:15 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,21 +21,6 @@ int			ft_sep_search(char c)
 	if (c == '\v' || c == '\f' || c == '\r')
 		return (1);
 	return (0);
-}
-
-void		ft_token_create(t_type type)
-{
-	t_token	*token;
-
-	if (!(token = (t_token*)ft_memalloc(sizeof(t_token))))
-		ft_error("NO_MEMORY");
-	token->x = g_data->x;
-	token->y = g_data->y;
-	token->type = type;
-	if (g_data->tokens)
-		g_data->tokens->prev = token;
-	token->next = g_data->tokens;
-	g_data->tokens = token;
 }
 
 void		ft_dup_lable(void)
