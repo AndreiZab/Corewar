@@ -5,6 +5,9 @@
 # include <fcntl.h>
 # include <limits.h>
 # include "libft.h"
+# include "SDL.h"
+// # include "SDL2_gfxPrimitives.h"
+# include "SDL_ttf.h"
 # include "op.h"
 # define COREWAR_STATUS_OK 0
 # define COREWAR_STATUS_WARNING 1
@@ -37,6 +40,22 @@
 # define COREWAR_LINK 4
 # define COREWAR_IDX 8
 # define COREWAR_DUMP_COLUMNS 64 //временно
+
+# define COURIER_TTF "../../include/cw2/courier.ttf"
+# define BLK 0, 0, 0, 0
+# define RD 170, 0, 0, 0
+# define GRN 0, 170, 0, 0
+# define BL 0, 0, 255, 0
+# define WHT 255, 255, 255, 0
+# define YLW 170, 170, 0, 0
+# define GRY 127, 127, 127, 0
+
+# define BLK_COL -1
+# define WHT_COL 0
+# define RD_COL 1
+# define GRN_COL 2
+# define BL_COL 3
+# define YLW_COL 4
 
 typedef struct s_corewar t_corewar;
 
@@ -115,6 +134,18 @@ struct s_corewar
 	int				cycle_to_die;
 	int				die_step;
 	int				cycle_lives_counter;
+
+	SDL_Window		*win;
+	SDL_Renderer	*ren;
+	TTF_Font		*fnt;
+	int				scr_w;
+	int				scr_h;
+	int				fnt_h;
+	int				col;
+	int				xl;
+	int				xr;
+	int				yu;
+	int				yd;
 };
 
 
@@ -355,5 +386,52 @@ int				kill_machine(t_corewar *cw);
 void			print_carriage_death(t_corewar *cw, t_carriage *carr);
 void			print_die_step(t_corewar *cw);
 void			print_winner(t_corewar *cw, int id);
+
+/*
+** vis_sdl_help_1.c
+*/
+
+int				ft_init_sdl(t_corewar *cw);
+int				init_sdl(t_corewar *cw);
+void			ft_quit(t_corewar *cw);
+void			ft_init_borders(t_corewar *cw);
+int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
+
+/*
+** vis_sdl_help_2.c
+*/
+
+void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
+void			ft_set_clr(SDL_Color *clr, int num);
+void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest, int num);
+
+/*
+** vis_sdl_draw.c
+*/
+
+void			ft_vis_redraw(t_corewar *cw);
+void			ttf_print_frames(t_corewar *cw);
+void			ttf_print_fields(t_corewar *cw);
+void			ttf_print_carrs(t_corewar *cw);
+int				ft_count_carrs(t_carriage *carrs);
+
+/*
+** vis_sdl_ttf_1.c
+*/
+
+void			ttf_print_system(t_corewar *cw, int x_pos, int y_pos);
+void			ttf_print_info(t_corewar *cw, int x_pos, int y_pos);
+void			ttf_print_players_1_2(t_corewar *cw, int x_pos, int y_pos);
+void			ttf_print_players_3_4(t_corewar *cw, int y_pos, int *i);
+void			ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i);
+
+/*
+** vis_sdl_ttf_2.c
+*/
+
+void			ttf_print_label(t_corewar *cw);
+void			ttf_arena_ds(t_corewar *cw, int x_pos);
+void			ft_count_fields(t_corewar *cw, int *p);
+void			ft_draw_arena_fields(t_corewar *cw, SDL_Rect dest, int p[], int del);
 
 #endif
