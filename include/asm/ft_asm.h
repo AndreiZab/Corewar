@@ -82,7 +82,6 @@ typedef struct		s_label
 ** parse_asm.c
  */
 
-void		ft_free_data(void);
 void		ft_asm(char *str);
 
 /*
@@ -95,8 +94,16 @@ void		ft_error(char *str);
 ** row_is_code.c
  */
 
-void		ft_token_create(t_type type);
+
 void		ft_row_is_code (char *str);
+
+/*
+** row_is_code_02.c
+ */
+
+int			ft_sep_search(char c);
+void		ft_create_label(void);
+int			ft_register(char *line, int len);
 
 /*
 ** syntax_analysis.c
@@ -114,6 +121,8 @@ void	 	ft_compilation_champ(void);
 ** write_bytes.c
  */
 
+void		ft_itoh(int32_t dec, int dir_size, u_int32_t *curr);
+int32_t		ft_atoi_cor(const char *str, u_int8_t size);
 void		ft_write_bytes(void);
 
 /*

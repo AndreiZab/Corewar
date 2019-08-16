@@ -6,70 +6,13 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/13 16:55:41 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 18:05:15 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 18:33:36 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
-int			ft_sep_search(char c)
-{
-	if (c == DIRECT_CHAR || c == SEPARATOR_CHAR || c == COMMENT_CHAR)
-		return (1);
-	if (c == '\0' || c == '\n' || c == '\"' || c == ' ' || c == '\t')
-		return (1);
-	if (c == '\v' || c == '\f' || c == '\r')
-		return (1);
-	return (0);
-}
-
-void		ft_dup_lable(void)
-{
-	char	*cont;
-	t_label	*lable;
-
-	cont = g_data->labels->ptr->content;
-	lable = g_data->labels->next;
-	while (lable)
-	{
-		if (!ft_strcmp(cont, lable->ptr->content))
-			ft_error("DUPLICATES_LABEL");
-		lable = lable->next;
-	}
-}
-
-void		ft_create_label(void)
-{
-	t_label	*label;
-
-	if (!(label = (t_label*)ft_memalloc(sizeof(t_label))))
-		ft_error("NO_MEMORY");
-	g_data->x++;
-	g_data->tokens->type = Label;
-	label->ptr = g_data->tokens;
-	if (g_data->labels)
-		g_data->labels->next = label;
-	label->prev = g_data->labels;
-	g_data->labels = label;
-	ft_dup_lable();
-}
-
-int			ft_register(char *line, int len)
-{
-	int	i;
-
-	i = 0;
-	if ((len == 2 || len == 3) && line[i++] == 'r')
-	{
-		while (ft_isdigit(line[i]) && i < len)
-			i++;
-		if (i == len && ft_atoi(line + 1) > 0)
-			return (1);
-	}
-	return (0);
-}
-
-static void	ft_txt(char *line, t_type type)
+void static		ft_txt(char *line, t_type type)
 {
 	int temp;
 
@@ -94,7 +37,7 @@ static void	ft_txt(char *line, t_type type)
 		ft_error("ERROR_WITH_TEXT");
 }
 
-static void	ft_direct_number(char *line)
+void static		ft_direct_number(char *line)
 {
 	int		temp;
 
@@ -112,7 +55,7 @@ static void	ft_direct_number(char *line)
 		ft_error("INVALID_DIRECT");
 }
 
-void		ft_indirect_number(char *line)
+void static		ft_indirect_number(char *line)
 {
 	int temp;
 
@@ -134,7 +77,7 @@ void		ft_indirect_number(char *line)
 	}
 }
 
-void		ft_parse_token(char **line)
+void static		ft_parse_token(char **line)
 {
 	char *str;
 

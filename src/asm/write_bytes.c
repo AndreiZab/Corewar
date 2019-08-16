@@ -6,12 +6,50 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/15 19:33:06 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 17:51:30 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 17:52:04 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_asm.h"
 
+void		ft_itoh(int32_t dec, int dir_size, u_int32_t *curr)
+{
+	int			step;
+	int			start_size;
+
+	start_size = dir_size;
+	step = 0;
+	while (dir_size)
+	{
+		g_data->output[*curr + dir_size - 1] = (u_int8_t)((dec >> step) & 0xFF);
+		step += 8;
+		dir_size--;
+	}
+	*curr += start_size;
+}
+
+int32_t		ft_atoi_cor(const char *str, u_int8_t size)
+{
+	int				sign;
+	int				i;
+	int64_t			nbr;
+
+	i = 0;
+	sign = 1;
+	nbr = 0;
+	while (('\t' <= str[i] && str[i] <= '\r') || str[i] == ' ')
+		++i;
+	if (str[i] == '-')
+		sign = -1;
+	if ((str[i] == '-') || (str[i] == '+'))
+		i++;
+	while ('0' <= str[i] && str[i] <= '9')
+		nbr = nbr * 10 + ((int)str[i++] - '0');
+	size == 1 ? (nbr = (u_int8_t)nbr) : 1;
+	size == 2 ? (nbr = (int16_t)nbr) : 1;
+	size == 4 ? (nbr = (int32_t)nbr) : 1;
+	return (nbr * (int64_t)sign);
+}
 static char			*ft_new_file(char *s_name)
 {
 	u_int16_t		len;
