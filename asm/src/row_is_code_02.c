@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 18:31:50 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 19:07:49 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/17 22:07:05 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@ int				ft_sep_search(char c)
 static void		ft_dup_label(void)
 {
 	char	*cont;
-	t_label	*lable;
+	t_label	*label;
 
 	cont = g_data->labels->ptr->content;
-	lable = g_data->labels->next;
-	while (lable)
+	label = g_data->labels->next;
+	while (label)
 	{
-		if (!ft_strcmp(cont, lable->ptr->content))
+		if (!ft_strcmp(cont, label->ptr->content))
 			ft_error("DUPLICATES_LABEL");
-		lable = lable->next;
+		label = label->next;
 	}
 }
 
@@ -64,6 +64,8 @@ int				ft_register(char *line, int len)
 		while (ft_isdigit(line[i]) && i < len)
 			i++;
 		if (i == len && ft_atoi(line + 1) > 0)
+			return (1);
+		if (ft_atoi(line + 1) == 0 && line[i - 1] == '0' && i == len)
 			return (1);
 	}
 	return (0);

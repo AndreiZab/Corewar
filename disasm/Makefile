@@ -13,8 +13,8 @@ SRCS=main.c\
 SRCS_DIR=.
 OBJS_DIR=obj
 
-INCLUDE=-I ../../include/ -I ../../include/disasm -I ../../lib/libft
-LIBFT_DIR=../../lib/libft
+INCLUDE=-I ./include/ -I ../common -I ../common/libft
+LIBFT_DIR=../common/libft
 
 CFLAGS=-Wall -Wextra -Werror
 

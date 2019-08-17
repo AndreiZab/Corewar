@@ -16,9 +16,9 @@ void		ft_error(char *str)
 {
 	if (g_data && g_data->y && g_data->x)
 	{
-		ft_putstr_fd("line:", 2);
+		ft_putstr_fd("Line:", 2);
 		ft_putnbr_fd(g_data->y, 2);
-		ft_putstr_fd(" column:", 2);
+		ft_putstr_fd(" Column:", 2);
 		ft_putnbr_fd(g_data->x, 2);
 		ft_putchar_fd(' ', 2);
 	}

@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 19:22:09 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/16 19:27:30 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/17 21:19:11 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int				ft_add_text(char *src, int i)
 	while (src[i] && src[i] != '\"')
 		dst[j++] = src[i++];
 	ft_string_connection(dst);
-	if (src[i] == '\"' && i++)
+	if (src[i] == '\"' && ++i)
 		g_data->quotes++;
 	while (src[i])
 	{
@@ -70,7 +70,7 @@ static char		*ft_get_name_or_comment(char *src, int *i, char flag)
 		g_data->quotes++;
 	while (src[*i] && src[*i] != '\"')
 		dst[j++] = src[(*i)++];
-	if (src[(*i)] == '\"' && (*i)++)
+	if (src[(*i)] == '\"' && ++(*i))
 		g_data->quotes++;
 	while (src[*i])
 	{

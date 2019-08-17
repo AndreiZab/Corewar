@@ -6,7 +6,7 @@
 /*   By: rhealitt <rhealitt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/14 17:17:31 by rhealitt          #+#    #+#             */
-/*   Updated: 2019/08/17 12:03:27 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/17 21:29:13 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,10 +72,10 @@ static void			ft_valid_command(t_token **command, int i)
 		if (token->type != Separator)
 			break ;
 	}
-	if (token && !(token->type == Line_feed || token->type == EOF))
-		ft_error("NEED_NEWLINE_IN_EOF");
 	if (args != 0)
 		ft_error("INVALID_NUM_OF_ARGUMENTS");
+	if (token && !(token->type == Line_feed || token->type == EOF))
+		ft_error("NEED_NEWLINE_IN_EOF");
 	*command = token;
 }
 
