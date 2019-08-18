@@ -45,7 +45,14 @@ OBJS_DIR=obj
 
 SDL_LIBS=`sdl2-config --libs` -lSDL2_gfx -lSDL2_ttf
 
+#SDL_LIBS=-L /Users/qclubfoo/brew/Cellar/sdl2_ttf/2.0.15/lib -lSDL2_ttf \
+#		-L /Users/qclubfoo/brew/Cellar/sdl2/2.0.9_1/lib -lSDL2
+#
 # Указать нужные пути для библиотек SDL
+#INCLUDE=-I ../../include/ -I ../../include/cw2 -I ../../lib/libft \
+#		-I /Users/qclubfoo/brew/Cellar/sdl2/2.0.9_1/include/SDL2 \
+#		-I /Users/qclubfoo/brew/Cellar/sdl2_ttf/2.0.15/include/SDL2
+
 INCLUDE=-I ../common/ -I include -I ../common/libft \
 		`sdl2-config --cflags`
 LIBFT_DIR=../common/libft

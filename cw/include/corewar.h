@@ -55,7 +55,7 @@
 # define COREWAR_IDX 8
 # define COREWAR_DUMP_COLUMNS 32
 
-# define COURIER_TTF "../../include/cw2/courier.ttf"
+# define COURIER_TTF "include/courier.ttf"
 # define BLK 0, 0, 0, 0
 # define RD 170, 0, 0, 0
 # define GRN 0, 170, 0, 0
