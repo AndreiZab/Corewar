@@ -10,10 +10,10 @@ SRCS=main.c\
 	check_3.c \
 	load_inst.c \
 	utils.c
-SRCS_DIR=.
+SRCS_DIR=src
 OBJS_DIR=obj
 
-INCLUDE=-I ./include/ -I ../common -I ../common/libft
+INCLUDE=-I ../common -I include -I ../common/libft
 LIBFT_DIR=../common/libft
 
 CFLAGS=-Wall -Wextra -Werror

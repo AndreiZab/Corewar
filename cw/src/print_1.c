@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 13:02:21 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:02:23 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,4 +53,11 @@ int		print_error_file_inst(char *inst, char *str, t_corewar *cw)
 	ft_putstr(str);
 	ft_putchar('\n');
 	return (COREWAR_STATUS_FATAL);
+}
+
+void	print_now_cycle(t_corewar *cw)
+{
+	ft_putstr("It is now cycle ");
+	print_col_nbr(cw, cw->cycle, COREWAR_COLOR_CYCLE);
+	ft_putchar('\n');
 }

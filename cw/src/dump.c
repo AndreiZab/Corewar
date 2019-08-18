@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 12:58:09 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:58:11 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ void		dump_carriages_by_owner(t_corewar *cw, unsigned char owner_id)
 		{
 			ft_putstr("\n\t== Position: ");
 			ft_putnbr(carr->pc);
-			ft_putstr(" ID: ");
+			ft_putstr(" (");
+			print_address(cw, carr->pc);
+			ft_putstr(") ID: ");
 			ft_putnbr(carr->id);
 			ft_putstr((carr->carry) ? "\n\tCarry: Yes" : "\n\tCarry: No");
 			ft_putstr("\n\tLast live instruction: ");

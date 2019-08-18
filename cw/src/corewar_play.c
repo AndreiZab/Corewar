@@ -49,6 +49,24 @@ int		execude_function(t_corewar *cw, t_carriage *carr)
 	return (COREWAR_STATUS_OK);
 }
 
+void	do_carriage(t_corewar *cw, t_carriage *carr, int *status)
+{
+	if (carr->instruction != NULL)
+	{
+		*status = execude_function(cw, carr);
+		if (carr->pc_comm != carr->pc &&
+			cw->log & COREWAR_OPT_LOG_PC_MOVEMENTS)
+			print_pc_movements(cw, carr);
+		carr->instruction = NULL;
+	}
+	else
+	{
+		carriage_grab_instruction(cw, carr);
+		if (carr->instruction == NULL)
+			carriage_move(carr, 1);
+	}
+}
+
 int		execude_carriages(t_corewar *cw)
 {
 	int				status;
@@ -62,27 +80,16 @@ int		execude_carriages(t_corewar *cw)
 		{
 			if (carr->sleep > 0)
 				--carr->sleep;
-			if (carr->sleep == 0)
+			if (carr->sleep <= 1)
 			{
-				if (carr->instruction != NULL)
-					status = execude_function(cw, carr);
-				else
-					carriage_move(carr, 1);
+				do_carriage(cw, carr, &status);
 				if (status != COREWAR_STATUS_OK)
 					break ;
-				carriage_grab_instruction(cw, carr);
 			}
 		}
 		carr = carr->next;
 	}
 	return (status);
-}
-
-void	print_now_cycle(t_corewar *cw)
-{
-	ft_putstr("It is now cycle ");
-	print_col_nbr(cw, cw->cycle, COREWAR_COLOR_CYCLE);
-	ft_putchar('\n');
 }
 
 int		corewar_play(t_corewar *cw)

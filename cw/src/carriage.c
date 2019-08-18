@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 12:53:39 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:53:41 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,12 @@ int		carriage_new(t_corewar *cw, unsigned char owner_id, int pos)
 		carr->id = carr->next->id + 1;
 	else
 		carr->id = 1;
-	carriage_grab_instruction(cw, carr);
+	carr->instruction = NULL;
 	return (COREWAR_STATUS_OK);
 }
 
 void	carriage_grab_instruction(t_corewar *cw, t_carriage *carr)
 {
-	if (carr->pc_comm != carr->pc && cw->log & COREWAR_OPT_LOG_PC_MOVEMENTS)
-		print_pc_movements(cw, carr);
 	carr->pc_comm = carr->pc;
 	if ((carr->instruction = insts_find(cw, cw->map[carr->pc_comm])) != NULL)
 		carr->sleep = carr->instruction->sleep;
@@ -59,7 +57,7 @@ int		carriage_copy(t_corewar *cw, t_carriage *carr, int pos)
 	copy->next = cw->carrs;
 	cw->carrs = copy;
 	copy->id = copy->next->id + 1;
-	carriage_grab_instruction(cw, copy);
+	copy->instruction = NULL;
 	return (COREWAR_STATUS_OK);
 }
 
@@ -69,9 +67,8 @@ void	carriage_move_by_types(t_corewar *cw, t_carriage *carr)
 	int		step;
 
 	i = -1;
+	step = 0;
 	while (++i < carr->instruction->argc)
-	{
-		step = get_size(carr->instruction, cw->temp_types[i]);
-		carriage_move(carr, step);
-	}
+		step += get_size(carr->instruction, cw->temp_types[i]);
+	carriage_move(carr, step);
 }

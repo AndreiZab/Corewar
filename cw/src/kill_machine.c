@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 12:59:49 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:59:50 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int		kill_machine(t_corewar *cw)
 	if (kill_carriages(cw) == 0)
 	{
 		winner_id = find_winner(cw);
+		cw->winner = cw->players + winner_id - 1;
 		print_winner(cw, winner_id);
 		return (COREWAR_STATUS_FINISH);
 	}

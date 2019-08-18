@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 12:59:05 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:59:07 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int		check_types(t_corewar *cw, t_carriage *carr)
 	int		i;
 
 	i = -1;
-	while (++i < 3)
+	while (++i < carr->instruction->argc)
 	{
 		if (check_arg(carr->instruction->argt[i], cw->temp_types[i]) == 0)
 			return (0);
@@ -51,6 +51,7 @@ int		check_registers(t_corewar *cw, t_carriage *carr)
 			if (!(regnumber_contains(reg_n)) &&
 				carr->instruction->argt[i] & DISASM_LINK)
 				return (0);
+			++offset;
 		}
 		else if (cw->temp_types[i] == DIR_CODE)
 			offset += carr->instruction->dir_size;

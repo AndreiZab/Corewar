@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 12:41:40 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 12:41:41 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,21 @@ static void		print_dir(t_corewar *cw, t_instruction *inst, int *i)
 	*i += inst->dir_size;
 }
 
-static void		print_ind(t_corewar *cw, int *i)
+static void		print_ind(t_corewar *cw, t_carriage *carr, int *i, int j)
 {
-	unsigned char	num[2];
+	short			ind;
+	int				val;
 
-	ft_bzero(num, 2);
-	map_get(cw, 2, *i, num);
-	ft_putnbr(*((short*)(num)));
+	map_get(cw, 2, *i, &ind);
+	if (carr->instruction->argt[j] & DISASM_IDX)
+		ind %= IDX_MOD;
+	if (carr->instruction->argt[j] & DISASM_ORIG_VALUE_IN)
+	{
+		map_get(cw, 4, carr->pc_comm + ind, &val);
+		ft_putnbr(val);
+	}
+	else
+		ft_putnbr(ind);
 	*i += 2;
 }
 
@@ -52,7 +60,7 @@ static void		print_executed(t_corewar *cw, t_carriage *carr, int i)
 		else if (cw->temp_types[j] == DIR_CODE)
 			print_dir(cw, carr->instruction, &i);
 		else
-			print_ind(cw, &i);
+			print_ind(cw, carr, &i, j);
 	}
 }
 
@@ -75,6 +83,8 @@ void			print_log(t_corewar *cw, t_carriage *carr)
 {
 	int		pos;
 
+	if (carr->instruction->byte == 16)
+		return ;
 	ft_putstr("P");
 	if (cw->options & COREWAR_OPT_COLORS)
 		ft_setcolor(cc_current, COREWAR_COLOR_CARRIAGE);
@@ -82,6 +92,6 @@ void			print_log(t_corewar *cw, t_carriage *carr)
 	if (cw->options & COREWAR_OPT_COLORS)
 		ft_setcolor(cc_current, cc_default);
 	ft_putstr(" | ");
-	pos = carr->pc_comm + 1 + ((carr->instruction->type_byte) ? 1 : 0);
+	pos = carr->pc_comm + 1 + (carr->instruction->type_byte ? 1 : 0);
 	print_executed(cw, carr, pos);
 }

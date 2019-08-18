@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 13:04:27 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:04:30 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,11 +48,10 @@ int		sti_function(t_corewar *cw, t_carriage *carr)
 	int		pos;
 
 	load_value(cw, carr, 0, REG_CODE);
-	load_value(cw, carr, 1, cw->temp_types[1]);
+	load_value(cw, carr, 1, cw->temp_types[1] | COREWAR_IDX);
 	load_value(cw, carr, 2, cw->temp_types[2]);
 	pos = carr->pc_comm + (cw->args[1] + cw->args[2]) % IDX_MOD;
-	map_set(cw, 4, pos,
-		(void*)&(cw->args[0]));
+	map_set(cw, 4, pos, cw->args + 0);
 	map_set_color(cw, pos, 4, carr->owner_id);
 	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
 		print_log_sti(cw, carr);

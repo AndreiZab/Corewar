@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 13:05:02 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:05:03 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ int		lfork_function(t_corewar *cw, t_carriage *carr)
 int		aff_function(t_corewar *cw, t_carriage *carr)
 {
 	load_value(cw, carr, 0, REG_CODE);
-	if (cw->log & COREWAR_OPT_LOG_OPERATIONS)
-		ft_putchar('\n');
 	if (cw->options & COREWAR_OPT_AFF)
 		ft_putchar(cw->args[0]);
 	return (COREWAR_STATUS_OK);

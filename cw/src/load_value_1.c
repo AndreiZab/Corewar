@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/16 13:00:42 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/17 11:57:42 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/16 13:00:44 by larlyne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,12 @@ void	load_ind_link(t_corewar *cw, t_carriage *carr, int arg_n)
 void	load_ind(t_corewar *cw, t_carriage *carr, int arg_n, char idx)
 {
 	long int	dir4;
-	short int	dir2;
 
 	load_ind_link(cw, carr, arg_n);
 	if (idx & COREWAR_IDX)
 		cw->args[arg_n] %= IDX_MOD;
-	if (carr->instruction->dir_size == 4)
-	{
-		map_get(cw, 4, carr->pc_comm + cw->args[arg_n], &dir4);
-		cw->args[arg_n] = dir4;
-	}
-	else if (carr->instruction->dir_size == 2)
-	{
-		map_get(cw, 2, carr->pc_comm + cw->args[arg_n], &dir2);
-		cw->args[arg_n] = dir2;
-	}
+	map_get(cw, 4, carr->pc_comm + cw->args[arg_n], &dir4);
+	cw->args[arg_n] = dir4;
 }
 
 void	load_dir(t_corewar *cw, t_carriage *carr, int arg_n)
