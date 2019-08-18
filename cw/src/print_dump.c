@@ -38,7 +38,7 @@ void		print_map_byte(t_corewar *cw, int pos)
 	ft_putchar(' ');
 	if (cw->options & COREWAR_OPT_COLORS)
 		ft_setcolor(cc_current, (id > 0 && id <= cw->players_count)
-			? cw->players_map[id] : cc_default);
+			? (t_ccolor)id : cc_default);
 	ft_putchar(alpha[cw->map[pos] / 16]);
 	ft_putchar(alpha[cw->map[pos] % 16]);
 	if (cw->options & COREWAR_OPT_COLORS)
