@@ -22,7 +22,8 @@ void		ft_error(char *str)
 		ft_putnbr_fd(g_data->x, 2);
 		ft_putchar_fd(' ', 2);
 	}
-	ft_free_data();
+	if (g_data)
+		ft_free_data();
 	ft_putendl_fd(str, 2);
 	exit(1);
 }
