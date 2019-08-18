@@ -18,7 +18,7 @@ int				ft_sep_search(char c)
 		return (1);
 	if (c == '\0' || c == '\n' || c == '\"' || c == ' ' || c == '\t')
 		return (1);
-	if (c == '\v' || c == '\f' || c == '\r'|| c == '-')
+	if (c == '\v' || c == '\f' || c == '\r' || c == '-')
 		return (1);
 	return (0);
 }
