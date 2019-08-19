@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:22:04 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/19 12:10:58 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:53:53 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,14 +66,9 @@ void	ft_event_procedure(t_corewar *cw)
 					break ;
 			}
 		}
-		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE && !(cw->winner))
-		{
-			cw->options -= COREWAR_OPT_VISUALIZER;
-			ft_quit(cw);
-		}
-		else
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
 			break ;
 	}
-		if (cw->winner)
-			ft_quit(cw);
+	if (e.key.keysym.sym == SDLK_ESCAPE)
+		ft_quit(cw);
 }

@@ -45,12 +45,7 @@ OBJS_DIR=obj
 
 SDL_LIBS=`sdl2-config --libs` -lSDL2_ttf
 
-#SDL_LIBS=-L /Users/rhealitt/.brew/Cellar/sdl2_ttf/2.0.15/lib -lSDL2_ttf \
-#		-L /Users/rhealitt/.brew/Cellar/sdl2/2.0.9_1/lib -lSDL2
 
-#INCLUDE=-I ../common -I include -I ../common/libft \
-#		-I /Users/rhealitt/.brew/Cellar/sdl2/2.0.9_1/include/SDL2 \
-#		-I /Users/rhealitt/.brew/Cellar/sdl2_ttf/2.0.15/include/SDL2
 
 INCLUDE=-I ../common/ -I include -I ../common/libft \
 		`sdl2-config --cflags`

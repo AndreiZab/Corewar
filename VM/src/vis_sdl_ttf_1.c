@@ -30,7 +30,7 @@ void	ttf_print_system(t_corewar *cw, int x_pos, int y_pos)
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 4);
 	x_dif = ttf_print_str(cw, clr, &dest, "cycles to die: ");
 	ft_change_dst(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(cw->cycle_to_die));
+	ttf_print_str(cw, clr, &dest, ft_itoa(cw->cycle_to_die - cw->cycle));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
 	x_dif = ttf_print_str(cw, clr, &dest, "cycle delta: ");
 	ft_change_dst(&dest, x_dif, 0);

@@ -6,7 +6,7 @@
 /*   By: larlyne <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 11:41:11 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/19 12:14:46 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/19 13:45:58 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@
 # define COREWAR_IDX 8
 # define COREWAR_DUMP_COLUMNS 32
 
-# define COURIER_TTF "include/courier.ttf"
+# define COURIER_TTF "/Library/Fonts/Courier New Bold.ttf"
 # define BLK 0, 0, 0, 0
 # define RD 170, 0, 0, 0
 # define GRN 0, 170, 0, 0
@@ -176,7 +176,7 @@ void							corewar_free(t_corewar **corewar);
 */
 
 int								process_arguments(t_corewar *cw, int argc,
-													 char **argv);
+		char **argv);
 
 /*
 ** process_flags.c
@@ -185,9 +185,9 @@ int								process_arguments(t_corewar *cw, int argc,
 int								process_flag_log(t_corewar *cw, int argc,
 													char **argv, int *i);
 int								process_flag_n(t_corewar *cw, int argc,
-												  char **argv, int *i);
+		char **argv, int *i);
 int								process_flag_dump(t_corewar *cw, int argc,
-													 char **argv, int *i);
+		char **argv, int *i);
 
 /*
 ** process_file.c
@@ -204,7 +204,7 @@ int								print_error_file(char *str, t_corewar *cw);
 int								print_error_file_unknown_inst(
 		unsigned char byte, t_corewar *cw);
 int								print_error_file_inst(char *inst, char *str,
-														 t_corewar *cw);
+		t_corewar *cw);
 void							print_now_cycle(t_corewar *cw);
 
 /*
@@ -212,20 +212,20 @@ void							print_now_cycle(t_corewar *cw);
 */
 
 void							print_utils_error(t_corewar *cw,
-												  char clear_color);
+		char clear_color);
 void							print_utils_file(t_corewar *cw,
-												 char clear_color);
+		char clear_color);
 void							print_col_str(t_corewar *cw, char *str,
-											  t_ccolor col);
+		t_ccolor col);
 void							print_col_nbr(t_corewar *cw, int nbr,
-											  t_ccolor col);
+		t_ccolor col);
 
 /*
 ** utils.c
 */
 
 int								accurate_read(int fd, char *buffer,
-												 int n_bytes);
+		int n_bytes);
 int								end_with(char *str, char *end);
 void							revert_bytes(void *addr, int size);
 int								regnumber_contains(int reg_n);
@@ -235,26 +235,26 @@ int								regnumber_contains(int reg_n);
 */
 
 int								check_magic_header(int fd, t_corewar *cw,
-													  t_player *pl);
+		t_player *pl);
 int								check_name(int fd, t_corewar *cw,
-											  t_player *pl);
+		t_player *pl);
 int								check_null(int fd, t_corewar *cw,
-											  t_player *pl);
+		t_player *pl);
 int								check_code_size(int fd, t_corewar *cw,
-												   t_player *pl);
+		t_player *pl);
 int								check_comment(int fd, t_corewar *cw,
-												 t_player *pl);
+		t_player *pl);
 
 void							get_types(char types[3], char from);
 int								get_size(t_instruction *inst, char type);
 int								check_arg(char permission, char current);
 int								check_instruction(t_corewar *cw, t_player *pl,
-													 t_instruction *inst, int i);
+		t_instruction *inst, int i);
 
 int								check_exe(int fd, t_corewar *cw,
-											 t_player *pl);
+		t_player *pl);
 int								check_eof(int fd, t_corewar *cw,
-											 t_player *pl);
+		t_player *pl);
 
 /*
 ** load_instructions.c
@@ -267,13 +267,12 @@ void							load_instructions(t_corewar *cw);
 */
 
 void							set_instruction_base(t_instruction *inst,
-													 unsigned char byte, char *name,
-													 char type_byte);
+		unsigned char byte, char *name, char type_byte);
 void							set_instruction_args(t_instruction *inst,
-													 char arg1, char arg2, char arg3);
+		char arg1, char arg2, char arg3);
 void							set_instruction_other(t_instruction *inst,
-													  int dir_size, int sleep,
-													  int (*f)(t_corewar*, t_carriage*));
+		int dir_size, int sleep,
+		int (*f)(t_corewar*, t_carriage*));
 
 /*
 ** insts.c
@@ -294,14 +293,14 @@ void							show_players(t_corewar *cw);
 */
 
 int								carriage_new(t_corewar *cw,
-												unsigned char owner_id, int pos);
+		unsigned char owner_id, int pos);
 void							carriage_grab_instruction(t_corewar *cw,
-														  t_carriage *carr);
+		t_carriage *carr);
 void							carriage_move(t_carriage *carr, int move);
 int								carriage_copy(t_corewar *cw, t_carriage *carr,
-												 int pos);
+		int pos);
 void							carriage_move_by_types(t_corewar *cw,
-													   t_carriage *carr);
+		t_carriage *carr);
 
 /*
 ** print_carriage.c
@@ -309,7 +308,7 @@ void							carriage_move_by_types(t_corewar *cw,
 
 void							print_bytes(t_corewar *cw, int pos, int count);
 void							print_pc_movements(t_corewar *cw,
-												   t_carriage *carr);
+		t_carriage *carr);
 
 /*
 ** corewar_play.c
@@ -323,11 +322,11 @@ int								corewar_play(t_corewar *cw);
 
 int								map_normilize(int pos);
 void							map_get(t_corewar *cw, int size, int pos,
-										void *output);
+		void *output);
 void							map_set(t_corewar *cw, int size, int pos,
-										void *input);
+		void *input);
 void							map_set_color(t_corewar *cw, int pos, int size,
-											  unsigned char owner_id);
+		unsigned char owner_id);
 
 /*
 ** instruction_functions_1.c, instruction_functions_2.c,
@@ -335,40 +334,40 @@ void							map_set_color(t_corewar *cw, int pos, int size,
 */
 
 int								live_function(t_corewar *cw,
-												 t_carriage *carr);
+		t_carriage *carr);
 int								ld_function(t_corewar *cw,
-											   t_carriage *carr);
+		t_carriage *carr);
 int								st_function(t_corewar *cw,
-											   t_carriage *carr);
+		t_carriage *carr);
 
 int								add_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 int								sub_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 int								and_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 int								or_function(t_corewar *cw,
-											   t_carriage *carr);
+		t_carriage *carr);
 int								xor_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 
 int								zjmp_function(t_corewar *cw,
-												 t_carriage *carr);
+		t_carriage *carr);
 int								ldi_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 int								sti_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 int								fork_function(t_corewar *cw,
-												 t_carriage *carr);
+		t_carriage *carr);
 int								lld_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 
 int								lldi_function(t_corewar *cw,
-												 t_carriage *carr);
+		t_carriage *carr);
 int								lfork_function(t_corewar *cw,
-												  t_carriage *carr);
+		t_carriage *carr);
 int								aff_function(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 
 /*
 ** function_utils.c
@@ -377,25 +376,25 @@ int								aff_function(t_corewar *cw,
 void							load_types(t_corewar *cw, t_carriage *carr);
 int								check_types(t_corewar *cw, t_carriage *carr);
 int								check_registers(t_corewar *cw,
-												   t_carriage *carr);
+		t_carriage *carr);
 
 /*
 ** load_value_1.c, load_value_2.c
 */
 
 void							load_ind_link(t_corewar *cw, t_carriage *carr,
-											  int arg_n);
+		int arg_n);
 void							load_ind(t_corewar *cw, t_carriage *carr,
-										 int arg_n, char idx);
+		int arg_n, char idx);
 void							load_dir(t_corewar *cw, t_carriage *carr,
-										 int arg_n);
+		int arg_n);
 void							load_value(t_corewar *cw, t_carriage *carr,
-										   int arg_n, char val_type);
+		int arg_n, char val_type);
 
 void							load_reg_link(t_corewar *cw, t_carriage *carr,
-											  int arg_n);
+		int arg_n);
 void							load_reg(t_corewar *cw, t_carriage *carr,
-										 int arg_n);
+		int arg_n);
 
 /*
 ** dump.c
@@ -423,22 +422,22 @@ char							*casting_uc_hex(int num, int width);
 void							print_log(t_corewar *cw, t_carriage *carr);
 
 void							print_reg(t_corewar *cw, t_carriage *carr,
-										  int *i, int j);
+		int *i, int j);
 
 /*
 ** print_log_functions.c
 */
 
 void							print_log_zjmp(t_corewar *cw,
-											   t_carriage *carr);
+		t_carriage *carr);
 void							print_log_ldi(t_corewar *cw,
-											  t_carriage *carr);
+		t_carriage *carr);
 void							print_log_sti(t_corewar *cw,
-											  t_carriage *carr);
+		t_carriage *carr);
 void							print_log_fork(t_corewar *cw,
-											   t_carriage *carr);
+		t_carriage *carr);
 void							print_log_lfork(t_corewar *cw,
-												t_carriage *carr);
+		t_carriage *carr);
 
 /*
 ** kill_machine.c
@@ -451,7 +450,7 @@ int								kill_machine(t_corewar *cw);
 */
 
 void							print_carriage_death(t_corewar *cw,
-													 t_carriage *carr);
+		t_carriage *carr);
 void							print_die_step(t_corewar *cw);
 void							print_winner(t_corewar *cw, int id);
 
@@ -464,17 +463,17 @@ int								init_sdl(t_corewar *cw);
 void							ft_quit(t_corewar *cw);
 void							ft_init_borders(t_corewar *cw);
 int								ttf_print_str(t_corewar *cw, SDL_Color clr,
-												 SDL_Rect *dest, char *str);
+		SDL_Rect *dest, char *str);
 
 /*
 ** vis_sdl_help_2.c
 */
 
 void							ft_change_dst(SDL_Rect *dest, int delta_x,
-											  int delta_y);
+		int delta_y);
 void							ft_set_clr(SDL_Color *clr, int num);
 void							ft_add_param(t_corewar *cw, SDL_Color *clr,
-											 SDL_Rect *dest, int num);
+		SDL_Rect *dest, int num);
 void							ft_event_procedure(t_corewar *cw);
 
 /*
@@ -492,15 +491,15 @@ int								ft_count_carrs(t_carriage *carrs);
 */
 
 void							ttf_print_system(t_corewar *cw, int x_pos,
-												 int y_pos);
+		int y_pos);
 void							ttf_print_info(t_corewar *cw, int x_pos,
-											   int y_pos);
+		int y_pos);
 void							ttf_print_players_1_2(t_corewar *cw, int x_pos,
-													  int y_pos);
+		int y_pos);
 void							ttf_print_players_3_4(t_corewar *cw, int y_pos,
-													  int *i);
+		int *i);
 void							ttf_print_sep_player(t_corewar *cw,
-													 SDL_Color clr, SDL_Rect dest, int i);
+		SDL_Color clr, SDL_Rect dest, int i);
 
 /*
 ** vis_sdl_ttf_2.c
@@ -510,7 +509,8 @@ void							ttf_print_label(t_corewar *cw);
 void							ttf_arena_ds(t_corewar *cw, int x_pos);
 void							ft_count_fields(t_corewar *cw, int *p);
 void							ft_draw_arena_fields(t_corewar *cw,
-													 SDL_Rect dest, int p[], int del);
-void							ttf_print_winner(t_corewar *cw, int x_pos, int y_pos);
+		SDL_Rect dest, int p[], int del);
+void							ttf_print_winner(t_corewar *cw, int x_pos,
+		int y_pos);
 
 #endif
