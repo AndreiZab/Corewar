@@ -41,11 +41,11 @@
 Тут должны быть картинки, представь их
 
 # Команда
-Larlune (линк)
+[Larlune](https://github.com/PofigistVip)
 
-Qclubfoo (линк)
+[Qclubfoo](https://github.com/qclubfoo)
 
-Rhealitt (а вот тут линк не нужен)
+[Rhealitt](https://github.com/AndreiZab)
 
 # Лицензия
 Do what you want 
