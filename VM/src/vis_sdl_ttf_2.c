@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/19 12:10:58 by rhealitt         ###   ########.fr       */
+/*   Updated: 2019/08/19 14:38:58 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	ttf_arena_ds(t_corewar *cw, int x_pos)
 	int			del;
 
 	ft_add_param(cw, &clr, &dest, WHT_COL);
-	ft_change_dst(&dest, x_pos, (cw->yd - cw->yu) / 4 * 3);
+	ft_change_dst(&dest, x_pos, (cw->yd - cw->yu) / 6 * 5);
 	ttf_print_str(cw, clr, &dest, "Arena distribution:");
 	ft_change_dst(&dest, 0, cw->fnt_h * 2);
 	del = MEM_SIZE / (cw->xr - cw->xl - 104);

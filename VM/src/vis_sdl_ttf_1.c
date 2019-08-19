@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 16:01:39 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/16 14:42:12 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/19 14:36:04 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,18 +22,18 @@ void	ttf_print_system(t_corewar *cw, int x_pos, int y_pos)
 	ft_change_dst(&dest, x_pos, y_pos);
 	x_dif = ttf_print_str(cw, clr, &dest, "total process: ");
 	ft_change_dst(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(ft_count_carrs(cw->carrs)));
+	ttf_print_str_free(cw, clr, &dest, ft_itoa(ft_count_carrs(cw->carrs)));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
 	x_dif = ttf_print_str(cw, clr, &dest, "cycle: ");
 	ft_change_dst(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(cw->cycle));
+	ttf_print_str_free(cw, clr, &dest, ft_itoa(cw->cycle));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 4);
 	x_dif = ttf_print_str(cw, clr, &dest, "cycles to die: ");
 	ft_change_dst(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(cw->cycle_to_die - cw->cycle));
+	ttf_print_str_free(cw, clr, &dest, ft_itoa(cw->cycle_to_die - cw->cycle));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
 	x_dif = ttf_print_str(cw, clr, &dest, "cycle delta: ");
-	ft_change_dst(&dest, x_dif, 0);
+	ft_change_dst_free(&dest, x_dif, 0);
 	ttf_print_str(cw, clr, &dest, ft_itoa(cw->die_step));
 }
 
@@ -67,7 +67,7 @@ void	ttf_print_players_1_2(t_corewar *cw, int x_pos, int y_pos)
 		else if (i == 2)
 		{
 			ft_add_param(cw, &clr, &dest, GRN_COL);
-			ft_change_dst(&dest, x_pos, y_pos + (cw->yd - cw->yu) / 2);
+			ft_change_dst(&dest, x_pos, y_pos + (cw->yd - cw->yu) / 4);
 			ttf_print_sep_player(cw, clr, dest, i - 1);
 		}
 		else if (i > 2)
@@ -91,7 +91,7 @@ void	ttf_print_players_3_4(t_corewar *cw, int y_pos, int *i)
 	{
 		ft_add_param(cw, &clr, &dest, YLW_COL);
 		ft_change_dst(&dest, (cw->xr - cw->xl) / 2,
-										y_pos + (cw->yd - cw->yu) / 2);
+										y_pos + (cw->yd - cw->yu) / 4);
 		ttf_print_sep_player(cw, clr, dest, (*i) - 1);
 	}
 }
@@ -102,11 +102,11 @@ void	ttf_print_sep_player(t_corewar *cw, SDL_Color clr, SDL_Rect dest, int i)
 
 	x_dif = ttf_print_str(cw, clr, &dest, "Player ");
 	ft_change_dst(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(i + 1));
+	ttf_print_str_free(cw, clr, &dest, ft_itoa(i + 1));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
 	ttf_print_str(cw, clr, &dest, cw->players[i].name);
 	ft_change_dst(&dest, 0, cw->fnt_h * 2);
 	x_dif = ttf_print_str(cw, clr, &dest, "Last live: ");
 	ft_change_dst(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(cw->players[i].live));
+	ttf_print_str_free(cw, clr, &dest, ft_itoa(cw->players[i].live));
 }
