@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/16 16:37:52 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/19 11:38:57 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,7 +126,8 @@ int		ft_count_carrs(t_carriage *carrs)
 	tmp = carrs;
 	while (tmp)
 	{
-		i++;
+		if (!(tmp->dead))
+			i++;
 		tmp = tmp->next;
 	}
 	return (i);
