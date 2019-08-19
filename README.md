@@ -27,15 +27,26 @@
 * Остановить, когда все игроки, кроме одного, мертвы
 
 ### Визуализация
-	//SDL2 всё такое, надо узнать поподробнее
+Отображает текущее состояние вертуальной машины в реальном времени
 
 # Установка
-Сделай мейк, ну ты справишься
+make
+//добавить sdl2
 
 # Usage
-Разбирайся сам
+./asm champ.s
 
-Еще можешь задание прочитать (corewar.en.pdf)
+./corewar [-cva] [-dump nbr_cycles] [-dinfo] [[-n champ_number] champ.cor]  
+Flags:  
+	-c - colored mode  
+	-v - visualization mode  
+	-a - enable aff output  
+Dump memory:  
+	-dump nbr_cycle - output dump memory  
+	-dinfo - output additional information on -dump  
+Champions:  
+	-n champ_number - set number of the champion  
+	champ.cor - binary file with champions code  
 
 # Визуализация
 Тут должны быть картинки, представь их
