@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 13:22:04 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/15 16:48:58 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/19 11:58:37 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,4 +48,29 @@ void	ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest, int num)
 	ft_set_clr(clr, num);
 	dest->x = cw->xl;
 	dest->y = cw->yu;
+}
+
+void	ft_event_procedure(t_corewar *cw)
+{
+	SDL_Event	e;
+
+	while (SDL_PollEvent(&e) != 0 || cw->winner)
+	{
+		if ((e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p) || cw->winner)
+		{
+			while (SDL_PollEvent(&e) != 0 || 1)
+			{
+				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
+					break ;
+				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
+					break ;
+			}
+		}
+		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE && !(cw->winner))
+			ft_quit(cw);
+		else
+			break ;
+	}
+		if (cw->winner)
+			ft_quit(cw);
 }

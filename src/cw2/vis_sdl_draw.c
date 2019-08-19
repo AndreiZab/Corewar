@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/11 15:54:05 by qclubfoo          #+#    #+#             */
-/*   Updated: 2019/08/19 11:38:57 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/19 12:00:31 by qclubfoo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,6 @@
 
 void	ft_vis_redraw(t_corewar *cw)
 {
-	SDL_Event	e;
-
 	ttf_print_frames(cw);
 	ttf_print_fields(cw);
 	ttf_print_label(cw);
@@ -26,21 +24,7 @@ void	ft_vis_redraw(t_corewar *cw)
 	if (cw->winner)
 		ttf_print_winner(cw, 20, cw->yd - cw->yu);
 	SDL_RenderPresent(cw->ren);
-	while (SDL_PollEvent(&e) != 0)
-	{
-		if ((e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p) || cw->winner)
-		{
-			while (SDL_PollEvent(&e) != 0 || 1)
-			{
-				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_p)
-					break ;
-				if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
-					break ;
-			}
-		}
-		if (e.type == SDL_KEYDOWN && e.key.keysym.sym == SDLK_ESCAPE)
-			ft_quit(cw);
-	}
+	ft_event_procedure(cw);
 }
 
 void	ttf_print_frames(t_corewar *cw)

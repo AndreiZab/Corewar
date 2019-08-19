@@ -406,6 +406,7 @@ int				ttf_print_str(t_corewar *cw, SDL_Color clr, SDL_Rect *dest, char *str);
 void			ft_change_dst(SDL_Rect *dest, int delta_x, int delta_y);
 void			ft_set_clr(SDL_Color *clr, int num);
 void			ft_add_param(t_corewar *cw, SDL_Color *clr, SDL_Rect *dest, int num);
+void			ft_event_procedure(t_corewar *cw);
 
 /*
 ** vis_sdl_draw.c
