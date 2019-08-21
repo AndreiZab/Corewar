@@ -36,21 +36,22 @@ make
 # Usage
 ./asm champ.s
 
+
 ./disasm [-cf] file1.cor [file2.cor ...]  
-		-c - colored mode  
-		-f - file-format mode  
+    -c - colored mode  
+    -f - file-format mode  
+
 
 ./corewar [-cva] [-dump nbr_cycles] [-dinfo] [[-n champ_number] champ.cor]  
 Flags:  
-		-c - colored mode  
-		-v - visualization mode  
-		-a - enable aff output  
+    -c - colored mode  
+    -v - visualization mode  
+    -a - enable aff output  
 Dump memory:  
-		-dump nbr_cycle - output dump memory  
-		-dinfo - output additional information on -dump  
+    -dump nbr_cycle - output dump memory  
+    -dinfo - output additional information on -dump  
 Champions:  
-		-n champ_number - set number of the champion  
-		champ.cor - binary file with champions code  
+    champ.cor - binary file with champions code  
 		
 
 
