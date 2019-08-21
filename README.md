@@ -34,27 +34,24 @@ make
 //добавить sdl2
 
 # Usage
-./asm champ.s
+	./asm champ.s
 
+	./disasm [-cf] file1.cor [file2.cor ...]  
+		-c - colored mode  
+		-f - file-format mode  
 
-./disasm [-cf] file1.cor [file2.cor ...]  
-* -c - colored mode  
-* - f - file-format mode  
-
-
-./corewar [-cva] [-dump nbr_cycles] [-dinfo] [[-n champ_number] champ.cor]  
-Flags:  
-* -c - colored mode  
-+ -v - visualization mode  
-- -a - enable aff output  
-Dump memory:  
-* -dump nbr_cycle - output dump memory  
-* -dinfo - output additional information on -dump  
-Champions:  
-* champ.cor - binary file with champions code  
+	./corewar [-cva] [-dump nbr_cycles] [-dinfo] [[-n champ_number] champ.cor]
+	Flags:
+		-c - colored mode
+		-v - visualization mode 
+		-a - enable aff output
 		
-
-
+	Dump memory:  
+		-dump nbr_cycle - output dump memory  
+		-dinfo - output additional information on -dump  
+	Champions:  
+		champ.cor - binary file with champions code  
+		
 # Визуализация
 Тут должны быть картинки, представь их
 
