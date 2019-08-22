@@ -29,16 +29,16 @@
 ### Визуализация
 Отображает текущее состояние вертуальной машины в реальном времени
 
-# Установка:
+# Установка
 ```git clone https://github.com/AndreiZab/Corewar.git```  
 
-Понадобится SDL2 и SDL2_TTF:  
+Понадобится SDL2 и SDL2_TTF
 * Debian  
 ```sudo apt-get install sdl2 sdl2_ttf```  
 * OSX  
 ```brew install sdl2 sdl2_ttf```  
 
-Компиляция:  
+Компиляция
 ```make```  
 # Usage
 	./asm champ.s
