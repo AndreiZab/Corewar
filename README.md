@@ -32,13 +32,13 @@
 # Установка
 ```git clone https://github.com/AndreiZab/Corewar.git```  
 
-Понадобится SDL2 и SDL2_TTF
-* Debian  
+Понадобится SDL2 и SDL2_TTF:
+* Debian:  
 ```sudo apt-get install sdl2 sdl2_ttf```  
-* OSX  
+* OSX:  
 ```brew install sdl2 sdl2_ttf```  
 
-Компиляция
+Компиляция:
 ```make```  
 # Usage
 	./asm champ.s
