@@ -53,7 +53,6 @@ $(OBJ_DIR):
 $(OBJ_DIR)%.o : ./src/%.c $(HEAD)
 	@$(CC) -c  $(OP_H) $(ASM_H) -I $(LIBFT_DIR) $< -o $@
 	@printf "Compiling... %27s => %-27s\r" $< $@
-	@sleep 0.1
 
 clean:
 	@$(MAKE) -sC $(LIBFT_DIR) clean
