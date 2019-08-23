@@ -43,9 +43,11 @@
 # Usage
 	./asm champ.s
 
+
 	./disasm [-cf] file1.cor [file2.cor ...]  
 		-c - colored mode  
 		-f - file-format mode  
+
 
 	./corewar [-cva] [-dump nbr_cycles] [-dinfo] [[-n champ_number] champ.cor]
 	Flags:
@@ -59,15 +61,9 @@
 	Champions:  
 		champ.cor - binary file with champions code  
 		
-# Визуализация
-Тут должны быть картинки, представь их
-
 # Команда
 [Larlune](https://github.com/PofigistVip)
 
 [Qclubfoo](https://github.com/qclubfoo)
 
 [Rhealitt](https://github.com/AndreiZab)
-
-# Лицензия
-Do what you want 
