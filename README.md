@@ -30,7 +30,7 @@
 Отображает текущее состояние вертуальной машины в реальном времени
 
 # Установка
-```git clone https://github.com/AndreiZab/Corewar.git```  
+```git clone https://github.com/AndreiZab/Corewar.git && cd Corewar```  
 
 Понадобится SDL2 и SDL2_TTF:
 * Debian:  
