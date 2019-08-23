@@ -33,8 +33,8 @@ void	ttf_print_system(t_corewar *cw, int x_pos, int y_pos)
 	ttf_print_str_free(cw, clr, &dest, ft_itoa(cw->cycle_to_die - cw->cycle));
 	ft_change_dst(&dest, -x_dif, cw->fnt_h * 2);
 	x_dif = ttf_print_str(cw, clr, &dest, "cycle delta: ");
-	ft_change_dst_free(&dest, x_dif, 0);
-	ttf_print_str(cw, clr, &dest, ft_itoa(cw->die_step));
+	ft_change_dst(&dest, x_dif, 0);
+	ttf_print_str_free(cw, clr, &dest, ft_itoa(cw->die_step));
 }
 
 void	ttf_print_info(t_corewar *cw, int x_pos, int y_pos)

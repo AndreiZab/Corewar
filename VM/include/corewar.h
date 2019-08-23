@@ -6,7 +6,7 @@
 /*   By: qclubfoo <qclubfoo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/08/18 11:41:11 by larlyne           #+#    #+#             */
-/*   Updated: 2019/08/19 14:32:45 by qclubfoo         ###   ########.fr       */
+/*   Updated: 2019/08/23 11:02:23 by rhealitt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -475,8 +475,8 @@ void							ft_set_clr(SDL_Color *clr, int num);
 void							ft_add_param(t_corewar *cw, SDL_Color *clr,
 		SDL_Rect *dest, int num);
 void							ft_event_procedure(t_corewar *cw);
-void							ttf_print_str_free(t_corewar *cw, SDL_Color clr,
-		SDL_Rect *dest, char *str)
+int							ttf_print_str_free(t_corewar *cw, SDL_Color clr,
+		SDL_Rect *dest, char *str);
 
 /*
 ** vis_sdl_draw.c
