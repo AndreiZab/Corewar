@@ -12,6 +12,8 @@
 
 #include "ft_asm.h"
 
+//Вывод всех ошибок и очистка памяти
+//В будущем стоит добавить отдельный вывод для лексических/синтаксиеских/... ошибок
 void		ft_error(char *str)
 {
 	if (g_data && g_data->y && g_data->x)
@@ -28,6 +30,8 @@ void		ft_error(char *str)
 	exit(1);
 }
 
+//Проверка имени на верное расширение
+//asm.s.s - валидно
 static int	ft_check_name(char *str)
 {
 	int l;
