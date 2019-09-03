@@ -12,6 +12,7 @@
 
 #include "ft_asm.h"
 
+// Поиск любых разделителей 
 int				ft_sep_search(char c)
 {
 	if (c == DIRECT_CHAR || c == SEPARATOR_CHAR || c == COMMENT_CHAR)
@@ -54,6 +55,7 @@ void			ft_create_label(void)
 	ft_dup_label();
 }
 
+// Валидация регистров, можно доваить r<16 но эта проверка в CW должна быть по subject
 int				ft_register(char *line, int len)
 {
 	int	i;
