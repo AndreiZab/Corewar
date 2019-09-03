@@ -12,6 +12,7 @@
 
 #include "ft_asm.h"
 
+// Смотрим куда добавить в name или в comment
 static void		ft_string_connection(char *dst)
 {
 	char *tmp;
@@ -30,6 +31,8 @@ static void		ft_string_connection(char *dst)
 	}
 }
 
+// Если был перенос строки(name/comment не завершился кавычкой)
+// Мы докладываем в строку нужную дату
 int				ft_add_text(char *src, int i)
 {
 	int		j;
@@ -57,6 +60,7 @@ int				ft_add_text(char *src, int i)
 	return (i);
 }
 
+// Выделяем из строк нужные нам данные и считаем кавычки
 static char		*ft_get_name_or_comment(char *src, int *i, char flag)
 {
 	int		j;
@@ -85,6 +89,8 @@ static char		*ft_get_name_or_comment(char *src, int *i, char flag)
 	return (dst);
 }
 
+// Из-за того что имя/коммент может быть записан не в одной строке мы ложим в структуру кол-во прочитанных кавычек
+// Это приходися делать ввиду чтения из файла по одной строке(до \n)
 static void		ft_check_quotes(char *str, int *i)
 {
 	while (str[*i] && str[*i] != '\"')
@@ -95,7 +101,7 @@ static void		ft_check_quotes(char *str, int *i)
 		(*i)++;
 	}
 }
-
+// Ищем имя или коммент, проверяем не дупликат ли это и записываем их в структуру
 int				ft_find_name_or_comment(char *str, int i)
 {
 	if (str[i] == NAME_CMD_STRING[0] && !ft_strncmp(str + i,
