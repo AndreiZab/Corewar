@@ -12,6 +12,7 @@
 
 #include "ft_asm.h"
 
+// Ревертим связанный список токенов для удобства
 void		ft_revert_tokens(void)
 {
 	t_token *curr;
