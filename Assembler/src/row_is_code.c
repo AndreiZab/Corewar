@@ -12,6 +12,8 @@
 
 #include "ft_asm.h"
 
+
+//Стоит оптимизировать, осталась пара архаизмов
 static void		ft_txt(char *line, t_type type)
 {
 	int temp;
@@ -37,6 +39,7 @@ static void		ft_txt(char *line, t_type type)
 		ft_error("ERROR_WITH_TEXT");
 }
 
+//На самом деле не только nbr, стоит переназвать(но не сейчас :D)
 static void		ft_number(char *line, t_type type)
 {
 	int		temp;
@@ -61,6 +64,7 @@ static void		ft_number(char *line, t_type type)
 		ft_error("INVALID_NBR");
 }
 
+//Ищем совпадение символов из строк и из op.h
 static void		ft_parse_token(char **line)
 {
 	char *str;
@@ -82,6 +86,7 @@ static void		ft_parse_token(char **line)
 	*line = str;
 }
 
+// Будем итерироваться по всей строке и парсить нужные токены
 void			ft_row_is_code(char *line)
 {
 	while (line[g_data->x])
