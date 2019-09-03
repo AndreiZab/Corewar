@@ -13,12 +13,15 @@
 #include "ft_asm.h"
 #include "get_next_line.h"
 
+
+//Эта функция нужна только что бы free можно было вставить как условие в while вместе с gnl
 static int		ft_free_l(char *line)
 {
 	if (line)
 		free(line);
 	return (1);
 }
+
 
 static void		ft_row_is_data(char *str, int i)
 {
@@ -41,6 +44,9 @@ static void		ft_row_is_data(char *str, int i)
 	}
 }
 
+//Две отдельные функции:
+//1)Для валидации name/comment 
+//2)asm кода - сюда мы попадем только после получения .name/.comment
 static void		ft_check_row(char *str)
 {
 	if (!g_data->comment || !g_data->name || str[g_data->x] == '.'
@@ -50,6 +56,9 @@ static void		ft_check_row(char *str)
 		ft_row_is_code(str);
 }
 
+//Здесь мы считываем линию за линией отслеживая row и column
+//Если мы перешли от name и comment к коду, то добавляем токен с \n
+//Пропускаем все пробелы,коменты и табулиции
 static void		ft_read_champ(void)
 {
 	char	*line;
@@ -79,6 +88,7 @@ static void		ft_read_champ(void)
 		ft_error("NO_NAME");
 }
 
+//Основное управление
 void			ft_asm(char *str)
 {
 	int fd;
