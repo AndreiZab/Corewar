@@ -12,6 +12,7 @@
 
 #include "ft_asm.h"
 
+//Поиск команды в глобальной таблице команд(она в хэдере)
 static int			ft_find_cmd(t_token *operation)
 {
 	int				i;
@@ -50,7 +51,8 @@ static void			ft_valid_arg(int cmd, t_token *tkn, int com, u_int32_t beg)
 	else if (arg_type == T_REG)
 		g_bytes++;
 }
-
+//Валидируем аргументы команды(их тип, кол-во и последовательность)
+//Не чекает наличие переноса строки в конце файла
 static void			ft_valid_command(t_token **command, int i)
 {
 	int				com_num;
