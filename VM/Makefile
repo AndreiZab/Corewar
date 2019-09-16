@@ -6,11 +6,11 @@ SRCS=main.c\
 	corewar_memory.c \
 	load_instructions.c \
 	load_instructions_utils.c \
-	insts.c \
 	process_arguments.c \
 	process_flags.c \
 	process_file.c \
 	utils.c \
+	insts.c \
 	check_1.c \
 	check_2.c \
 	check_3.c \
