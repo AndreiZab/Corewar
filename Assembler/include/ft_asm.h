@@ -153,6 +153,7 @@ void				ft_token_create(t_type type);
 ** END
 */
 
+// Таблица asm команд, их OP коды, кол-во и тип аргументов 
 static t_ops	g_op_tab[16] = {
 	{
 		.name = "live",
